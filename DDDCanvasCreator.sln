@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDCanvasCreator", "src\DDDCanvasCreator\DDDCanvasCreator.csproj", "{2C760B0A-CAF9-428E-A59E-8D7995F07F14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FE84BF77-B157-4F04-AFD1-D3EF8152F939}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{0A967C8B-604B-4D05-87A6-82F024E710D7}"
+	ProjectSection(SolutionItems) = preProject
+		Yamls\AggregateDesignCanvasFullSample1.yaml = Yamls\AggregateDesignCanvasFullSample1.yaml
+		Yamls\BoundedContextBasic.yaml = Yamls\BoundedContextBasic.yaml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppRun", "src\ConsoleAppRun\ConsoleAppRun.csproj", "{CD0E6EE3-396B-4946-AB61-93F6A2CF70DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C760B0A-CAF9-428E-A59E-8D7995F07F14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C760B0A-CAF9-428E-A59E-8D7995F07F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C760B0A-CAF9-428E-A59E-8D7995F07F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C760B0A-CAF9-428E-A59E-8D7995F07F14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD0E6EE3-396B-4946-AB61-93F6A2CF70DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD0E6EE3-396B-4946-AB61-93F6A2CF70DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD0E6EE3-396B-4946-AB61-93F6A2CF70DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD0E6EE3-396B-4946-AB61-93F6A2CF70DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

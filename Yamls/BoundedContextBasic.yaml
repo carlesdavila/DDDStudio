@@ -1,0 +1,20 @@
+bounded_contexts:
+  - name: "Sales"
+    color: "#0000FF" # Blue
+    models:
+      - name: "Customer"
+        type: "AggregateRoot"
+      - name: "Product"
+        type: "AggregateRoot"
+      - name: "Address"
+        type: "ValueObject"
+
+  - name: "Inventory"
+    color: "#008000" # Green
+    models:
+      - name: "Product"
+        type: "AggregateRoot"
+      - name: "Warehouse"
+        type: "AggregateRoot"
+      - name: "InventoryQuantity"
+        type: "ValueObject"

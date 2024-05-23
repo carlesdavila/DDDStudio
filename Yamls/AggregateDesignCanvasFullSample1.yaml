@@ -1,0 +1,119 @@
+aggregate:
+  name: Order
+  description: "An aggregate representing a customer order. This boundary was chosen to encapsulate the complete lifecycle of an order from creation to fulfillment or cancellation. Trade-offs include managing concurrency for high-volume orders."
+  
+  stateTransitions:
+    - initial: Created
+      transitions:
+        - to: Confirmed
+        - to: Cancelled
+    - initial: Confirmed
+      transitions:
+        - to: Shipped
+        - to: Cancelled
+    - initial: Shipped
+      transitions:
+        - to: Completed
+
+  enforcedInvariants:
+    - description: "Order must have at least one OrderItem."
+    - description: "Order status must follow the correct transitions: Created -> Confirmed -> Shipped -> Completed or Cancelled."
+    - description: "Order total must be recalculated when items are added or removed."
+  
+  correctivePolicies:
+    - description: "If an OrderItem is out of stock, notify the customer and adjust the order or issue a refund."
+    - description: "If the order status is not updated due to a system failure, retry the update process."
+
+  handledCommands:
+    - name: PlaceOrder
+      description: "Command to place a new order."
+      parameters:
+        - name: CustomerId
+          type: Guid
+        - name: OrderItems
+          type: List<OrderItem>
+    - name: ConfirmOrder
+      description: "Command to confirm an order."
+      parameters:
+        - name: OrderId
+          type: Guid
+    - name: ShipOrder
+      description: "Command to mark an order as shipped."
+      parameters:
+        - name: OrderId
+          type: Guid
+    - name: CompleteOrder
+      description: "Command to complete an order."
+      parameters:
+        - name: OrderId
+          type: Guid
+    - name: CancelOrder
+      description: "Command to cancel an existing order."
+      parameters:
+        - name: OrderId
+          type: Guid
+  
+  createdEvents:
+    - name: OrderPlaced
+      description: "Event triggered when a new order is placed."
+      parameters:
+        - name: OrderId
+          type: Guid
+        - name: CustomerId
+          type: Guid
+        - name: OrderDate
+          type: DateTime
+        - name: OrderItems
+          type: List<OrderItem>
+    - name: OrderConfirmed
+      description: "Event triggered when an order is confirmed."
+      parameters:
+        - name: OrderId
+          type: Guid
+    - name: OrderShipped
+      description: "Event triggered when an order is shipped."
+      parameters:
+        - name: OrderId
+          type: Guid
+    - name: OrderCompleted
+      description: "Event triggered when an order is completed."
+      parameters:
+        - name: OrderId
+          type: Guid
+    - name: OrderCancelled
+      description: "Event triggered when an order is cancelled."
+      parameters:
+        - name: OrderId
+          type: Guid
+  
+  throughput:
+    commandHandlingRate:
+      average: 5  # Average number of commands per minute
+      max: 20     # Maximum number of commands per minute
+    totalNumberOfClients:
+      average: 1  # Typically one client (customer) per order
+      max: 3      # Occasionally multiple clients (customer service, etc.)
+
+  size:
+    eventGrowthRate:
+      average: 5  # Average number of events per order
+      max: 10     # Maximum number of events per order
+    lifetime:
+      average: "30 days"  # Average lifetime of an order
+      max: "90 days"      # Maximum lifetime of an order
+
+  entities:
+    - name: OrderItem
+      attributes:
+        - name: ProductId
+          type: Guid
+          description: "Identifier of the product."
+        - name: Quantity
+          type: int
+          description: "Quantity of the product ordered."
+        - name: Price
+          type: decimal
+          description: "Price of the product at the time of the order."
+      invariants:
+        - description: "Quantity must be greater than 0."
+        - description: "Price must be greater than 0."
