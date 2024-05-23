@@ -5,7 +5,7 @@ namespace DDDCanvasCreator.Creators;
 
 public class BcBasicCreator
 {
-    public void CreateSvg(List<BoundedContext> contexts,  string outputPath)
+    public void CreateSvg(List<BoundedContext> contexts, string outputPath)
     {
         const int width = 800;
         const int height = 600;
@@ -13,7 +13,10 @@ public class BcBasicCreator
         const int contextHeight = 200;
         const int margin = 20;
         const int modelHeight = 30;
-        const int titleHeight = 20;
+        const int titleHeight = 25;
+        const int modelTitleHeight = 20;
+        const int strokeWidth = 3;
+        const int borderRadius = 10;
 
         var svgDoc = new SvgDocument
         {
@@ -26,50 +29,62 @@ public class BcBasicCreator
 
         foreach (var context in contexts)
         {
+            // Draw context rectangle
             var contextRect = new SvgRectangle
             {
                 X = x,
                 Y = y,
                 Width = contextWidth,
                 Height = contextHeight,
-                Fill = new SvgColourServer(ColorTranslator.FromHtml(context.Color)),
-                Stroke = new SvgColourServer(Color.Black),
-                StrokeWidth = 1
+                Fill = new SvgColourServer(Color.White),
+                Stroke = new SvgColourServer(ColorTranslator.FromHtml(context.Color)),
+                StrokeWidth = strokeWidth,
+                StrokeLineCap = SvgStrokeLineCap.Round,
+                CornerRadiusX = borderRadius,
+                CornerRadiusY = borderRadius
             };
             svgDoc.Children.Add(contextRect);
 
-            var title = new SvgText(context.Name)
+            // Draw context title
+            var title = new SvgText(context.Name.ToUpper())
             {
-                X = [x + contextWidth / 2],
-                Y = [y + titleHeight],
+                X = new SvgUnitCollection { x + contextWidth / 2 },
+                Y = new SvgUnitCollection { y + titleHeight },
                 TextAnchor = SvgTextAnchor.Middle,
-                FontSize = 16,
-                Fill = new SvgColourServer(Color.Black)
+                FontSize = 18,
+                FontWeight = SvgFontWeight.Bold,
+                Fill = new SvgColourServer(ColorTranslator.FromHtml(context.Color))
             };
             svgDoc.Children.Add(title);
 
             var modelY = y + titleHeight + margin;
             foreach (var model in context.Models)
             {
+                // Draw model rectangle
                 var modelRect = new SvgRectangle
                 {
                     X = x + margin,
                     Y = modelY,
                     Width = contextWidth - 2 * margin,
                     Height = modelHeight,
-                    Fill = new SvgColourServer(Color.White),
-                    Stroke = new SvgColourServer(Color.Black),
-                    StrokeWidth = 1
+                    Fill = new SvgColourServer(ColorTranslator.FromHtml("#14a32c")),
+                    Stroke = new SvgColourServer(ColorTranslator.FromHtml("#14a32c")),
+                    StrokeWidth = strokeWidth,
+                    StrokeLineCap = SvgStrokeLineCap.Round,
+                    CornerRadiusX = borderRadius / 2,
+                    CornerRadiusY = borderRadius / 2
                 };
                 svgDoc.Children.Add(modelRect);
 
-                var modelName = new SvgText($"{model.Name} ({model.Type})")
+                // Draw model name
+                var modelName = new SvgText(model.Name)
                 {
-                    X = [x + contextWidth / 2],
-                    Y = [modelY + modelHeight / 2 + 5],
+                    X = new SvgUnitCollection { x + contextWidth / 2 },
+                    Y = new SvgUnitCollection { modelY + modelTitleHeight },
                     TextAnchor = SvgTextAnchor.Middle,
-                    FontSize = 12,
-                    Fill = new SvgColourServer(Color.Black)
+                    FontSize = 14,
+                    FontWeight = SvgFontWeight.Bold,
+                    Fill = new SvgColourServer(Color.White)
                 };
                 svgDoc.Children.Add(modelName);
 
