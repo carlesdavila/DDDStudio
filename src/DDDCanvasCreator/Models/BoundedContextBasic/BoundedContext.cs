@@ -1,4 +1,6 @@
-﻿namespace DDDCanvasCreator.Creators;
+﻿using DDDCanvasCreator.Creators;
+
+namespace DDDCanvasCreator.Models.BoundedContextBasic;
 
 public class BoundedContext
 {

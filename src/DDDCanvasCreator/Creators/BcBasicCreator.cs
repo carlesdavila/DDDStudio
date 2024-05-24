@@ -1,11 +1,27 @@
 ﻿using System.Drawing;
+using DDDCanvasCreator.Models.BoundedContextBasic;
+using DDDCanvasCreator.Services;
 using Svg;
+using YamlDotNet.Serialization;
 
 namespace DDDCanvasCreator.Creators;
 
-public class BcBasicCreator
+public class BcBasicCreator : IYamlProcessor
 {
-    public void CreateSvg(List<BoundedContext> contexts, string outputPath)
+    public void ProcessYamlAndGenerateSvg(string yamlContent, string outputFilePath)
+    {
+        var boundedContexts = ParseYaml(yamlContent);
+        GenerateBoundedContextSvg(boundedContexts, outputFilePath);
+    }
+
+    private List<BoundedContext> ParseYaml(string yamlContent)
+    {
+        var deserializer = new DeserializerBuilder().Build();
+        var result = deserializer.Deserialize<Dictionary<string, List<BoundedContext>>>(yamlContent);
+        return result["bounded_contexts"];
+    }
+
+    private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string outputFilePath)
     {
         const int width = 800;
         const int height = 600;
@@ -99,6 +115,6 @@ public class BcBasicCreator
             }
         }
 
-        svgDoc.Write(outputPath);
+        svgDoc.Write(outputFilePath);
     }
 }
