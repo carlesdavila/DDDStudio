@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace DDDCanvasCreator.Tests;
 
 public class DDDCanvasTests
@@ -6,9 +8,14 @@ public class DDDCanvasTests
     public void GenerateBoundedContextSvg_WhenYamlFileExists_GeneratesSvg()
     {
         // Arrange
+        
+        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
+        var directory = Path.GetDirectoryName(assemblyLocation);
+        var yamlFilePath = Path.Combine(directory!, "TestData", "bounded_context_basic_input.yaml");
+
+        
         var dddCanvas = new DDDCanvas();
-        var yamlFilePath = "path/to/your/bounded_context_input.yaml";
-        var outputFilePath = "path/to/your/bounded_context_output.svg";
+        var outputFilePath = "./bounded_context_output.svg";
 
         // Act
         dddCanvas.GenerateSvg(yamlFilePath, outputFilePath);

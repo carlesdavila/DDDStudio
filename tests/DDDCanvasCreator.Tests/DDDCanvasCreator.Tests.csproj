@@ -24,4 +24,10 @@
       <ProjectReference Include="..\..\src\DDDCanvasCreator\DDDCanvasCreator.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="TestData\bounded_context_basic_input.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
