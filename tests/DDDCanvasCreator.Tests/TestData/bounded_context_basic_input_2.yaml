@@ -1,4 +1,4 @@
-boundedContexts:
+﻿bounded_contexts:
   - name: "Sales"
     color: "#0000FF" # Blue
     models:

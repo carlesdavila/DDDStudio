@@ -9,7 +9,7 @@ public static class YamlProcessorFactory
         // Logic to determine which processor to use based on the YAML content
         return yamlContent switch
         {
-            _ when yamlContent.Contains("bounded_contexts") => new BcBasicCreator(),
+            _ when yamlContent.Contains("boundedContexts") => new BcBasicCreator(),
             _ when yamlContent.Contains("aggregate") => new AggregateCanvasCreator(),
             _ => throw new NotSupportedException("Unsupported YAML format")
         };

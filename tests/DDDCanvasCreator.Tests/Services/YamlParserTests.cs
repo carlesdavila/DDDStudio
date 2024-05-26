@@ -1,4 +1,15 @@
-﻿boundedContexts:
+﻿using DDDCanvasCreator.Services;
+
+namespace DDDCanvasCreator.Tests.Services;
+
+public class YamlParserTests
+{
+    [Fact]
+    public void CanParseBoundedContext()
+    {
+
+      var input = @"
+boundedContexts:
   - name: Sales
     color: '#0000FF'
     models:
@@ -16,4 +27,10 @@
       - name: Warehouse
         type: AggregateRoot
       - name: InventoryQuantity
-        type: ValueObject
+        type: ValueObject";
+
+        
+      using var parser = new YamlParser(input);
+      var app = parser.ParseBoundedContextsBasic();
+    }
+}
