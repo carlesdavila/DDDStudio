@@ -2,7 +2,6 @@
 using DDDCanvasCreator.Models.BoundedContextBasic;
 using DDDCanvasCreator.Services;
 using Svg;
-using YamlDotNet.Serialization;
 
 namespace DDDCanvasCreator.Creators;
 
@@ -11,14 +10,14 @@ public class BcBasicCreator : IYamlProcessor
     public void ProcessYamlAndGenerateSvg(string yamlContent, string outputFilePath)
     {
         var boundedContexts = ParseYaml(yamlContent);
-        GenerateBoundedContextSvg(boundedContexts, outputFilePath);
+        GenerateBoundedContextSvg(boundedContexts.BoundedContexts, outputFilePath);
     }
 
-    private List<BoundedContext> ParseYaml(string yamlContent)
+    private BoundedContextsBasic ParseYaml(string yamlContent)
     {
-        var deserializer = new DeserializerBuilder().Build();
-        var result = deserializer.Deserialize<Dictionary<string, List<BoundedContext>>>(yamlContent);
-        return result["bounded_contexts"];
+        using var parser = new YamlParser(yamlContent);
+        var actual = parser.ParseBoundedContextsBasic();
+        return actual;
     }
 
     private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string outputFilePath)
@@ -53,7 +52,7 @@ public class BcBasicCreator : IYamlProcessor
                 Width = contextWidth,
                 Height = contextHeight,
                 Fill = new SvgColourServer(Color.White),
-                Stroke = new SvgColourServer(ColorTranslator.FromHtml(context.Color)),
+                Stroke = new SvgColourServer(ColorTranslator.FromHtml(context.Color!)),
                 StrokeWidth = strokeWidth,
                 StrokeLineCap = SvgStrokeLineCap.Round,
                 CornerRadiusX = borderRadius,
@@ -62,14 +61,14 @@ public class BcBasicCreator : IYamlProcessor
             svgDoc.Children.Add(contextRect);
 
             // Draw context title
-            var title = new SvgText(context.Name.ToUpper())
+            var title = new SvgText(context.Name!.ToUpper())
             {
                 X = new SvgUnitCollection { x + contextWidth / 2 },
                 Y = new SvgUnitCollection { y + titleHeight },
                 TextAnchor = SvgTextAnchor.Middle,
                 FontSize = 18,
                 FontWeight = SvgFontWeight.Bold,
-                Fill = new SvgColourServer(ColorTranslator.FromHtml(context.Color))
+                Fill = new SvgColourServer(ColorTranslator.FromHtml(context.Color!))
             };
             svgDoc.Children.Add(title);
 

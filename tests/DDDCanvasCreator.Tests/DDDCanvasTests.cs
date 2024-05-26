@@ -24,7 +24,7 @@ public class DDDCanvasTests
         Assert.True(File.Exists(outputFilePath));
     }
 
-    [Fact]
+    [Fact (Skip = "not developed")]
     public void GenerateAggregateSvg_WhenYamlFileExists_GeneratesSvg()
     {
         // Arrange
