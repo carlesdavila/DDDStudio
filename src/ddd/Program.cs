@@ -1,9 +1,12 @@
-﻿using System.Reflection;
-using Cocona;
+﻿using Cocona;
+using ddd.Commands;
 using DDDCanvasCreator;
 
 var app = CoconaApp.Create();
 
+app.AddCommands<AboutCommand>();
+
+app.AddCommands<InitCommand>();
 
 app.AddCommand("GenerateSvgs", ([Argument] string inputDirectory, string outputDirectory) =>
     {
@@ -36,44 +39,4 @@ app.AddCommand("GenerateSvgs", ([Argument] string inputDirectory, string outputD
     })
     .WithDescription("Generate all svgs from yaml files");
 
-
-app.AddCommand("version", () =>
-    {
-        ShowLogo("starting...!");
-        ShowVersion();
-    })
-    .WithDescription("Client Version");
 app.Run();
-
-
-return;
-
-
-static void ShowLogo(string message)
-{
-    var logo = $"\n        {message}";
-    logo += @"
-
-  _____  _____  _____     _____ _             _ _        
- |  __ \|  __ \|  __ \   / ____| |           | (_)       
- | |  | | |  | | |  | | | (___ | |_ _   _  __| |_  ___   
- | |  | | |  | | |  | |  \___ \| __| | | |/ _` | |/ _ \  
- | |__| | |__| | |__| |  ____) | |_| |_| | (_| | | (_) | 
- |_____/|_____/|_____/ _|_____/ \__|\__,_|\__,_|_|\___/  
-               
-";
-
-    Console.WriteLine(logo);
-}
-
-static void ShowVersion()
-{
-    var assembly = Assembly.GetExecutingAssembly();
-
-    var version = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
-                  ?? assembly.GetName().Version?.ToString()
-                  ?? "Version not found";
-    var cleanVersion = version.Split('+')[0];
-
-    Console.WriteLine($"Version: {cleanVersion}");
-}
