@@ -8,6 +8,16 @@ app.AddCommands<AboutCommand>();
 
 app.AddCommands<InitCommand>();
 
+app.AddCommands<AddSubdomainCommand>();
+
+app.AddCommands<AddContextCommand>();
+
+app.AddCommands<AddAggregateCommand>();
+
+app.AddCommands<GenerateDocsCommand>();
+
+
+
 app.AddCommand("GenerateSvgs", ([Argument] string inputDirectory, string outputDirectory) =>
     {
         var dddCanvas = new DDDCanvas();
