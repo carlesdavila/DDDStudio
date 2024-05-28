@@ -1,0 +1,4 @@
+﻿aggregate:
+  name: Order
+  description: "An aggregate representing a customer order. This boundary was chosen to encapsulate the complete lifecycle of an order from creation to fulfillment or cancellation. Trade-offs include managing concurrency for high-volume orders."
+  

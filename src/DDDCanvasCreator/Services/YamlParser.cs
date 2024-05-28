@@ -1,4 +1,5 @@
-﻿using DDDCanvasCreator.Models.BoundedContextBasic;
+﻿using DDDCanvasCreator.Models.AggregateCanvas;
+using DDDCanvasCreator.Models.BoundedContextBasic;
 using YamlDotNet.Core;
 using YamlDotNet.RepresentationModel;
 
@@ -32,6 +33,34 @@ public class YamlParser: IDisposable
         _reader.Dispose();
     }
 
+    public Aggregate ParseAggregate()
+    {
+        try
+        {
+            _yamlStream.Load(_reader);
+        }
+        catch (YamlException ex)
+        {
+            if (_fileInfo != null)
+            {
+                throw new DDDYamlException(ex.Start, $"Unable to parse '{_fileInfo.Name}'. See inner exception.", ex, _fileInfo);
+            }
+
+            throw new DDDYamlException(ex.Start, $"Unable to parse YAML.  See inner exception.", ex);
+        }
+        var aggregate = new Aggregate();
+
+        var document = _yamlStream.Documents[0];
+        var node = document.RootNode;
+        ThrowIfNotYamlMapping(node, _fileInfo);
+
+        aggregate.Source = _fileInfo!;
+        
+        AggregateParser.HandleAggregate((YamlMappingNode)node, aggregate);
+
+        
+        return aggregate;
+    }
     public BoundedContextsBasic ParseBoundedContextsBasic()
     {
         try

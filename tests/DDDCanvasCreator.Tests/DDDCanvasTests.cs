@@ -24,13 +24,17 @@ public class DDDCanvasTests
         Assert.True(File.Exists(outputFilePath));
     }
 
-    [Fact (Skip = "not developed")]
+    [Fact]
     public void GenerateAggregateSvg_WhenYamlFileExists_GeneratesSvg()
     {
         // Arrange
+        var assemblyLocation = Assembly.GetExecutingAssembly().Location;
+        var directory = Path.GetDirectoryName(assemblyLocation);
+        var yamlFilePath = Path.Combine(directory!, "TestData", "aggregate_input.yaml");
+
+        
         var dddCanvas = new DDDCanvas();
-        var yamlFilePath = "path/to/your/aggregate_input.yaml";
-        var outputFilePath = "path/to/your/aggregate_output.svg";
+        var outputFilePath = "./aggregate_output.svg";
 
         // Act
         dddCanvas.GenerateSvg(yamlFilePath, outputFilePath);
