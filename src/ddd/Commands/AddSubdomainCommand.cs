@@ -5,7 +5,7 @@ namespace ddd.Commands;
 public class AddSubdomainCommand
 {
     [Command(Description = "Add a new subdomain and generate a base YAML file.")]
-    public void AddSubdomain(string name)
+    public void Subdomain([Argument]string name)
     {
         var subdomainPath = Path.Combine("DDD", "Subdomains", name, "BoundedContexts");
         if (!Directory.Exists(subdomainPath))

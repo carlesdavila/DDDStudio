@@ -5,7 +5,7 @@ namespace ddd.Commands;
 public class AddAggregateCommand
 {
     [Command(Description = "Add a new aggregate to a bounded context of a subdomain.")]
-    public void AddAggregate(string name, string subdomain, string context)
+    public void Aggregate([Argument]string name, [Option('s')]string subdomain, [Option('c')]string context)
     {
         var aggregatePath = Path.Combine("DDD", "Subdomains", subdomain, "BoundedContexts", context, "Aggregates",
             $"{name}.yaml");

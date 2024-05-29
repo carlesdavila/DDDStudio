@@ -3,16 +3,18 @@ using ddd.Commands;
 
 var app = CoconaApp.Create();
 
-app.AddCommands<AboutCommand>();
-
 app.AddCommands<InitCommand>();
 
-app.AddCommands<AddSubdomainCommand>();
-
-app.AddCommands<AddContextCommand>();
-
-app.AddCommands<AddAggregateCommand>();
+app.AddSubCommand("add", x =>
+    {
+        x.AddCommands<AddSubdomainCommand>();
+        x.AddCommands<AddContextCommand>();
+        x.AddCommands<AddAggregateCommand>();
+    })
+    .WithDescription("Adds a DDD item");
 
 app.AddCommands<GenerateDocsCommand>();
+
+app.AddCommands<AboutCommand>();
 
 app.Run();
