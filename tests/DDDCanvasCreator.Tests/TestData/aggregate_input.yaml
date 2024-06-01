@@ -12,3 +12,25 @@
         - to: Shipped
         - to: Cancelled
     - state: Shipped
+      
+  enforcedInvariants:
+    - "Order must have at least one OrderItem."
+    - "Order total must be recalculated when items are added or removed."
+      
+  correctivePolicies:
+    - "If an OrderItem is out of stock, notify the customer and adjust the order or issue a refund."
+    - "If the order status is not updated due to a system failure, retry the update process."
+
+  handledCommands:
+    - PlaceOrder
+    - ConfirmOrder
+    - ShipOrder
+    - CompleteOrder
+    - CancelOrder
+
+  createdEvents:
+    - OrderPlaced
+    - OrderConfirmed
+    - OrderShipped
+    - OrderCompleted
+    - OrderCancelled

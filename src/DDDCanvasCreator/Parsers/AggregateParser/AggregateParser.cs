@@ -24,7 +24,7 @@ public static class AggregateParser
         }
     }
 
-    private static void HandleAggregateMapping(YamlMappingNode? yamlMappingNode, Models.AggregateCanvas.Aggregate aggregate)
+    private static void HandleAggregateMapping(YamlMappingNode? yamlMappingNode, Aggregate aggregate)
     {
         foreach (var child in yamlMappingNode!.Children)
         {
@@ -40,11 +40,38 @@ public static class AggregateParser
                     break;
                 case "stateTransitions":
                     YamlParser.ThrowIfNotYamlSequence(key, child.Value);
-                    StateTransitionsParser.HandleStateTransitions((child.Value as YamlSequenceNode)!, aggregate.StateTransitions);
+                    StateTransitionsParser.HandleStateTransitions((child.Value as YamlSequenceNode)!,
+                        aggregate.StateTransitions);
+                    break;
+                case "enforcedInvariants":
+                    YamlParser.ThrowIfNotYamlSequence(key, child.Value);
+                    HandleStringSequence(child.Value as YamlSequenceNode, aggregate.EnforcedInvariants);
+                    break;
+                case "correctivePolicies":
+                    YamlParser.ThrowIfNotYamlSequence(key, child.Value);
+                    HandleStringSequence(child.Value as YamlSequenceNode, aggregate.CorrectivePolicies);
+                    break;
+                case "handledCommands":
+                    YamlParser.ThrowIfNotYamlSequence(key, child.Value);
+                    HandleStringSequence(child.Value as YamlSequenceNode, aggregate.HandledCommands);
+                    break;
+                case "createdEvents":
+                    YamlParser.ThrowIfNotYamlSequence(key, child.Value);
+                    HandleStringSequence(child.Value as YamlSequenceNode, aggregate.CreatedEvents);
                     break;
                 default:
                     throw new DDDYamlException(child.Key.Start, $"Unrecognized Key: {key}");
             }
+        }
+    }
+
+    //TODO: Move to YamlParser?
+    private static void HandleStringSequence(YamlSequenceNode? yamlSequenceNode, List<string> enforcedInvariants)
+    {
+        foreach (var child in yamlSequenceNode!.Children)
+        {
+            var enforcedInvariant = YamlParser.GetScalarValue(child);
+            enforcedInvariants.Add(enforcedInvariant);
         }
     }
 }

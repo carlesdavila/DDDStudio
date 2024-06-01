@@ -15,7 +15,6 @@ aggregate:
 
   enforcedInvariants:
     - "Order must have at least one OrderItem."
-    - "Order status must follow the correct transitions: Created -> Confirmed -> Shipped -> Completed or Cancelled."
     - "Order total must be recalculated when items are added or removed."
   
   correctivePolicies:
