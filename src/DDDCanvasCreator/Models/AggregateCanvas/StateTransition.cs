@@ -2,6 +2,6 @@
 
 public class StateTransition
 {
-    public string Initial { get; set; }
-    public List<string> Transitions { get; set; }
+    public string State { get; set; }
+    public List<Transition> Transitions { get; set; } = [];
 }

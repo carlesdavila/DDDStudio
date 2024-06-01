@@ -12,8 +12,6 @@ aggregate:
         - to: Shipped
         - to: Cancelled
     - state: Shipped
-      transitions:
-        - to: []
 
   enforcedInvariants:
     - "Order must have at least one OrderItem."

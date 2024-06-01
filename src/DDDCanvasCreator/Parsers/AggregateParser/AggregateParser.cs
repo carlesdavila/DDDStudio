@@ -1,7 +1,8 @@
 ﻿using DDDCanvasCreator.Models.AggregateCanvas;
+using DDDCanvasCreator.Services;
 using YamlDotNet.RepresentationModel;
 
-namespace DDDCanvasCreator.Services;
+namespace DDDCanvasCreator.Parsers.AggregateParser;
 
 public static class AggregateParser
 {
@@ -23,7 +24,7 @@ public static class AggregateParser
         }
     }
 
-    private static void HandleAggregateMapping(YamlMappingNode? yamlMappingNode, Aggregate aggregate)
+    private static void HandleAggregateMapping(YamlMappingNode? yamlMappingNode, Models.AggregateCanvas.Aggregate aggregate)
     {
         foreach (var child in yamlMappingNode!.Children)
         {
@@ -36,6 +37,10 @@ public static class AggregateParser
                     break;
                 case "description":
                     aggregate.Description = YamlParser.GetScalarValue(key, child.Value);
+                    break;
+                case "stateTransitions":
+                    YamlParser.ThrowIfNotYamlSequence(key, child.Value);
+                    StateTransitionsParser.HandleStateTransitions((child.Value as YamlSequenceNode)!, aggregate.StateTransitions);
                     break;
                 default:
                     throw new DDDYamlException(child.Key.Start, $"Unrecognized Key: {key}");

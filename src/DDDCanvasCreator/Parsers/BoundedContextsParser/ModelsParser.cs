@@ -1,7 +1,8 @@
 ﻿using DDDCanvasCreator.Models.BoundedContextBasic;
+using DDDCanvasCreator.Services;
 using YamlDotNet.RepresentationModel;
 
-namespace DDDCanvasCreator.Services;
+namespace DDDCanvasCreator.Parsers.BoundedContextsParser;
 
 public static class ModelsParser
 {

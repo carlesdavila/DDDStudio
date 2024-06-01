@@ -8,5 +8,5 @@ public class Aggregate
     public FileInfo Source { get; set; } = default!;
     public string Name { get; set; }
     public string Description { get; set; }
-    public List<StateTransition> StateTransitions { get; set; }
+    public List<StateTransition> StateTransitions { get; set; } = [];
 }

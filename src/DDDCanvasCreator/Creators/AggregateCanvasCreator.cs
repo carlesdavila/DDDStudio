@@ -29,6 +29,14 @@ public class AggregateCanvasCreator : IYamlProcessor
         // Load the SVG file as an initial template
         var svgDocument = SvgDocument.Open(templateFilePath);
         
+        GenerateNameAndDescription(aggregate, svgDocument);
+
+        // Save the modified SVG document to the specified output file path
+        svgDocument.Write(outputFilePath);
+    }
+
+    private void GenerateNameAndDescription(Aggregate aggregate, SvgDocument svgDocument)
+    {
         // Modify the text for the name
         var nameText = svgDocument.GetElementById<SvgText>("nameText");
         if (nameText != null) nameText.Text = $"1. Name: {aggregate.Name}";
@@ -66,9 +74,6 @@ public class AggregateCanvasCreator : IYamlProcessor
                 initialY += lineHeight;
             }
         }
-
-        // Save the modified SVG document to the specified output file path
-        svgDocument.Write(outputFilePath);
     }
 
     private List<string> SplitTextIntoLines(string text, float charWidth, float maxLineWidth)

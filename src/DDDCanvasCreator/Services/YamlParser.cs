@@ -1,5 +1,7 @@
 ﻿using DDDCanvasCreator.Models.AggregateCanvas;
 using DDDCanvasCreator.Models.BoundedContextBasic;
+using DDDCanvasCreator.Parsers.AggregateParser;
+using DDDCanvasCreator.Parsers.BoundedContextsParser;
 using YamlDotNet.Core;
 using YamlDotNet.RepresentationModel;
 

@@ -1,11 +1,12 @@
 ﻿using DDDCanvasCreator.Models.BoundedContextBasic;
+using DDDCanvasCreator.Services;
 using YamlDotNet.RepresentationModel;
 
-namespace DDDCanvasCreator.Services;
+namespace DDDCanvasCreator.Parsers.BoundedContextsParser;
 
 public static class BoundedContextsBasicParser
 {
-    public static void HandleBoundedContextsBasic(YamlMappingNode yamlMappingNode,  BoundedContextsBasic app)
+    public static void HandleBoundedContextsBasic(YamlMappingNode yamlMappingNode,  BoundedContextsBasic boundedContextsBasic)
     {
         foreach (var child in yamlMappingNode.Children)
         {
@@ -15,7 +16,7 @@ public static class BoundedContextsBasicParser
             {
                 case "boundedContexts":
                     YamlParser.ThrowIfNotYamlSequence(key, child.Value);
-                    BoundedContextsParser.HandleBoundedContexts((child.Value as YamlSequenceNode)!, app.BoundedContexts);
+                    BoundedContextsParser.HandleBoundedContexts((child.Value as YamlSequenceNode)!, boundedContextsBasic.BoundedContexts);
                     break;
                 default:
                     throw new DDDYamlException(child.Key.Start, $"Unrecognized Key: {key}");
