@@ -8,9 +8,9 @@ public class GenerateDocsCommand
     [Command(Description = "Generate SVG documentation from YAML files.")]
     public void GenerateDocs()
     {
-        var yamlFiles = Directory.GetFiles("DDD", "*.yaml", SearchOption.AllDirectories);
+        var yamlFiles = Directory.GetFiles(Constants.MainPath, "*.yaml", SearchOption.AllDirectories);
 
-        var outputFolder = "docs";
+        const string outputFolder = "docs";
         if (!Directory.Exists(outputFolder)) Directory.CreateDirectory(outputFolder);
 
         foreach (var yamlFile in yamlFiles)

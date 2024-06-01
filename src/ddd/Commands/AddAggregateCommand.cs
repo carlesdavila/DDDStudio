@@ -7,10 +7,10 @@ public class AddAggregateCommand
     [Command(Description = "Add a new aggregate to a bounded context of a subdomain.")]
     public void Aggregate([Argument]string name, [Option('s')]string subdomain, [Option('c')]string context)
     {
-        var aggregatePath = Path.Combine("DDD", "Subdomains", subdomain, "BoundedContexts", context, "Aggregates",
+        var aggregatePath = Path.Combine(Constants.MainPath, "Subdomains", subdomain, "BoundedContexts", context, "Aggregates",
             $"{name}.yaml");
 
-        if (!Directory.Exists(Path.Combine("DDD", "Subdomains", subdomain, "BoundedContexts", context)))
+        if (!Directory.Exists(Path.Combine(Constants.MainPath, "Subdomains", subdomain, "BoundedContexts", context)))
         {
             Console.WriteLine($"Bounded Context '{context}' in subdomain '{subdomain}' does not exist.");
             return;

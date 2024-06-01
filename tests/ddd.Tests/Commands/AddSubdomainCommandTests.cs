@@ -16,6 +16,6 @@ public class AddSubdomainCommandTests
         CoconaApp.Run<AddSubdomainCommand>(args);
 
         // Assert
-        Assert.True(Directory.Exists(Path.Combine("DDD", "Subdomains", "TestSubdomain")));
+        Assert.True(Directory.Exists(Path.Combine(Constants.MainPath, "Subdomains", "TestSubdomain")));
     }
 }

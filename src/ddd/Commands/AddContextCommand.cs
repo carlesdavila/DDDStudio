@@ -7,7 +7,7 @@ public class AddContextCommand
     [Command(Description = "Add a new bounded context to a subdomain.")]
     public void Context([Argument]string name, [Option('s')]string subdomain)
     {
-        var contextPath = Path.Combine("DDD", "Subdomains", subdomain, "BoundedContexts", name);
+        var contextPath = Path.Combine(Constants.MainPath, "Subdomains", subdomain, "BoundedContexts", name);
         string[] contextDirectories =
         {
             "Aggregates"
