@@ -23,10 +23,10 @@
 
   handledCommands:
     - PlaceOrder
-    - ConfirmOrder
-    - ShipOrder
-    - CompleteOrder
-    - CancelOrder
+    - Confirm
+    - Ship
+    - Complete
+    - Cancel
 
   createdEvents:
     - OrderPlaced
