@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text;
+﻿using System.Text;
 using DDDCanvasCreator.Models.AggregateCanvas;
 using DDDCanvasCreator.Services;
 using Svg;
@@ -44,77 +43,38 @@ public class AggregateCanvasCreator : IYamlProcessor
 
     private void GenerateHandledCommands(List<string> aggregateHandledCommands, SvgDocument svgDocument)
     {
-        // Get the rectangle using its ID
-        var rect = svgDocument.GetElementById<SvgRectangle>("handledCommandsRect");
-        if (rect == null) throw new Exception("Rectangle with ID 'handledCommandsRect' not found in the SVG.");
+        // Get the group that contains the handled commands elements
+        var cardsHcGroup = svgDocument.GetElementById<SvgGroup>("cardsHc");
 
-        // Define the properties of the rectangle
-        float rectX = rect.X;
-        float rectY = rect.Y;
-        float rectWidth = rect.Width;
-        float rectHeight = rect.Height;
-
-        // Define the initial offset and the spacing between boxes
-        var boxSize = 62.5f; // Size of the square box (25% larger than 50)
-        var initialY = rectY + 60; // A little top margin to start below the existing text
-        var spacingX = boxSize + 10; // Spacing between each box horizontally
-
-        // Calculate the initial X to center the boxes horizontally within the rectangle
-        var totalBoxesWidth = aggregateHandledCommands.Count * boxSize + (aggregateHandledCommands.Count - 1) * 10;
-        var initialX = rectX + (rectWidth - totalBoxesWidth) / 2;
-
-        // Text font and style for handled commands
-        var fontFamily = "IBM Plex Sans";
-        float fontSize = 12; // Font size
-        var textColor = "#323D4F";
-        var boxFillColor = "#40C7EA";
-
-        // Get the existing group using its ID
-        var handledCommandsGroup = svgDocument.GetElementById<SvgGroup>("handledCommandsGroup");
-        if (handledCommandsGroup == null)
-            throw new Exception("Group with ID 'handledCommandsGroup' not found in the SVG.");
-
-        // Keep the existing handled commands text element
-        var handledCommandsText = svgDocument.GetElementById<SvgText>("handledCommandsText");
-
-        // Counter for horizontal positioning
-        var index = 0;
-
-        foreach (var command in aggregateHandledCommands)
+        if (cardsHcGroup != null)
         {
-            // Create the square background for each command
-            var rectElement = new SvgRectangle
+            // Get all handled commands rectangles and texts
+            var rects = cardsHcGroup.Children.OfType<SvgRectangle>().ToList();
+            var texts = cardsHcGroup.Children.OfType<SvgText>().ToList();
+
+            // Remove unused rectangles and texts
+            for (var i = aggregateHandledCommands.Count; i < rects.Count; i++)
             {
-                X = initialX + index * spacingX, // Adjust to place boxes horizontally
-                Y = initialY - 20, // Adjust to position the text inside the box
-                Width = boxSize, // Square width
-                Height = boxSize, // Square height
-                Fill = new SvgColourServer(ColorTranslator.FromHtml(boxFillColor)),
-                Stroke = SvgPaintServer.None
-            };
+                var rectId = $"rectHc{i + 1}";
+                var textId = $"txtHc{i + 1}";
 
-            // Create the <text> element with the necessary properties
-            var textElement = new SvgText(command)
+                var rect = rects.FirstOrDefault(r => r.ID == rectId);
+                if (rect != null) cardsHcGroup.Children.Remove(rect);
+
+                var text = texts.FirstOrDefault(t => t.ID == textId);
+                if (text != null) cardsHcGroup.Children.Remove(text);
+            }
+
+            // Update existing texts with the new aggregateHandledCommands list
+            for (var i = 0; i < aggregateHandledCommands.Count; i++)
             {
-                X = new SvgUnitCollection
-                    { initialX + index * spacingX + 5 }, // Adjust to center the text within the box
-                Y = new SvgUnitCollection { initialY },
-                Fill = new SvgColourServer(ColorTranslator.FromHtml(textColor)),
-                FontFamily = fontFamily,
-                FontSize = fontSize,
-                FontWeight = SvgFontWeight.Bold
-            };
+                var command = aggregateHandledCommands[i];
+                var textId = $"txtHc{i + 1}";
 
-            // Create a group to hold both the rectangle and the text
-            var commandGroup = new SvgGroup();
-            commandGroup.Children.Add(rectElement);
-            commandGroup.Children.Add(textElement);
-
-            // Add the group to the existing <g> group
-            handledCommandsGroup.Children.Add(commandGroup);
-
-            // Increment the counter for the next horizontal position
-            index++;
+                // Find and update the corresponding text
+                var text = texts.FirstOrDefault(t => t.ID == textId);
+                if (text != null) text.Text = command;
+            }
         }
     }
 
