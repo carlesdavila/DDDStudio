@@ -76,6 +76,30 @@
                 <text id="txtHc8" x="633" y="465" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
             </g>
         </g>
+        <rect id="createdEventsRect"  x="370" y="520" width="350" height="200" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <g id="createdEventsGroup" transform="translate(-0.5 -0.5)">
+            <text id="createdEventsText" x="379" y="551" fill="#323D4F" font-family="IBM Plex Sans" font-size="20px" font-weight="bold">7. Created
+                Events
+            </text>
+            <g id="cardsCe">
+                <rect id="rectCe1" x="390" y="570" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
+                <text id="txtCe1" x="393" y="605" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
+                <rect id="rectCe2" x="470" y="570" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
+                <text id="txtCe2" x="473" y="605" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
+                <rect id="rectCe3" x="550" y="570" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
+                <text id="txtCe3" x="553" y="605" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
+                <rect id="rectCe4" x="630" y="570" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
+                <text id="txtCe4" x="633" y="605" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
+                <rect id="rectCe5" x="390" y="650" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
+                <text id="txtCe5" x="393" y="685" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
+                <rect id="rectCe6" x="470" y="650" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
+                <text id="txtCe6" x="473" y="685" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
+                <rect id="rectCe7" x="550" y="650" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
+                <text id="txtCe7" x="553" y="685" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
+                <rect id="rectCe8" x="630" y="650" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
+                <text id="txtCe8" x="633" y="685" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
+            </g>
+        </g>
         <rect x="730" y="300" width="320" height="210" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <text x="739" y="331" fill="#323D4F" font-family="IBM Plex Sans" font-size="20px" font-weight="bold">8.
@@ -137,12 +161,6 @@
     <g transform="translate(-0.5 -0.5)">
         <text x="898" y="694" fill="#323D4F" font-family="IBM Plex Sans" font-size="12px" text-anchor="end"
               font-weight="bold">Number of events persisted
-        </text>
-    </g>
-    <rect x="370" y="520" width="350" height="200" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
-    <g transform="translate(-0.5 -0.5)">
-        <text x="379" y="551" fill="#323D4F" font-family="IBM Plex Sans" font-size="20px" font-weight="bold">7. Created
-            Events
         </text>
     </g>
     <rect id="descriptionRect" x="10" y="120" width="350" height="170" fill="rgb(255, 255, 255)" stroke="none"
