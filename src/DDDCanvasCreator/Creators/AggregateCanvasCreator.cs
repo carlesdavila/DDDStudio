@@ -29,16 +29,54 @@ public class AggregateCanvasCreator : IYamlProcessor
         // Load the SVG file as an initial template
         var svgDocument = SvgDocument.Open(templateFilePath);
 
+
         GenerateNameAndDescription(aggregate, svgDocument);
+        GenerateEnforcedInvariants(aggregate.EnforcedInvariants, svgDocument);
         GenerateHandledCommands(aggregate.HandledCommands, svgDocument);
         GenerateCreatedEvents(aggregate.CreatedEvents, svgDocument);
+        GenerateCorrectivePolicies(aggregate.CorrectivePolicies, svgDocument);
         // GenerateStateTransitions(aggregate.StateTransitions, svgDocument);
-        // GenerateEnforcedInvariants(aggregate.EnforcedInvariants,svgDocument);
-        // GenerateCorrectivePolicies(aggregate.CorrectivePolicies, svgDocument);
-
-
+        
         // Save the modified SVG document to the specified output file path
         svgDocument.Write(outputFilePath);
+    }
+
+    private void GenerateCorrectivePolicies(List<string> aggregateCorrectivePolicies, SvgDocument svgDocument)
+    {
+        AddBulletPoints(aggregateCorrectivePolicies, svgDocument, "cpText");
+    }
+
+    private void GenerateEnforcedInvariants(List<string> aggregateEnforcedInvariants, SvgDocument svgDocument)
+    {
+        AddBulletPoints(aggregateEnforcedInvariants, svgDocument, "eiText");
+    }
+
+    private void AddBulletPoints(List<string> items, SvgDocument svgDocument, string textElementId)
+    {
+        // Get the text element with the specified ID
+        var textElement = svgDocument.GetElementById<SvgText>(textElementId);
+
+        if (textElement != null)
+        {
+            // Clear any existing content
+            textElement.Children.Clear();
+
+            // Add each item as a new tspan
+            foreach (var item in items)
+            {
+                var tspan = new SvgTextSpan
+                {
+                    X = [19], // Set the x position
+                    Dy = [new SvgUnit(SvgUnitType.Em, 1.2f)],
+                    Text = "• " + item // Add the bullet point and text
+                };
+                textElement.Children.Add(tspan);
+            }
+        }
+        else
+        {
+            throw new InvalidOperationException($"The '{textElementId}' element was not found in the SVG document.");
+        }
     }
 
     private void GenerateHandledCommands(List<string> aggregateHandledCommands, SvgDocument svgDocument)
@@ -87,16 +125,6 @@ public class AggregateCanvasCreator : IYamlProcessor
                 if (text != null) text.Text = element;
             }
         }
-    }
-
-    private void GenerateCorrectivePolicies(List<string> aggregateCorrectivePolicies, SvgDocument svgDocument)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void GenerateEnforcedInvariants(List<string> aggregateEnforcedInvariants, SvgDocument svgDocument)
-    {
-        throw new NotImplementedException();
     }
 
     private void GenerateStateTransitions(List<StateTransition> aggregateStateTransitions, SvgDocument svgDocument)

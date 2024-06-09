@@ -12,18 +12,17 @@
     <style>
         .hcCards { fill:#40C7EA;stroke:none; }
         .ceCards { fill:#FFAA5E;stroke:none; }
-         .textCards text {
-        font-family: "IBM Plex Sans";
-        font-size: 12px;
-        font-weight: bold;
-        fill: #323D4F;
+        .textCards text {
+            font-family: "IBM Plex Sans";
+            font-size: 12px;
+            font-weight: bold;
+            fill: #323D4F;
         }
-
         .title {
-        font-family: "IBM Plex Sans";
-        font-size: 20px;
-        font-weight: bold;
-        fill: #323D4F;
+            font-family: "IBM Plex Sans";
+            font-size: 20px;
+            font-weight: bold;
+            fill: #323D4F;
         }
     </style>
 
@@ -44,7 +43,8 @@
               pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <text class="title" x="19" y="151">2.Description</text>
-            <text id="descriptionText" x="19" y="151" fill="#323D4F" font-family="IBM Plex Sans" font-size="16px"></text>
+            <text id="descriptionText" x="19" y="151" fill="#323D4F" font-family="IBM Plex Sans" font-size="16px">
+            </text>
         </g>
         <g transform="translate(-0.5 -0.5)">
             <text class="title" x="379" y="91">3. State Transitions</text>
@@ -53,11 +53,16 @@
               stroke="none" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <text class="title" x="19" y="331">4. Enforced Invariants</text>
+            <text id="eiText" x="19" y="345">
+            </text>
         </g>
         <rect id="correctivePoliciesRect" x="10" y="520" width="350" height="200" fill="rgb(255, 255, 255)"
               stroke="none" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <text class="title" x="19" y="551">5. Corrective Policies</text>
+            <text id="cpText" x="19" y="565">
+            </text>
+
         </g>
         <rect id="handledCommandsRect" x="370" y="300" width="350" height="210" fill="rgb(255, 255, 255)" stroke="none"
               pointer-events="all"/>
