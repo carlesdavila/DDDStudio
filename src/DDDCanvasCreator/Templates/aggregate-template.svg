@@ -2,11 +2,17 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg"
      version="1.1" width="1060px" height="770px" viewBox="-0.5 -0.5 1060 770">
+    
     <defs>
         <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#888" flood-opacity="0.9" />
+            <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#888" flood-opacity="0.9"/>
         </filter>
     </defs>
+    <!-- Embedded CSS-->
+    <style>
+        .hcCards { fill:#40C7EA;stroke:none; }
+        .ceCards { fill:#FFAA5E;stroke:none; }
+    </style>
 
     <g>
         <rect x="0" y="0" width="1060" height="770" fill="#323d4f" stroke="none" pointer-events="all"/>
@@ -40,64 +46,102 @@
                 is licensed under a Creative Commons Attribution 4.0 International License, CC BY 4.0....
             </text>
         </g>
-        <rect x="10" y="300" width="350" height="210" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <rect id="enforcedInvariantsRect" x="10" y="300" width="350" height="210" fill="rgb(255, 255, 255)"
+              stroke="none" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <text x="19" y="331" fill="#323D4F" font-family="IBM Plex Sans" font-size="20px" font-weight="bold">4.
                 Enforced Invariants
             </text>
         </g>
-        <rect x="10" y="520" width="350" height="200" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <rect id="correctivePoliciesRect" x="10" y="520" width="350" height="200" fill="rgb(255, 255, 255)"
+              stroke="none" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <text x="19" y="551" fill="#323D4F" font-family="IBM Plex Sans" font-size="20px" font-weight="bold">5.
                 Corrective Policies
             </text>
         </g>
-        <rect id="handledCommandsRect"  x="370" y="300" width="350" height="210" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <rect id="handledCommandsRect" x="370" y="300" width="350" height="210" fill="rgb(255, 255, 255)" stroke="none"
+              pointer-events="all"/>
         <g id="handledCommandsGroup" transform="translate(-0.5 -0.5)">
-            <text id="handledCommandsText" x="379" y="331" fill="#323D4F" font-family="IBM Plex Sans" font-size="20px" font-weight="bold">6.
+            <text id="handledCommandsText" x="379" y="331" fill="#323D4F" font-family="IBM Plex Sans" font-size="20px"
+                  font-weight="bold">6.
                 Handled Commands
             </text>
-            <g id="cardsHc">
-                <rect id="rectHc1" x="390" y="350" width="65" height="65" style="fill:#40C7EA;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtHc1" x="393" y="385" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
-                <rect id="rectHc2" x="470" y="350" width="65" height="65" style="fill:#40C7EA;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtHc2" x="473" y="385" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
-                <rect id="rectHc3" x="550" y="350" width="65" height="65" style="fill:#40C7EA;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtHc3" x="553" y="385" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
-                <rect id="rectHc4" x="630" y="350" width="65" height="65" style="fill:#40C7EA;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtHc4" x="633" y="385" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
-                <rect id="rectHc5" x="390" y="430" width="65" height="65" style="fill:#40C7EA;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtHc5" x="393" y="465" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
-                <rect id="rectHc6" x="470" y="430" width="65" height="65" style="fill:#40C7EA;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtHc6" x="473" y="465" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
-                <rect id="rectHc7" x="550" y="430" width="65" height="65" style="fill:#40C7EA;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtHc7" x="553" y="465" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
-                <rect id="rectHc8" x="630" y="430" width="65" height="65" style="fill:#40C7EA;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtHc8" x="633" y="465" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
+            <g id="cardsHc" class="hcCards">
+                <rect id="rectHc1" x="390" y="350" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtHc1" x="393" y="385" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
+                <rect id="rectHc2" x="470" y="350" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtHc2" x="473" y="385" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
+                <rect id="rectHc3" x="550" y="350" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtHc3" x="553" y="385" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
+                <rect id="rectHc4" x="630" y="350" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtHc4" x="633" y="385" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
+                <rect id="rectHc5" x="390" y="430" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtHc5" x="393" y="465" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
+                <rect id="rectHc6" x="470" y="430" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtHc6" x="473" y="465" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
+                <rect id="rectHc7" x="550" y="430" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtHc7" x="553" y="465" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
+                <rect id="rectHc8" x="630" y="430" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtHc8" x="633" y="465" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
             </g>
         </g>
-        <rect id="createdEventsRect"  x="370" y="520" width="350" height="200" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+        <rect id="createdEventsRect" x="370" y="520" width="350" height="200" fill="rgb(255, 255, 255)" stroke="none"
+              pointer-events="all"/>
         <g id="createdEventsGroup" transform="translate(-0.5 -0.5)">
-            <text id="createdEventsText" x="379" y="551" fill="#323D4F" font-family="IBM Plex Sans" font-size="20px" font-weight="bold">7. Created
+            <text id="createdEventsText" x="379" y="551" fill="#323D4F" font-family="IBM Plex Sans" font-size="20px"
+                  font-weight="bold">7. Created
                 Events
             </text>
-            <g id="cardsCe">
-                <rect id="rectCe1" x="390" y="570" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtCe1" x="393" y="605" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
-                <rect id="rectCe2" x="470" y="570" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtCe2" x="473" y="605" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
-                <rect id="rectCe3" x="550" y="570" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtCe3" x="553" y="605" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
-                <rect id="rectCe4" x="630" y="570" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtCe4" x="633" y="605" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
-                <rect id="rectCe5" x="390" y="650" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtCe5" x="393" y="685" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
-                <rect id="rectCe6" x="470" y="650" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtCe6" x="473" y="685" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
-                <rect id="rectCe7" x="550" y="650" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtCe7" x="553" y="685" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
-                <rect id="rectCe8" x="630" y="650" width="65" height="65" style="fill:#FFAA5E;stroke:none;" filter="url(#dropShadow)" />
-                <text id="txtCe8" x="633" y="685" font-family="IBM Plex Sans" font-size="12" font-weight="bold" style="fill:#323D4F;">text</text>
+            <g id="cardsCe" class="ceCards">
+                <rect id="rectCe1" x="390" y="570" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtCe1" x="393" y="605" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
+                <rect id="rectCe2" x="470" y="570" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtCe2" x="473" y="605" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
+                <rect id="rectCe3" x="550" y="570" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtCe3" x="553" y="605" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
+                <rect id="rectCe4" x="630" y="570" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtCe4" x="633" y="605" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
+                <rect id="rectCe5" x="390" y="650" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtCe5" x="393" y="685" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
+                <rect id="rectCe6" x="470" y="650" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtCe6" x="473" y="685" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
+                <rect id="rectCe7" x="550" y="650" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtCe7" x="553" y="685" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
+                <rect id="rectCe8" x="630" y="650" width="65" height="65" filter="url(#dropShadow)"/>
+                <text id="txtCe8" x="633" y="685" font-family="IBM Plex Sans" font-size="12" font-weight="bold"
+                      style="fill:#323D4F;">text
+                </text>
             </g>
         </g>
         <rect x="730" y="300" width="320" height="210" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
