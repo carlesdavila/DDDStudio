@@ -15,24 +15,9 @@
         .mainRect { fill: #FFFFFF; stroke: none; }
         .hcCards { fill:#40C7EA;stroke:none; }
         .ceCards { fill:#FFAA5E;stroke:none; }
-        .textCards text {
-        font-family: "IBM Plex Sans";
-        font-size: 12px;
-        font-weight: bold;
-        fill: #323D4F;
-        }
-        .title {
-        font-family: "IBM Plex Sans";
-        font-size: 20px;
-        font-weight: bold;
-        fill: #323D4F;
-        }
-        .mainTitle {
-        font-family: "IBM Plex Sans";
-        font-size: 30px;
-        font-weight: bold;
-        fill: #FFFFFF;
-        }
+        .textCards text { font-family: "IBM Plex Sans";font-size: 12px;font-weight: bold;fill: #323D4F; }
+        .title { font-family: "IBM Plex Sans";font-size: 20px;font-weight: bold;fill: #323D4F; }
+        .mainTitle { font-family: "IBM Plex Sans"; font-size: 30px; font-weight: bold;fill: #FFFFFF; }
     </style>
 
     <!-- Background -->
@@ -92,7 +77,7 @@
     </g>
 
     <!-- 7.Created Events -->
-    <rect id="createdEventsRect" class="mainRect" x="370" y="520" width="350" height="200" />
+    <rect id="createdEventsRect" class="mainRect" x="370" y="520" width="350" height="200"/>
     <g id="createdEventsGroup">
         <text id="createdEventsText" class="title" x="379" y="551">7. Created Events</text>
         <g id="cardsCe" class="ceCards textCards">
