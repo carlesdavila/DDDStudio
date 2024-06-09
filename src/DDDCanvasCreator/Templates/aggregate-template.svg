@@ -12,6 +12,7 @@
     <!-- Embedded CSS-->
     <style>
         .bgRect { fill: #323d4f; stroke: none; }
+        .mainRect { fill: #FFFFFF; stroke: none; }
         .hcCards { fill:#40C7EA;stroke:none; }
         .ceCards { fill:#FFAA5E;stroke:none; }
         .textCards text {
@@ -26,51 +27,49 @@
         font-weight: bold;
         fill: #323D4F;
         }
+        .mainTitle {
+        font-family: "IBM Plex Sans";
+        font-size: 30px;
+        font-weight: bold;
+        fill: #FFFFFF;
+        }
     </style>
 
     <!-- Background -->
     <rect class="bgRect" x="0" y="0" width="1060" height="770" pointer-events="all"/>
 
     <!-- Header -->
-    <rect x="370" y="60" width="680" height="230" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
-    <rect x="10" y="10" width="1040" height="40" fill="#323d4f" stroke="none" pointer-events="all"/>
-    <g transform="translate(-0.5 -0.5)">
-        <text x="12" y="39" fill="#FFFFFF" font-family="IBM Plex Sans" font-size="30px" font-weight="bold">Aggregate
-            Design Canvas
-        </text>
-    </g>
-    <rect x="10" y="60" width="350" height="50" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
-    <g transform="translate(-0.5 -0.5)">
-        <text id="nameText" class="title" x="19" y="91">1. Name</text>
-    </g>
-    <rect id="descriptionRect" x="10" y="120" width="350" height="170" fill="rgb(255, 255, 255)" stroke="none"
-          pointer-events="all"/>
-    <g transform="translate(-0.5 -0.5)">
-        <text class="title" x="19" y="151">2.Description</text>
-        <text id="descriptionText" x="19" y="151" fill="#323D4F" font-family="IBM Plex Sans" font-size="16px">
-        </text>
-    </g>
-    <g transform="translate(-0.5 -0.5)">
-        <text class="title" x="379" y="91">3. State Transitions</text>
-    </g>
-    <rect id="enforcedInvariantsRect" x="10" y="300" width="350" height="210" fill="rgb(255, 255, 255)"
-          stroke="none" pointer-events="all"/>
-    <g transform="translate(-0.5 -0.5)">
-        <text class="title" x="19" y="331">4. Enforced Invariants</text>
-        <text id="eiText" x="19" y="345">
-        </text>
-    </g>
-    <rect id="correctivePoliciesRect" x="10" y="520" width="350" height="200" fill="rgb(255, 255, 255)"
-          stroke="none" pointer-events="all"/>
-    <g transform="translate(-0.5 -0.5)">
-        <text class="title" x="19" y="551">5. Corrective Policies</text>
-        <text id="cpText" x="19" y="565">
-        </text>
+    <text class="mainTitle" x="12" y="39">Aggregate Design Canvas</text>
 
-    </g>
-    <rect id="handledCommandsRect" x="370" y="300" width="350" height="210" fill="rgb(255, 255, 255)" stroke="none"
-          pointer-events="all"/>
-    <g id="handledCommandsGroup" transform="translate(-0.5 -0.5)">
+    <!-- 1.Name -->
+    <rect class="mainRect" x="10" y="60" width="350" height="50"/>
+    <text id="nameText" class="title" x="19" y="91">1. Name</text>
+
+    <!-- 2.Description -->
+    <rect id="descriptionRect" class="mainRect" x="10" y="120" width="350" height="170"/>
+    <text class="title" x="19" y="151">2.Description</text>
+    <text id="descriptionText" x="19" y="151" fill="#323D4F" font-family="IBM Plex Sans" font-size="16px">
+    </text>
+
+    <!-- 3.State Transitions -->
+    <rect class="mainRect" x="370" y="60" width="680" height="230"/>
+    <text class="title" x="379" y="91">3. State Transitions</text>
+
+    <!-- 4.Enforced Invariants -->
+    <rect id="enforcedInvariantsRect" class="mainRect" x="10" y="300" width="350" height="210"/>
+    <text class="title" x="19" y="331">4. Enforced Invariants</text>
+    <text id="eiText" x="19" y="345">
+    </text>
+
+    <!-- 5.Corrective Policies -->
+    <rect id="correctivePoliciesRect" class="mainRect" x="10" y="520" width="350" height="200"/>
+    <text class="title" x="19" y="551">5. Corrective Policies</text>
+    <text id="cpText" x="19" y="565">
+    </text>
+
+    <!-- 6.Handled Commands -->
+    <rect id="handledCommandsRect" class="mainRect" x="370" y="300" width="350" height="210"/>
+    <g id="handledCommandsGroup">
         <text id="handledCommandsText" class="title" x="379" y="331">6. Handled Commands</text>
         <g id="cardsHc" class="hcCards textCards">
             <rect id="rectHc1" x="390" y="350" width="65" height="65" filter="url(#dropShadow)"/>
@@ -91,9 +90,10 @@
             <text id="txtHc8" x="633" y="465">text</text>
         </g>
     </g>
-    <rect id="createdEventsRect" x="370" y="520" width="350" height="200" fill="rgb(255, 255, 255)" stroke="none"
-          pointer-events="all"/>
-    <g id="createdEventsGroup" transform="translate(-0.5 -0.5)">
+
+    <!-- 7.Created Events -->
+    <rect id="createdEventsRect" class="mainRect" x="370" y="520" width="350" height="200" />
+    <g id="createdEventsGroup">
         <text id="createdEventsText" class="title" x="379" y="551">7. Created Events</text>
         <g id="cardsCe" class="ceCards textCards">
             <rect id="rectCe1" x="390" y="570" width="65" height="65" filter="url(#dropShadow)"/>
@@ -114,7 +114,9 @@
             <text id="txtCe8" x="633" y="685">text</text>
         </g>
     </g>
-    <rect x="730" y="300" width="320" height="210" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+
+    <!--8. Throughput -->
+    <rect class="mainRect" x="730" y="300" width="320" height="210"/>
     <g transform="translate(-0.5 -0.5)">
         <text class="title" x="739" y="331">8. Throughput</text>
     </g>
@@ -138,8 +140,6 @@
               font-weight="bold">Command handling rate
         </text>
     </g>
-
-
     <rect x="740" y="415" width="160" height="30" fill="none" stroke="none" pointer-events="all"/>
     <g transform="translate(-0.5 -0.5)">
         <text x="898" y="434" fill="#323D4F" font-family="IBM Plex Sans" font-size="12px" text-anchor="end"
@@ -152,7 +152,9 @@
               font-weight="bold">Concurrency conflict chance
         </text>
     </g>
-    <rect x="730" y="520" width="320" height="200" fill="rgb(255, 255, 255)" stroke="none" pointer-events="all"/>
+
+    <!--9. Size -->
+    <rect class="mainRect" x="730" y="520" width="320" height="200"/>
     <g transform="translate(-0.5 -0.5)">
         <text class="title" x="739" y="551">9. Size</text>
     </g>
