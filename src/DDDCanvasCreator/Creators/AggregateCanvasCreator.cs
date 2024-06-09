@@ -29,9 +29,9 @@ public class AggregateCanvasCreator : IYamlProcessor
         // Load the SVG file as an initial template
         var svgDocument = SvgDocument.Open(templateFilePath);
 
-        GenerateHandledCommands(aggregate.HandledCommands, svgDocument);
-
         GenerateNameAndDescription(aggregate, svgDocument);
+        GenerateHandledCommands(aggregate.HandledCommands, svgDocument);
+        GenerateCreatedEvents(aggregate.CreatedEvents, svgDocument);
         // GenerateStateTransitions(aggregate.StateTransitions, svgDocument);
         // GenerateEnforcedInvariants(aggregate.EnforcedInvariants,svgDocument);
         // GenerateCorrectivePolicies(aggregate.CorrectivePolicies, svgDocument);
@@ -70,6 +70,43 @@ public class AggregateCanvasCreator : IYamlProcessor
             {
                 var command = aggregateHandledCommands[i];
                 var textId = $"txtHc{i + 1}";
+
+                // Find and update the corresponding text
+                var text = texts.FirstOrDefault(t => t.ID == textId);
+                if (text != null) text.Text = command;
+            }
+        }
+    }
+
+    private void GenerateCreatedEvents(List<string> aggregateCreatedEvents, SvgDocument svgDocument)
+    {
+        // Get the group that contains the handled commands elements
+        var cardsHcGroup = svgDocument.GetElementById<SvgGroup>("cardsCe");
+
+        if (cardsHcGroup != null)
+        {
+            // Get all handled commands rectangles and texts
+            var rects = cardsHcGroup.Children.OfType<SvgRectangle>().ToList();
+            var texts = cardsHcGroup.Children.OfType<SvgText>().ToList();
+
+            // Remove unused rectangles and texts
+            for (var i = aggregateCreatedEvents.Count; i < rects.Count; i++)
+            {
+                var rectId = $"rectCe{i + 1}";
+                var textId = $"txtCe{i + 1}";
+
+                var rect = rects.FirstOrDefault(r => r.ID == rectId);
+                if (rect != null) cardsHcGroup.Children.Remove(rect);
+
+                var text = texts.FirstOrDefault(t => t.ID == textId);
+                if (text != null) cardsHcGroup.Children.Remove(text);
+            }
+
+            // Update existing texts with the new aggregateHandledCommands list
+            for (var i = 0; i < aggregateCreatedEvents.Count; i++)
+            {
+                var command = aggregateCreatedEvents[i];
+                var textId = $"txtCe{i + 1}";
 
                 // Find and update the corresponding text
                 var text = texts.FirstOrDefault(t => t.ID == textId);
