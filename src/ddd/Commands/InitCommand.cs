@@ -16,7 +16,7 @@ public class InitCommand
     {
         string[] directories =
         {
-            "DDD",
+            Constants.MainPath,
             "docs"
         };
 

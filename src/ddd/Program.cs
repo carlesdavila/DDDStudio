@@ -17,4 +17,7 @@ app.AddCommands<GenerateDocsCommand>();
 
 app.AddCommands<AboutCommand>();
 
+app.AddCommands<ListCommand>();
+
+
 app.Run();
