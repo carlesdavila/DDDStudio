@@ -5,14 +5,17 @@ namespace ddd.Commands;
 public class AddSubdomainCommand
 {
     [Command(Description = "Add a new subdomain and generate a base YAML file.")]
-    public void Subdomain([Argument]string name)
+    public void Subdomain([Argument] string name)
     {
-        var subdomainPath = Path.Combine(Constants.MainPath, "Subdomains", name, "BoundedContexts");
+        const string suffix = "Subdomain";
+        if (!name.EndsWith(suffix)) name += suffix;
+        
+        var subdomainPath = Path.Combine(Constants.MainPath, name);
         if (!Directory.Exists(subdomainPath))
         {
             Directory.CreateDirectory(subdomainPath);
             Console.WriteLine($"Subdomain '{name}' added.");
-            
+
             var yamlContent = @"
 boundedContexts:
   - name: Sales
@@ -34,7 +37,7 @@ boundedContexts:
       - name: InventoryQuantity
         type: ValueObject
 ";
-            var yamlFilePath = Path.Combine(Constants.MainPath, "Subdomains", name, $"{name}.yaml");
+            var yamlFilePath = Path.Combine(Constants.MainPath, name, $"{name}.yaml");
             File.WriteAllText(yamlFilePath, yamlContent);
             Console.WriteLine($"Created base YAML file for subdomain '{name}' at '{yamlFilePath}'.");
         }

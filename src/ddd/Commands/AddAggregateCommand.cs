@@ -5,12 +5,20 @@ namespace ddd.Commands;
 public class AddAggregateCommand
 {
     [Command(Description = "Add a new aggregate to a bounded context of a subdomain.")]
-    public void Aggregate([Argument]string name, [Option('s')]string subdomain, [Option('c')]string context)
+    public void Aggregate([Argument] string name, [Option('s')] string subdomain, [Option('c')] string context)
     {
-        var aggregatePath = Path.Combine(Constants.MainPath, "Subdomains", subdomain, "BoundedContexts", context, "Aggregates",
-            $"{name}.yaml");
+        const string suffix = "Aggregate";
+        if (!name.EndsWith(suffix)) name += suffix;
+        
+        const string contextSuffix = "Context";
+        if (!context.EndsWith(contextSuffix)) context += contextSuffix;
+        
+        const string subdomainSuffix = "Subdomain";
+        if (!subdomain.EndsWith(subdomainSuffix)) subdomain += subdomainSuffix;
 
-        if (!Directory.Exists(Path.Combine(Constants.MainPath, "Subdomains", subdomain, "BoundedContexts", context)))
+        var aggregatePath = Path.Combine(Constants.MainPath, subdomain, context, name, $"{name}.yaml");
+
+        if (!Directory.Exists(Path.Combine(Constants.MainPath, subdomain, context)))
         {
             Console.WriteLine($"Bounded Context '{context}' in subdomain '{subdomain}' does not exist.");
             return;
