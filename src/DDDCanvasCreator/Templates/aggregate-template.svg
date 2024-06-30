@@ -11,6 +11,12 @@
 
     <!-- Embedded CSS-->
     <style>
+        .description {
+            font-family: "IBM Plex Sans";
+            font-size: 16px;
+            color: #2c9bf0;
+            text-align: justify;
+        }
         .bgRect { fill: #323d4f; stroke: none; }
         .mainRect { fill: #FFFFFF; stroke: none; }
         .hcCards { fill:#40C7EA;stroke:none; }
@@ -33,8 +39,12 @@
     <!-- 2.Description -->
     <rect id="descriptionRect" class="mainRect" x="10" y="120" width="350" height="170"/>
     <text class="title" x="19" y="151">2.Description</text>
-    <text id="descriptionText" x="19" y="151" fill="#323D4F" font-family="IBM Plex Sans" font-size="16px">
-    </text>
+    <switch id="descriptionSwitch">
+        <foreignObject id="descriptionFo" x="19" y="160" width="332" height="115" requiredExtensions="http://www.w3.org/1999/xhtml">
+        </foreignObject>
+        <text id="descriptionText" x="19" y="160" fill="#323D4F" font-family="IBM Plex Sans" font-size="16px">
+        </text>
+    </switch>
 
     <!-- 3.State Transitions -->
     <rect class="mainRect" x="370" y="60" width="680" height="230"/>

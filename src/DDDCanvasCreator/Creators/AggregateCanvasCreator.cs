@@ -36,7 +36,7 @@ public class AggregateCanvasCreator : IYamlProcessor
         GenerateCreatedEvents(aggregate.CreatedEvents, svgDocument);
         GenerateCorrectivePolicies(aggregate.CorrectivePolicies, svgDocument);
         // GenerateStateTransitions(aggregate.StateTransitions, svgDocument);
-        
+
         // Save the modified SVG document to the specified output file path
         svgDocument.Write(outputFilePath);
     }
@@ -137,6 +137,22 @@ public class AggregateCanvasCreator : IYamlProcessor
         // Modify the text for the name
         var nameText = svgDocument.GetElementById<SvgText>("nameText");
         if (nameText != null) nameText.Text = $"1. Name: {aggregate.Name}";
+
+        // Modify the text for the description in the div within the foreignObject
+        var descriptionFo = svgDocument.GetElementById<SvgForeignObject>("descriptionFo");
+        if (descriptionFo != null)
+        {
+            // Clear existing content
+            descriptionFo.Nodes.Clear();
+
+            // Assign the new content directly to the foreignObject
+            var nonSvgElement = new NonSvgElement("div","http://www.w3.org/1999/xhtml")
+            {
+                Content = aggregate.Description
+            };
+            nonSvgElement.CustomAttributes.Add("class", "description");
+            descriptionFo.Children.Add( nonSvgElement);
+        }
 
         // Modify the text for the description
         var descriptionText = svgDocument.GetElementById<SvgText>("descriptionText");

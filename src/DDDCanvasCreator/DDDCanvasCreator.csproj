@@ -12,10 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Templates\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Update="Templates\aggregate-template.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
