@@ -43,12 +43,49 @@ public class AggregateCanvasCreator : IYamlProcessor
 
     private void GenerateCorrectivePolicies(List<string> aggregateCorrectivePolicies, SvgDocument svgDocument)
     {
+        AddHtmlBulletPoints(aggregateCorrectivePolicies, svgDocument, "correctivePoliciesFo");
+
         AddBulletPoints(aggregateCorrectivePolicies, svgDocument, "cpText");
     }
 
     private void GenerateEnforcedInvariants(List<string> aggregateEnforcedInvariants, SvgDocument svgDocument)
     {
+        AddHtmlBulletPoints(aggregateEnforcedInvariants, svgDocument, "enforcedInvariantsFo");
+
         AddBulletPoints(aggregateEnforcedInvariants, svgDocument, "eiText");
+    }
+
+    private void AddHtmlBulletPoints(List<string> items, SvgDocument svgDocument, string foreignObjectElementId)
+    {
+        // Get the foreignObject element with the specified ID
+        var foreignObjectElement = svgDocument.GetElementById<SvgForeignObject>(foreignObjectElementId);
+
+        if (foreignObjectElement != null)
+        {
+            // Clear any existing content
+            foreignObjectElement.Nodes.Clear();
+
+            // Create the <ul> element
+            var ulElement = new NonSvgElement("ul", "http://www.w3.org/1999/xhtml");
+            ulElement.CustomAttributes.Add("class", "list");
+
+            // Add each item as a <li> element
+            foreach (var item in items)
+            {
+                var liElement = new NonSvgElement("li", "http://www.w3.org/1999/xhtml")
+                {
+                    Content = item
+                };
+                ulElement.Children.Add(liElement);
+            }
+
+            // Add the <ul> element to the foreignObject
+            foreignObjectElement.Children.Add(ulElement);
+        }
+        else
+        {
+            throw new InvalidOperationException($"The '{foreignObjectElementId}' element was not found in the SVG document.");
+        }
     }
 
     private void AddBulletPoints(List<string> items, SvgDocument svgDocument, string textElementId)
@@ -146,12 +183,12 @@ public class AggregateCanvasCreator : IYamlProcessor
             descriptionFo.Nodes.Clear();
 
             // Assign the new content directly to the foreignObject
-            var nonSvgElement = new NonSvgElement("div","http://www.w3.org/1999/xhtml")
+            var nonSvgElement = new NonSvgElement("div", "http://www.w3.org/1999/xhtml")
             {
                 Content = aggregate.Description
             };
             nonSvgElement.CustomAttributes.Add("class", "description");
-            descriptionFo.Children.Add( nonSvgElement);
+            descriptionFo.Children.Add(nonSvgElement);
         }
 
         // Modify the text for the description

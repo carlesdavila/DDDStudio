@@ -12,10 +12,19 @@
     <!-- Embedded CSS-->
     <style>
         .description {
-            font-family: "IBM Plex Sans";
-            font-size: 16px;
-            color: #2c9bf0;
-            text-align: justify;
+        font-family: "IBM Plex Sans";
+        font-size: 16px;
+        color: #2c9bf0;
+        text-align: justify;
+        }
+        .list {
+        margin: 0;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-family: 'IBM Plex Sans';
+        font-size: 16px;
+        text-align: justify;
+        color: #2c9bf0;
         }
         .bgRect { fill: #323d4f; stroke: none; }
         .mainRect { fill: #FFFFFF; stroke: none; }
@@ -40,7 +49,8 @@
     <rect id="descriptionRect" class="mainRect" x="10" y="120" width="350" height="170"/>
     <text class="title" x="19" y="151">2.Description</text>
     <switch id="descriptionSwitch">
-        <foreignObject id="descriptionFo" x="19" y="160" width="332" height="115" requiredExtensions="http://www.w3.org/1999/xhtml">
+        <foreignObject id="descriptionFo" x="19" y="160" width="332" height="115"
+                       requiredExtensions="http://www.w3.org/1999/xhtml">
         </foreignObject>
         <text id="descriptionText" x="19" y="160" fill="#323D4F" font-family="IBM Plex Sans" font-size="16px">
         </text>
@@ -53,14 +63,22 @@
     <!-- 4.Enforced Invariants -->
     <rect id="enforcedInvariantsRect" class="mainRect" x="10" y="300" width="350" height="210"/>
     <text class="title" x="19" y="331">4. Enforced Invariants</text>
-    <text id="eiText" x="19" y="345">
-    </text>
+    <switch>
+        <foreignObject id="enforcedInvariantsFo" x="19" y="345" width="340" height="180">
+        </foreignObject>
+        <text id="eiText" x="19" y="345">
+        </text>
+    </switch>
 
     <!-- 5.Corrective Policies -->
     <rect id="correctivePoliciesRect" class="mainRect" x="10" y="520" width="350" height="200"/>
     <text class="title" x="19" y="551">5. Corrective Policies</text>
-    <text id="cpText" x="19" y="565">
-    </text>
+    <switch>
+        <foreignObject id="correctivePoliciesFo" x="19" y="565" width="340" height="180">
+        </foreignObject>
+        <text id="cpText" x="19" y="565">
+        </text>
+    </switch>
 
     <!-- 6.Handled Commands -->
     <rect id="handledCommandsRect" class="mainRect" x="370" y="300" width="350" height="210"/>
