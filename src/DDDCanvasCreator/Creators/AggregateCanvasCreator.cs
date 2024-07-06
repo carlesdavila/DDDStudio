@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Drawing;
+using System.Text;
 using DDDCanvasCreator.Models.AggregateCanvas;
 using DDDCanvasCreator.Services;
 using Svg;
@@ -35,7 +36,7 @@ public class AggregateCanvasCreator : IYamlProcessor
         GenerateHandledCommands(aggregate.HandledCommands, svgDocument);
         GenerateCreatedEvents(aggregate.CreatedEvents, svgDocument);
         GenerateCorrectivePolicies(aggregate.CorrectivePolicies, svgDocument);
-        // GenerateStateTransitions(aggregate.StateTransitions, svgDocument);
+        GenerateStateTransitions(aggregate.StateTransitions, svgDocument);
 
         // Save the modified SVG document to the specified output file path
         svgDocument.Write(outputFilePath);
@@ -84,7 +85,8 @@ public class AggregateCanvasCreator : IYamlProcessor
         }
         else
         {
-            throw new InvalidOperationException($"The '{foreignObjectElementId}' element was not found in the SVG document.");
+            throw new InvalidOperationException(
+                $"The '{foreignObjectElementId}' element was not found in the SVG document.");
         }
     }
 
@@ -166,7 +168,104 @@ public class AggregateCanvasCreator : IYamlProcessor
 
     private void GenerateStateTransitions(List<StateTransition> aggregateStateTransitions, SvgDocument svgDocument)
     {
-        throw new NotImplementedException();
+        // Tamaño y posición del rectángulo principal en el SVG
+        float rectX = 370;
+        float rectY = 91;
+        float rectWidth = 680;
+        float rectHeight = 230;
+
+        // Margen dentro del rectángulo para los elementos
+        float marginX = 20;
+        float marginY = 20;
+
+        // Tamaño fijo de cada estado
+        float stateWidth = 100;
+        float stateHeight = 50;
+
+        // Espacio entre los estados
+        var stateSpacingX = (rectWidth - 2 * marginX - stateWidth * aggregateStateTransitions.Count) /
+                            (aggregateStateTransitions.Count - 1);
+
+        // Calcula la posición inicial para el primer estado
+        var currentStateX = rectX + marginX;
+        var currentStateY = rectY + marginY;
+
+        // Obtén el grupo stateGroup del documento SVG
+        var stateGroup = svgDocument.GetElementById<SvgGroup>("stateGroup");
+
+        // Diccionario para almacenar la posición de cada estado
+        var statePositions = new Dictionary<string, (float x, float y)>();
+
+        // Itera sobre cada StateTransition para dibujar los estados y sus transiciones
+        foreach (var stateTransition in aggregateStateTransitions)
+        {
+            // Guarda la posición del estado
+            statePositions[stateTransition.State] = (currentStateX, currentStateY);
+
+            // Crea el rectángulo para representar el estado
+            var stateRect = new SvgRectangle
+            {
+                X = new SvgUnit(currentStateX),
+                Y = new SvgUnit(currentStateY),
+                Width = new SvgUnit(stateWidth),
+                Height = new SvgUnit(stateHeight),
+                Fill = new SvgColourServer(Color.LightBlue), // Ajusta el color de fondo del estado según sea necesario
+                Stroke = new SvgColourServer(Color.Black),
+                StrokeWidth = new SvgUnit(1)
+            };
+            stateGroup.Children.Add(stateRect);
+
+            // Añade el nombre del estado
+            var stateText = new SvgText
+            {
+                X = new SvgUnitCollection { new(currentStateX + stateWidth / 2) },
+                Y = new SvgUnitCollection
+                    { new(currentStateY + stateHeight / 2) }, // Posición ajustable para centrar verticalmente el texto
+                FontSize = new SvgUnit(12),
+                FontWeight = SvgFontWeight.Bold,
+                Fill = new SvgColourServer(Color.Black),
+                TextAnchor = SvgTextAnchor.Middle,
+                // Clase de estilo definida en SVG
+                ID = "stateText_" + Guid.NewGuid().ToString("N")
+            };
+            stateText.Text = stateTransition.State;
+            stateGroup.Children.Add(stateText);
+
+            // Actualiza la posición x para el próximo estado
+            currentStateX += stateWidth + stateSpacingX;
+        }
+
+        // Itera sobre cada StateTransition para dibujar las flechas de transición
+        foreach (var stateTransition in aggregateStateTransitions)
+        {
+            var (startX, startY) = statePositions[stateTransition.State];
+
+            foreach (var transition in stateTransition.Transitions)
+                if (statePositions.TryGetValue(transition.To, out var endPosition))
+                {
+                    var (endX, endY) = endPosition;
+
+                    // Calcula los puntos de inicio y fin en los bordes de los rectángulos
+                    var arrowStartX = startX + stateWidth;
+                    var arrowStartY = startY + stateHeight / 2;
+                    var arrowEndX = endX;
+                    var arrowEndY = endY + stateHeight / 2;
+
+                    // Dibuja la línea de la flecha
+                    var arrowLine = new SvgLine
+                    {
+                        StartX = new SvgUnit(arrowStartX),
+                        StartY = new SvgUnit(arrowStartY),
+                        EndX = new SvgUnit(arrowEndX),
+                        EndY = new SvgUnit(arrowEndY),
+                        Stroke = new SvgColourServer(Color.Black),
+                        StrokeWidth = new SvgUnit(1),
+                        // Añade el marcador definido en el SVG
+                        MarkerEnd = new Uri("url(#arrowhead)", UriKind.Relative)
+                    };
+                    stateGroup.Children.Add(arrowLine);
+                }
+        }
     }
 
     private void GenerateNameAndDescription(Aggregate aggregate, SvgDocument svgDocument)
