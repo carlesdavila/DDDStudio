@@ -195,6 +195,18 @@ public class AggregateCanvasCreator : IYamlProcessor
 
         // Diccionario para almacenar la posición de cada estado
         var statePositions = new Dictionary<string, (float x, float y)>();
+        
+        
+        // Lista de colores para alternar
+        var colors = new List<Color>
+        {
+            ColorTranslator.FromHtml("#f2798b"),
+            ColorTranslator.FromHtml("#a8ccf6"),
+            ColorTranslator.FromHtml("#d8f79c")
+        };
+
+        // Iterador de colores
+        int colorIndex = 0;
 
         // Itera sobre cada StateTransition para dibujar los estados y sus transiciones
         foreach (var stateTransition in aggregateStateTransitions)
@@ -209,11 +221,15 @@ public class AggregateCanvasCreator : IYamlProcessor
                 Y = new SvgUnit(currentStateY),
                 Width = new SvgUnit(stateWidth),
                 Height = new SvgUnit(stateHeight),
-                Fill = new SvgColourServer(Color.LightBlue), // Ajusta el color de fondo del estado según sea necesario
-                Stroke = new SvgColourServer(Color.Black),
-                StrokeWidth = new SvgUnit(1)
+                Fill = new SvgColourServer(colors[colorIndex]),
+                Filter = new Uri("url(#dropShadow)", UriKind.Relative)
+                
             };
+            stateRect.CustomAttributes.Add("class", "state-card");
             stateGroup.Children.Add(stateRect);
+            
+            // Alterna el color
+            colorIndex = (colorIndex + 1) % colors.Count;
 
             // Añade el nombre del estado
             var stateText = new SvgText
