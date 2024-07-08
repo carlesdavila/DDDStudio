@@ -120,48 +120,71 @@ public class AggregateCanvasCreator : IYamlProcessor
 
     private void GenerateHandledCommands(List<string> aggregateHandledCommands, SvgDocument svgDocument)
     {
-        GenerateElements(aggregateHandledCommands, svgDocument, "cardsHc", "rectHc", "txtHc");
+        GenerateElements(aggregateHandledCommands, svgDocument, "cardsHc", "rectHc", "txtHc", "swHc", "foHc");
     }
 
     private void GenerateCreatedEvents(List<string> aggregateCreatedEvents, SvgDocument svgDocument)
     {
-        GenerateElements(aggregateCreatedEvents, svgDocument, "cardsCe", "rectCe", "txtCe");
+        GenerateElements(aggregateCreatedEvents, svgDocument, "cardsCe", "rectCe", "txtCe", "swCe", "foCe");
     }
 
     private void GenerateElements(List<string> aggregateElements, SvgDocument svgDocument, string groupIdPrefix,
-        string rectIdPrefix, string textIdPrefix)
+        string rectIdPrefix, string textIdPrefix, string switchIdPrefix, string foreignObjectIdPrefix)
     {
         // Get the group that contains the elements
         var group = svgDocument.GetElementById<SvgGroup>(groupIdPrefix);
 
         if (group != null)
         {
-            // Get all rectangles and texts
+            // Get all rectangles and switches
             var rects = group.Children.OfType<SvgRectangle>().ToList();
-            var texts = group.Children.OfType<SvgText>().ToList();
+            var switches = group.Children.OfType<SvgSwitch>().ToList();
 
-            // Remove unused rectangles and texts
+            // Remove unused rectangles and switches
             for (var i = aggregateElements.Count; i < rects.Count; i++)
             {
                 var rectId = $"{rectIdPrefix}{i + 1}";
-                var textId = $"{textIdPrefix}{i + 1}";
+                var switchId = $"{switchIdPrefix}{i + 1}";
 
                 var rect = rects.FirstOrDefault(r => r.ID == rectId);
                 if (rect != null) group.Children.Remove(rect);
 
-                var text = texts.FirstOrDefault(t => t.ID == textId);
-                if (text != null) group.Children.Remove(text);
+                var svgSwitch = switches.FirstOrDefault(s => s.ID == switchId);
+                if (svgSwitch != null) group.Children.Remove(svgSwitch);
             }
 
-            // Update existing texts with the new aggregateElements list
+            // Update existing texts and foreignObjects within switches with the new aggregateElements list
             for (var i = 0; i < aggregateElements.Count; i++)
             {
                 var element = aggregateElements[i];
+                var switchId = $"{switchIdPrefix}{i + 1}";
+                var foreignObjectId = $"{foreignObjectIdPrefix}{i + 1}";
                 var textId = $"{textIdPrefix}{i + 1}";
 
-                // Find and update the corresponding text
-                var text = texts.FirstOrDefault(t => t.ID == textId);
-                if (text != null) text.Text = element;
+                // Find the corresponding switch
+                var svgSwitch = switches.FirstOrDefault(s => s.ID == switchId);
+                if (svgSwitch != null)
+                {
+                    // Find the corresponding foreignObject within the switch
+                    var foreignObject = svgSwitch.Children.OfType<SvgForeignObject>()
+                        .FirstOrDefault(f => f.ID == foreignObjectId);
+                    if (foreignObject != null)
+                    {
+                        foreignObject.Content = null; // Clear previous content
+
+                        // Assign the new content directly to the foreignObject
+                        var xhtmlDiv = new NonSvgElement("div", "http://www.w3.org/1999/xhtml")
+                        {
+                            Content = FormatElement(element)
+                        };
+                        xhtmlDiv.CustomAttributes.Add("class", "text-card");
+                        foreignObject.Nodes.Add(xhtmlDiv);
+                    }
+
+                    // Find and update the corresponding text within the switch
+                    var text = svgSwitch.Children.OfType<SvgText>().FirstOrDefault(t => t.ID == textId);
+                    if (text != null) text.Text = element;
+                }
             }
         }
     }
@@ -195,8 +218,8 @@ public class AggregateCanvasCreator : IYamlProcessor
 
         // Diccionario para almacenar la posición de cada estado
         var statePositions = new Dictionary<string, (float x, float y)>();
-        
-        
+
+
         // Lista de colores para alternar
         var colors = new List<Color>
         {
@@ -206,7 +229,7 @@ public class AggregateCanvasCreator : IYamlProcessor
         };
 
         // Iterador de colores
-        int colorIndex = 0;
+        var colorIndex = 0;
 
         // Itera sobre cada StateTransition para dibujar los estados y sus transiciones
         foreach (var stateTransition in aggregateStateTransitions)
@@ -223,11 +246,10 @@ public class AggregateCanvasCreator : IYamlProcessor
                 Height = new SvgUnit(stateHeight),
                 Fill = new SvgColourServer(colors[colorIndex]),
                 Filter = new Uri("url(#dropShadow)", UriKind.Relative)
-                
             };
             stateRect.CustomAttributes.Add("class", "state-card");
             stateGroup.Children.Add(stateRect);
-            
+
             // Alterna el color
             colorIndex = (colorIndex + 1) % colors.Count;
 
@@ -368,5 +390,20 @@ public class AggregateCanvasCreator : IYamlProcessor
         if (currentLine.Length > 0) lines.Add(currentLine.ToString().Trim());
 
         return lines;
+    }
+    
+    private string FormatElement(string element)
+    {
+        if (string.IsNullOrEmpty(element))
+            return element;
+
+        // Convert camelCase or PascalCase to words separated by spaces
+        var formattedElement = System.Text.RegularExpressions.Regex.Replace(element, "([a-z])([A-Z])", "$1 $2");
+
+        // Convert kebab-case to words separated by spaces
+        formattedElement = formattedElement.Replace("-", " ");
+
+        // Ensure the first letter is capitalized
+        return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(formattedElement.ToLower());
     }
 }

@@ -9,7 +9,7 @@
         </filter>
         <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="10" refY="5"
                 orient="auto" markerUnits="userSpaceOnUse">
-            <polygon points="0 0, 10 5, 0 10" fill="#000000" />
+            <polygon points="0 0, 10 5, 0 10" fill="#000000"/>
         </marker>
     </defs>
 
@@ -20,6 +20,20 @@
         font-size: 16px;
         color: #2c9bf0;
         text-align: justify;
+        }
+        .text-card {
+        font-family: "IBM Plex Sans";
+        font-size: 12px;
+        font-weight: bold;
+        color: #323D4F;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 65px;
+        height: 65px;
+        padding: 10px;
+        box-sizing: border-box;
         }
         .list {
         margin: 0;
@@ -37,7 +51,7 @@
         .textCards text { font-family: "IBM Plex Sans";font-size: 12px;font-weight: bold;fill: #323D4F; }
         .title { font-family: "IBM Plex Sans";font-size: 20px;font-weight: bold;fill: #323D4F; }
         .mainTitle { font-family: "IBM Plex Sans"; font-size: 30px; font-weight: bold;fill: #FFFFFF; }
-        
+
         .state-card {
         stroke: none;
         font-family: 'IBM Plex Sans';
@@ -107,21 +121,53 @@
         <text id="handledCommandsText" class="title" x="379" y="331">6. Handled Commands</text>
         <g id="cardsHc" class="hcCards textCards">
             <rect id="rectHc1" x="390" y="350" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtHc1" x="393" y="385">text</text>
+            <switch id="swHc1">
+                <foreignObject id="foHc1" x="390" y="350" width="65" height="65">
+                </foreignObject>
+                <text id="txtHc1" x="393" y="385">text</text>
+            </switch>
             <rect id="rectHc2" x="470" y="350" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtHc2" x="473" y="385">text</text>
+            <switch id="swHc2">
+                <foreignObject id="foHc2" x="470" y="350" width="65" height="65">
+                </foreignObject>
+                <text id="txtHc2" x="473" y="385">text</text>
+            </switch>
             <rect id="rectHc3" x="550" y="350" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtHc3" x="553" y="385">text</text>
+            <switch id="swHc3">
+                <foreignObject id="foHc3" x="550" y="350" width="65" height="65">
+                </foreignObject>
+                <text id="txtHc3" x="553" y="385">text</text>
+            </switch>
             <rect id="rectHc4" x="630" y="350" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtHc4" x="633" y="385">text</text>
+            <switch id="swHc4">
+                <foreignObject id="foHc4" x="630" y="350" width="65" height="65">
+                </foreignObject>
+                <text id="txtHc4" x="633" y="385">text</text>
+            </switch>
             <rect id="rectHc5" x="390" y="430" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtHc5" x="393" y="465">text</text>
+            <switch id="swHc5">
+                <foreignObject id="foHc5" x="390" y="430" width="65" height="65">
+                </foreignObject>
+                <text id="txtHc5" x="393" y="465">text</text>
+            </switch>
             <rect id="rectHc6" x="470" y="430" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtHc6" x="473" y="465">text</text>
+            <switch id="swHc6">
+                <foreignObject id="foHc6" x="470" y="430" width="65" height="65">
+                </foreignObject>
+                <text id="txtHc6" x="473" y="465">text</text>
+            </switch>
             <rect id="rectHc7" x="550" y="430" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtHc7" x="553" y="465">text</text>
+            <switch id="swHc7">
+                <foreignObject id="foHc7" x="550" y="430" width="65" height="65">
+                </foreignObject>
+                <text id="txtHc7" x="553" y="465">text</text>
+            </switch>
             <rect id="rectHc8" x="630" y="430" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtHc8" x="633" y="465">text</text>
+            <switch id="swHc8">
+                <foreignObject id="foHc8" x="630" y="430" width="65" height="65">
+                </foreignObject>
+                <text id="txtHc8" x="633" y="465">text</text>
+            </switch>
         </g>
     </g>
 
@@ -131,21 +177,53 @@
         <text id="createdEventsText" class="title" x="379" y="551">7. Created Events</text>
         <g id="cardsCe" class="ceCards textCards">
             <rect id="rectCe1" x="390" y="570" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtCe1" x="393" y="605">text</text>
+            <switch id="swCe1">
+                <foreignObject id="foCe1" x="390" y="570" width="65" height="65">
+                </foreignObject>
+                <text id="txtCe1" x="393" y="605">text</text>
+            </switch>
             <rect id="rectCe2" x="470" y="570" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtCe2" x="473" y="605">text</text>
+            <switch id="swCe2">
+                <foreignObject id="foCe2" x="470" y="570" width="65" height="65">
+                </foreignObject>
+                <text id="txtCe2" x="473" y="605">text</text>
+            </switch>
             <rect id="rectCe3" x="550" y="570" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtCe3" x="553" y="605">text</text>
+            <switch id="swCe3">
+                <foreignObject id="foCe3" x="550" y="570" width="65" height="65">
+                </foreignObject>
+                <text id="txtCe3" x="553" y="605">text</text>
+            </switch>
             <rect id="rectCe4" x="630" y="570" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtCe4" x="633" y="605">text</text>
+            <switch id="swCe4">
+                <foreignObject id="foCe4" x="630" y="570" width="65" height="65">
+                </foreignObject>
+                <text id="txtCe4" x="633" y="605">text</text>
+            </switch>
             <rect id="rectCe5" x="390" y="650" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtCe5" x="393" y="685">text</text>
+            <switch id="swCe5">
+                <foreignObject id="foCe5" x="390" y="650" width="65" height="65">
+                </foreignObject>
+                <text id="txtCe5" x="393" y="685">text</text>
+            </switch>
             <rect id="rectCe6" x="470" y="650" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtCe6" x="473" y="685">text</text>
+            <switch id="swCe6">
+                <foreignObject id="foCe6" x="470" y="650" width="65" height="65">
+                </foreignObject>
+                <text id="txtCe6" x="473" y="685">text</text>
+            </switch>
             <rect id="rectCe7" x="550" y="650" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtCe7" x="553" y="685">text</text>
+            <switch id="swCe7">
+                <foreignObject id="foCe7" x="550" y="650" width="65" height="65">
+                </foreignObject>
+                <text id="txtCe7" x="553" y="685">text</text>
+            </switch>
             <rect id="rectCe8" x="630" y="650" width="65" height="65" filter="url(#dropShadow)"/>
-            <text id="txtCe8" x="633" y="685">text</text>
+            <switch id="swCe8">
+                <foreignObject id="foCe8" x="630" y="650" width="65" height="65">
+                </foreignObject>
+                <text id="txtCe8" x="633" y="685">text</text>
+            </switch>
         </g>
     </g>
 
