@@ -1,4 +1,7 @@
 # DDD Studio
+![DDD Studio](logo.png)
+
+![NuGet Version](https://img.shields.io/nuget/v/DDD.Studio)
 
 ## Project Description
 
