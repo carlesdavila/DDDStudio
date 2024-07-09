@@ -1,5 +1,4 @@
-# DDD Studio
-![DDD Studio](logo.png)
+# ![DDD Studio](logo.png) DDD Studio
 
 ![NuGet Version](https://img.shields.io/nuget/v/DDD.Studio)
 
