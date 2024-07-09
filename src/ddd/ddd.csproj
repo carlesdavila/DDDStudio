@@ -8,7 +8,25 @@
         <PackageId>DDD.Studio</PackageId>
         <ToolCommandName>ddd</ToolCommandName>
         <PackAsTool>true</PackAsTool>
+
+        <Title>DDD Studio</Title>
+        <Authors>Carles Davila</Authors>
+        <Description>Document artifacts identified in the Domain-Driven Design Starter Modelling Process.</Description>
+        <PackageTags>ddd;</PackageTags>
+        <PackageProjectUrl>https://github.com/carlesdavila/DDDStudio</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/carlesdavila/DDDStudio</RepositoryUrl>
+
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+
+        <MinVerDefaultPreReleasePhase>preview</MinVerDefaultPreReleasePhase>
+        <MinVerAutoIncrement>minor</MinVerAutoIncrement>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Cocona" Version="2.2.0" />
