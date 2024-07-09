@@ -15,6 +15,7 @@
         <PackageTags>ddd;</PackageTags>
         <PackageProjectUrl>https://github.com/carlesdavila/DDDStudio</PackageProjectUrl>
         <RepositoryUrl>https://github.com/carlesdavila/DDDStudio</RepositoryUrl>
+        <PackageIcon>logo.png</PackageIcon>
 
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -26,6 +27,7 @@
 
     <ItemGroup>
         <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+        <None Include="..\..\logo.png" Pack="true" Visible="false" PackagePath="" />
     </ItemGroup>
 
     <ItemGroup>
