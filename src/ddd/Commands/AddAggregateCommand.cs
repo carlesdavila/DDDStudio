@@ -30,7 +30,7 @@ public class AddAggregateCommand
 aggregate:
   name: {name}
   description: ""Some Description.""
-  state_transitions: 
+  stateTransitions: 
     - state: Inactive
       transitions:
         - to: Active
@@ -38,38 +38,24 @@ aggregate:
       transitions:
         - to: Cancelled
     - state: Cancelled
-  enforced_invariants: 
+  enforcedInvariants: 
     - ""Order must have at least one OrderItem.""
     - ""Order total must be recalculated when items are added or removed.""
-  corrective_policies: 
+  correctivePolicies: 
     - ""If an OrderItem is out of stock, notify the customer and adjust the order or issue a refund.""
     - ""If the order status is not updated due to a system failure, retry the update process.""
-  handled_commands: 
+  handledCommands: 
     - PlaceOrder
     - Confirm
     - Ship
     - Complete
     - Cancel
-  created_events: 
+  createdEvents: 
     - OrderPlaced
     - OrderConfirmed
     - OrderShipped
     - OrderCompleted
     - OrderCancelled
-  throughput: 
-    command_handling_rate: 
-      average: 
-      maximum: 
-    total_number_of_clients: 
-      average: 
-      maximum: 
-  size:
-    event_growth_rate: 
-      average: 
-      maximum: 
-    lifetime: 
-      average: 
-      maximum: 
 ";
 
             File.WriteAllText(aggregatePath, yamlContent);
