@@ -314,11 +314,13 @@
 
     <!-- Footer -->
     <g id="footer">
-        <text x="12" y="747" fill="#FFFFFF" font-family="IBM Plex Sans" font-size="9px">Aggregate Design Canvas v1.1
-            designed by Kacper Gunia &amp; Domain-Driven Design Crew....
+        <text x="12" y="747" fill="#FFFFFF" font-family="IBM Plex Sans" font-size="9px">
+            <tspan>Aggregate Design Canvas v1.1 designed by Kacper Gunia &amp; Domain-Driven Design Crew. </tspan>
+            <tspan x="12" y="760">For more information visit https://github.com/ddd-crew/aggregate-design-canvas</tspan>
         </text>
-        <text x="946" y="747" fill="#FFFFFF" font-family="IBM Plex Sans" font-size="9px" text-anchor="end">This work
-            is licensed under a Creative Commons Attribution 4.0 International License, CC BY 4.0....
+        <text x="946" y="747" fill="#FFFFFF" font-family="IBM Plex Sans" font-size="9px" text-anchor="end">
+            <tspan>This work is licensed under a Creative Commons Attribution 4.0 International License, CC BY 4.0. </tspan>
+            <tspan x="946" y="760">For more information visit https://github.com/ddd-crew/aggregate-design-canvas</tspan>
         </text>
     </g>
 
