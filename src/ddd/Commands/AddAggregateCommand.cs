@@ -16,7 +16,7 @@ public class AddAggregateCommand
         const string subdomainSuffix = "Subdomain";
         if (!subdomain.EndsWith(subdomainSuffix)) subdomain += subdomainSuffix;
 
-        var aggregatePath = Path.Combine(Constants.MainPath, subdomain, context, name, $"{name}.yaml");
+        var aggregatePath = Path.Combine(Constants.MainPath, subdomain, context, $"{name}.yaml");
 
         if (!Directory.Exists(Path.Combine(Constants.MainPath, subdomain, context)))
         {
@@ -29,17 +29,33 @@ public class AddAggregateCommand
             var yamlContent = $@"
 aggregate:
   name: {name}
-  description: 
+  description: ""Some Description.""
   state_transitions: 
-    - 
+    - state: Inactive
+      transitions:
+        - to: Active
+    - state: Active
+      transitions:
+        - to: Cancelled
+    - state: Cancelled
   enforced_invariants: 
-    - 
+    - ""Order must have at least one OrderItem.""
+    - ""Order total must be recalculated when items are added or removed.""
   corrective_policies: 
-    - 
+    - ""If an OrderItem is out of stock, notify the customer and adjust the order or issue a refund.""
+    - ""If the order status is not updated due to a system failure, retry the update process.""
   handled_commands: 
-    - 
+    - PlaceOrder
+    - Confirm
+    - Ship
+    - Complete
+    - Cancel
   created_events: 
-    - 
+    - OrderPlaced
+    - OrderConfirmed
+    - OrderShipped
+    - OrderCompleted
+    - OrderCancelled
   throughput: 
     command_handling_rate: 
       average: 
