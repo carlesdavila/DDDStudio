@@ -8,6 +8,9 @@ public class AddAggregateCommand
     public void Aggregate([Argument] string name, [Option('s')] string subdomain, [Option('c')] string context)
     {
         const string suffix = "Aggregate";
+        var originalName = name.EndsWith(suffix) ? name[..^suffix.Length] : name;
+
+        
         if (!name.EndsWith(suffix)) name += suffix;
         
         const string contextSuffix = "Context";
@@ -26,10 +29,9 @@ public class AddAggregateCommand
 
         if (!File.Exists(aggregatePath))
         {
-            var yamlContent = $@"
-aggregate:
-  name: {name}
-  description: ""Some Description.""
+            var yamlContent = $@"aggregate:
+  name: {originalName}
+  description: ""{originalName} Description.""
   stateTransitions: 
     - state: Inactive
       transitions:
@@ -59,13 +61,12 @@ aggregate:
 ";
 
             File.WriteAllText(aggregatePath, yamlContent);
-            Console.WriteLine(
-                $"Aggregate design canvas for '{name}' added to Bounded Context '{context}' in subdomain '{subdomain}'.");
+            Console.WriteLine($"Created YAML file for aggregate '{originalName}' at '{aggregatePath}'.");
         }
         else
         {
             Console.WriteLine(
-                $"Aggregate design canvas for '{name}' already exists in Bounded Context '{context}' of subdomain '{subdomain}'.");
+                $"Aggregate design canvas for '{originalName}' already exists in Bounded Context '{context}' of subdomain '{subdomain}'.");
         }
     }
 }

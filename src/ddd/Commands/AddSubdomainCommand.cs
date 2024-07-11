@@ -16,8 +16,7 @@ public class AddSubdomainCommand
             Directory.CreateDirectory(subdomainPath);
             Console.WriteLine($"Subdomain '{name}' added.");
 
-            var yamlContent = @"
-boundedContexts:
+            var yamlContent = @"boundedContexts:
   - name: Sales
     color: '#0000FF'
     models:

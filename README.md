@@ -11,6 +11,61 @@ for its simplicity and readability, allowing both humans and machines to easily 
 structured approach facilitates continuous collaboration and integration into repositories, supporting ongoing
 development efforts.
 
+## Folder Structure Generated
+
+The tool generates a folder and file structure to organize subdomains and bounded contexts in a DDD (Domain-Driven Design) project. Below is the detailed structure:
+
+```plaintext
+DDD/
+├── BusinessSubdomain/
+│   ├── BusinessSubdomain.yaml
+│   ├── SalesContext/
+│   │   ├── OrderAggregate.yaml
+│   │   └── ...
+│   └── ...
+├── AnotherSubdomain/
+│   ├── AnotherSubdomain.yaml
+│   ├── ExampleContext/
+│   │   ├── SampleAggregate.yaml
+│   │   └── ...
+│   └── ...
+└── ddd.yaml
+```
+## Example of an Aggregate YAML File
+
+Here is an example of the `OrderAggregate.yaml` file:
+
+```yaml
+aggregate:
+  name: Order
+  description: "An aggregate representing a customer order. This boundary was chosen to encapsulate the complete lifecycle of an order from creation to fulfillment or cancellation. Trade-offs include managing concurrency for high-volume orders."
+  stateTransitions:
+    - state: Pending
+      transitions:
+        - to: Shipped
+    - state: Shipped
+      transitions:
+        - to: Completed
+    - state: Completed
+  enforcedInvariants:
+    - "Order must have at least one OrderItem."
+    - "Order total must be recalculated when items are added or removed."
+  correctivePolicies:
+    - "If an OrderItem is out of stock, notify the customer and adjust the order or issue a refund."
+    - "If the order status is not updated due to a system failure, retry the update process."
+  handledCommands:
+    - PlaceOrder
+    - Ship
+    - Complete
+  createdEvents:
+    - OrderPlaced
+    - OrderShipped
+    - OrderCompleted
+ ```
+## Aggregate Design Canvas
+The above YAML example would generate the following SVG:
+![Aggregate Design Canvas](images/OrderAggregateSample.svg)
+
 ## Installation
 
 ## Getting started
