@@ -1,4 +1,4 @@
-# ![DDD Studio](logo.png) DDD Studio
+# ![DDD Studio](https://raw.githubusercontent.com/carlesdavila/DDDStudio/main/logo.png) DDD Studio
 
 ![NuGet Version](https://img.shields.io/nuget/v/DDD.Studio)
 
@@ -64,7 +64,7 @@ aggregate:
  ```
 ## Aggregate Design Canvas
 The above YAML example would generate the following SVG:
-![Aggregate Design Canvas](images/OrderAggregateSample.svg)
+![Aggregate Design Canvas](https://raw.githubusercontent.com/carlesdavila/DDDStudio/main/images/OrderAggregateSample.svg)
 
 ## Installation
 
