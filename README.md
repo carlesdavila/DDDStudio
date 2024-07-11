@@ -170,11 +170,7 @@ ddd about
 
 This will provide detailed information about the tool and its capabilities.
 
-With these commands, you can efficiently manage and document your DDD projects. Happy coding!
-## DDD
-- **Subdomains**
-- **Bounded Contexts**
-- **Aggregates**
+With these commands, you can efficiently manage and document your DDD projects.
 
 ## FAQ
 
