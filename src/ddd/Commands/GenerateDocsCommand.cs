@@ -8,7 +8,9 @@ public class GenerateDocsCommand
     [Command(Description = "Generate SVG documentation from YAML files.")]
     public void GenerateDocs()
     {
-        var yamlFiles = Directory.GetFiles(Constants.MainPath, "*.yaml", SearchOption.AllDirectories);
+        var absolutePath = Path.GetFullPath(Constants.MainPath);
+
+        var yamlFiles = Directory.GetFiles(absolutePath, "*.yaml", SearchOption.AllDirectories);
 
         const string outputFolder = "docs";
         if (!Directory.Exists(outputFolder)) Directory.CreateDirectory(outputFolder);
@@ -25,7 +27,11 @@ public class GenerateDocsCommand
             catch (Exception ex)
             {
                 Console.WriteLine(
-                    $"Error generating SVG documentation for '{Path.GetFileName(yamlFile)}': {ex.Message}");
+                    $"Error generating SVG documentation for '{Path.GetFileName(yamlFile)}':\n" +
+                    $"Exception Type: {ex.GetType()}\n" +
+                    $"Message: {ex.Message}\n" +
+                    $"Stack Trace: {ex.StackTrace}\n" +
+                    $"Inner Exception: {ex.InnerException}");
             }
     }
 }
