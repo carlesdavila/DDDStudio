@@ -18,6 +18,7 @@ public class GenerateDocsCommand
             {
                 var dddCanvas = new DDDCanvas();
                 var outputFilePath = Path.Combine(outputFolder, Path.GetFileNameWithoutExtension(yamlFile) + ".svg");
+                Console.WriteLine($"Start generation for '{yamlFile}'. Output: '{outputFilePath}");
                 dddCanvas.GenerateSvg(yamlFile, outputFilePath);
                 Console.WriteLine($"SVG documentation generated for '{Path.GetFileName(yamlFile)}'.");
             }
