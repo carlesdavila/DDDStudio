@@ -1,5 +1,8 @@
 ﻿using System.Drawing;
+using System.Globalization;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using DDDCanvasCreator.Models.AggregateCanvas;
 using DDDCanvasCreator.Services;
 using Svg;
@@ -24,13 +27,14 @@ public class AggregateCanvasCreator : IYamlProcessor
 
     private void GenerateAggregateSvg(Aggregate aggregate, string outputFilePath)
     {
-        // Construct the full path to the SVG template file
-        var templateFilePath = Path.Combine("Templates", "aggregate-template.svg");
+        var resourceName = "DDDCanvasCreator.Templates.aggregate-template.svg";
 
-        // Load the SVG file as an initial template
-        var svgDocument = SvgDocument.Open(templateFilePath);
+        // Leer el contenido del archivo SVG incrustado
+        var svgContent = ReadEmbeddedResource(resourceName);
 
-
+        // Procesar el contenido SVG usando Svg.NET
+        var svgDocument = SvgDocument.FromSvg<SvgDocument>(svgContent);
+        
         GenerateNameAndDescription(aggregate, svgDocument);
         GenerateEnforcedInvariants(aggregate.EnforcedInvariants, svgDocument);
         GenerateHandledCommands(aggregate.HandledCommands, svgDocument);
@@ -40,6 +44,20 @@ public class AggregateCanvasCreator : IYamlProcessor
 
         // Save the modified SVG document to the specified output file path
         svgDocument.Write(outputFilePath);
+    }
+
+    private string ReadEmbeddedResource(string resourceName)
+    {
+        var assembly = Assembly.GetExecutingAssembly();
+        using var stream = assembly.GetManifestResourceStream(resourceName);
+
+        if (stream == null)
+        {
+            throw new FileNotFoundException($"Resource '{resourceName}' not found.");
+        }
+
+        using var reader = new StreamReader(stream);
+        return reader.ReadToEnd();
     }
 
     private void GenerateCorrectivePolicies(List<string> aggregateCorrectivePolicies, SvgDocument svgDocument)
@@ -391,19 +409,19 @@ public class AggregateCanvasCreator : IYamlProcessor
 
         return lines;
     }
-    
+
     private string FormatElement(string element)
     {
         if (string.IsNullOrEmpty(element))
             return element;
 
         // Convert camelCase or PascalCase to words separated by spaces
-        var formattedElement = System.Text.RegularExpressions.Regex.Replace(element, "([a-z])([A-Z])", "$1 $2");
+        var formattedElement = Regex.Replace(element, "([a-z])([A-Z])", "$1 $2");
 
         // Convert kebab-case to words separated by spaces
         formattedElement = formattedElement.Replace("-", " ");
 
         // Ensure the first letter is capitalized
-        return System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(formattedElement.ToLower());
+        return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(formattedElement.ToLower());
     }
 }
