@@ -4,7 +4,7 @@
 
 ## Project Description
 
-**DDD Studio** is a tool designed to document artifacts identified in the Domain-Driven Design Starter Modelling
+**DDD Studio** is a tool designed to document artifacts identified in the [Domain-Driven Design Starter Modelling Process](https://github.com/ddd-crew/ddd-starter-modelling-process) 
 Process. It helps users document key elements such as Bounded Contexts and Aggregates. The tool automatically creates a
 structured set of folders and YAML documents, making it easy to document and organize your DDD artifacts. YAML is used
 for its simplicity and readability, allowing both humans and machines to easily understand and edit the documents. This
@@ -63,7 +63,7 @@ aggregate:
     - OrderCompleted
  ```
 ## Aggregate Design Canvas
-The above YAML example would generate the following SVG:
+The above YAML example would generate the following [Aggregate Design Canvas](https://github.com/ddd-crew/aggregate-design-canvas) in SVG format:
 ![Aggregate Design Canvas](https://raw.githubusercontent.com/carlesdavila/DDDStudio/main/images/OrderAggregateSample.svg)
 
 ## Installation

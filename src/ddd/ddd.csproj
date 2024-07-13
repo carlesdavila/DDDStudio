@@ -12,7 +12,7 @@
         <Title>DDD Studio</Title>
         <Authors>Carles Davila</Authors>
         <Description>Document artifacts identified in the Domain-Driven Design Starter Modelling Process.</Description>
-        <PackageTags>ddd;</PackageTags>
+        <PackageTags>DDD;Aggregate Design Canvas;</PackageTags>
         <PackageProjectUrl>https://github.com/carlesdavila/DDDStudio</PackageProjectUrl>
         <RepositoryUrl>https://github.com/carlesdavila/DDDStudio</RepositoryUrl>
         <PackageIcon>logo.png</PackageIcon>
