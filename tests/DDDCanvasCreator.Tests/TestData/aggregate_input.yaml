@@ -12,6 +12,7 @@
         - to: Shipped
         - to: Cancelled
     - state: Shipped
+    - state: Cancelled
       
   enforcedInvariants:
     - "Order must have at least one OrderItem."
