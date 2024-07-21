@@ -28,9 +28,6 @@ public static class BoundedContextsParser
                 case "name":
                     boundedContext.Name = YamlParser.GetScalarValue(key, child.Value).ToLowerInvariant();
                     break;
-                case "color":
-                    boundedContext.Color = YamlParser.GetScalarValue(key, child.Value).ToLowerInvariant();
-                    break;
                 case "models":
                     YamlParser.ThrowIfNotYamlSequence(key, child.Value);
                     ModelsParser.HandleModels((child.Value as YamlSequenceNode)!, boundedContext.Models);

@@ -19,7 +19,7 @@ public class BcBasicCreator : IYamlProcessor
         var actual = parser.ParseBoundedContextsBasic();
         return actual;
     }
-
+    
     private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string outputFilePath)
     {
         const int width = 800;
@@ -39,11 +39,17 @@ public class BcBasicCreator : IYamlProcessor
             Height = height
         };
 
+        var colors = new List<string> { "#0000FF", "#008000", "#FF0000", "#FFFF00" }; // Predefined colors
+        var colorIndex = 0;
+
         var x = margin;
         var y = margin;
 
         foreach (var context in contexts)
         {
+            var contextColor = colors[colorIndex];
+            colorIndex = (colorIndex + 1) % colors.Count;
+
             // Draw context rectangle
             var contextRect = new SvgRectangle
             {
@@ -52,7 +58,7 @@ public class BcBasicCreator : IYamlProcessor
                 Width = contextWidth,
                 Height = contextHeight,
                 Fill = new SvgColourServer(Color.White),
-                Stroke = new SvgColourServer(ColorTranslator.FromHtml(context.Color!)),
+                Stroke = new SvgColourServer(ColorTranslator.FromHtml(contextColor)),
                 StrokeWidth = strokeWidth,
                 StrokeLineCap = SvgStrokeLineCap.Round,
                 CornerRadiusX = borderRadius,
@@ -63,12 +69,12 @@ public class BcBasicCreator : IYamlProcessor
             // Draw context title
             var title = new SvgText(context.Name!.ToUpper())
             {
-                X = new SvgUnitCollection { x + contextWidth / 2 },
-                Y = new SvgUnitCollection { y + titleHeight },
+                X = [x + contextWidth / 2],
+                Y = [y + titleHeight],
                 TextAnchor = SvgTextAnchor.Middle,
                 FontSize = 18,
                 FontWeight = SvgFontWeight.Bold,
-                Fill = new SvgColourServer(ColorTranslator.FromHtml(context.Color!))
+                Fill = new SvgColourServer(ColorTranslator.FromHtml(contextColor))
             };
             svgDoc.Children.Add(title);
 
@@ -94,8 +100,8 @@ public class BcBasicCreator : IYamlProcessor
                 // Draw model name
                 var modelName = new SvgText(model.Name)
                 {
-                    X = new SvgUnitCollection { x + contextWidth / 2 },
-                    Y = new SvgUnitCollection { modelY + modelTitleHeight },
+                    X = [x + contextWidth / 2],
+                    Y = [modelY + modelTitleHeight],
                     TextAnchor = SvgTextAnchor.Middle,
                     FontSize = 14,
                     FontWeight = SvgFontWeight.Bold,
