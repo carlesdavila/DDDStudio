@@ -19,7 +19,7 @@ public class BcBasicCreator : IYamlProcessor
         var actual = parser.ParseBoundedContextsBasic();
         return actual;
     }
-    
+
     private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string outputFilePath)
     {
         const int width = 800;
@@ -69,8 +69,8 @@ public class BcBasicCreator : IYamlProcessor
             // Draw context title
             var title = new SvgText(context.Name!.ToUpper())
             {
-                X = [x + contextWidth / 2],
-                Y = [y + titleHeight],
+                X = new SvgUnitCollection { x + contextWidth / 2 },
+                Y = new SvgUnitCollection { y + titleHeight },
                 TextAnchor = SvgTextAnchor.Middle,
                 FontSize = 18,
                 FontWeight = SvgFontWeight.Bold,
@@ -100,8 +100,8 @@ public class BcBasicCreator : IYamlProcessor
                 // Draw model name
                 var modelName = new SvgText(model.Name)
                 {
-                    X = [x + contextWidth / 2],
-                    Y = [modelY + modelTitleHeight],
+                    X = new SvgUnitCollection { x + contextWidth / 2 },
+                    Y = new SvgUnitCollection { modelY + modelTitleHeight },
                     TextAnchor = SvgTextAnchor.Middle,
                     FontSize = 14,
                     FontWeight = SvgFontWeight.Bold,
@@ -112,11 +112,11 @@ public class BcBasicCreator : IYamlProcessor
                 modelY += modelHeight + margin / 2;
             }
 
-            y += contextHeight + margin;
-            if (y + contextHeight > height - margin)
+            x += contextWidth + margin;
+            if (x + contextWidth > width - margin)
             {
-                y = margin;
-                x += contextWidth + margin;
+                x = margin;
+                y += contextHeight + margin;
             }
         }
 

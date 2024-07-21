@@ -26,10 +26,10 @@ public static class ModelsParser
             switch (key)
             {
                 case "name":
-                    model.Name = YamlParser.GetScalarValue(key, child.Value).ToLowerInvariant();
+                    model.Name = YamlParser.GetScalarValue(key, child.Value);
                     break;
                 case "type":
-                    model.Type = YamlParser.GetScalarValue(key, child.Value).ToLowerInvariant();
+                    model.Type = YamlParser.GetScalarValue(key, child.Value);
                     break;
                 default:
                     throw new DDDYamlException(child.Key.Start, $"Unrecognized Key: {key}");
