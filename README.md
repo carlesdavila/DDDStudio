@@ -31,6 +31,31 @@ DDD/
 │   └── ...
 └── ddd.yaml
 ```
+## Documenting Subdomains
+If you are using the DDD Starter Modelling Process, you are likely employing collaborative techniques such as Domain Storytelling or Event Storming to identify Bounded Contexts. Once these Bounded Contexts are identified, you can use DDD Studio to document them and their models in YAML format.
+
+### Example of Subdomain
+```yaml
+boundedContexts:
+  - name: Sales
+    models:
+      - name: Customer
+        type: AggregateRoot
+      - name: Product
+        type: AggregateRoot
+      - name: Address
+        type: ValueObject
+  - name: Inventory
+    models:
+      - name: Product
+        type: AggregateRoot
+      - name: Warehouse
+        type: AggregateRoot
+      - name: InventoryQuantity
+        type: ValueObject
+```
+### Generates the following SVG
+
 ## Example of an Aggregate YAML File
 
 Here is an example of the `OrderAggregate.yaml` file:

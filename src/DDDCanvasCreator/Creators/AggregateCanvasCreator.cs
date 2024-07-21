@@ -29,10 +29,10 @@ public class AggregateCanvasCreator : IYamlProcessor
     {
         var resourceName = "DDDCanvasCreator.Templates.aggregate-template.svg";
 
-        // Leer el contenido del archivo SVG incrustado
+        // Read the content of the embedded SVG file
         var svgContent = ReadEmbeddedResource(resourceName);
 
-        // Procesar el contenido SVG usando Svg.NET
+        // Process the SVG content using Svg.NET
         var svgDocument = SvgDocument.FromSvg<SvgDocument>(svgContent);
 
         GenerateNameAndDescription(aggregate, svgDocument);
@@ -206,32 +206,32 @@ public class AggregateCanvasCreator : IYamlProcessor
 
     private void GenerateStateTransitions(List<StateTransition> aggregateStateTransitions, SvgDocument svgDocument)
     {
-        // Tamaño y posición del rectángulo principal en el SVG
-        float rectX = 370;
-        float rectY = 91;
-        float rectWidth = 680;
+        // Size and position of the main rectangle in the SVG
+        const float rectX = 370;
+        const float rectY = 91;
+        const float rectWidth = 680;
         float rectHeight = 230;
 
-        // Margen dentro del rectángulo para los elementos
-        float marginX = 20;
-        float marginY = 20;
+        // Margin inside the rectangle for elements
+        const float marginX = 20;
+        const float marginY = 20;
 
-        // Tamaño fijo de cada estado
-        float stateWidth = 100;
-        float stateHeight = 50;
+        // Fixed size of each state
+        const float stateWidth = 100;
+        const float stateHeight = 50;
 
-        // Distancia vertical entre niveles
-        float levelSpacingY = 60;
-        // Distancia horizontal entre estados
-        float stateSpacingX = 120;
+        // Vertical distance between levels
+        const float levelSpacingY = 60;
+        // Horizontal distance between states
+        const float stateSpacingX = 120;
 
-        // Diccionario para almacenar la posición de cada estado
+        // Dictionary to store the position of each state
         var statePositions = new Dictionary<string, (float x, float y)>();
 
-        // Cola para gestionar la distribución de los estados
+        // Queue to manage the distribution of states
         var stateQueue = new Queue<StateTransition>(aggregateStateTransitions);
 
-        // Lista de colores para alternar
+        // List of colors to alternate
         var colors = new List<Color>
         {
             ColorTranslator.FromHtml("#f2798b"),
@@ -239,18 +239,18 @@ public class AggregateCanvasCreator : IYamlProcessor
             ColorTranslator.FromHtml("#d8f79c")
         };
 
-        // Iterador de colores
+        // Color iterator
         var colorIndex = 0;
 
-        // Variables para controlar la posición de los estados
+        // Variables to control the position of the states
         var currentStateX = rectX + marginX;
         var currentStateY = rectY + marginY;
         var currentLevel = 0;
 
-        // Diccionario para evitar procesar un estado más de una vez
+        // Dictionary to avoid processing a state more than once
         var processedStates = new HashSet<string>();
 
-        // Obtener el grupo stateGroup del documento SVG
+        // Get the stateGroup from the SVG document
         var stateGroup = svgDocument.GetElementById<SvgGroup>("stateGroup");
 
         while (stateQueue.Count > 0)
@@ -259,10 +259,10 @@ public class AggregateCanvasCreator : IYamlProcessor
 
             if (!processedStates.Contains(stateTransition.State))
             {
-                // Coloca el estado actual
+                // Place the current state
                 statePositions[stateTransition.State] = (currentStateX, currentStateY);
 
-                // Crea el rectángulo para representar el estado
+                // Create the rectangle to represent the state
                 var stateRect = new SvgRectangle
                 {
                     X = new SvgUnit(currentStateX),
@@ -275,15 +275,14 @@ public class AggregateCanvasCreator : IYamlProcessor
                 stateRect.CustomAttributes.Add("class", "state-card");
                 stateGroup.Children.Add(stateRect);
 
-                // Alterna el color
+                // Alternate the color
                 colorIndex = (colorIndex + 1) % colors.Count;
 
-                // Añade el nombre del estado
+                // Add the state name
                 var stateText = new SvgText
                 {
-                    X = new SvgUnitCollection { new(currentStateX + stateWidth / 2) },
-                    Y = new SvgUnitCollection
-                        { new(currentStateY + stateHeight / 2 + 5) }, // Ajuste para centrar verticalmente
+                    X = [new SvgUnit(currentStateX + stateWidth / 2)],
+                    Y = [new SvgUnit(currentStateY + stateHeight / 2 + 5)], // Adjustment to vertically center
                     FontSize = new SvgUnit(12),
                     FontWeight = SvgFontWeight.Bold,
                     Fill = new SvgColourServer(Color.Black),
@@ -293,18 +292,18 @@ public class AggregateCanvasCreator : IYamlProcessor
                 stateText.Text = stateTransition.State;
                 stateGroup.Children.Add(stateText);
 
-                // Marca el estado como procesado
+                // Mark the state as processed
                 processedStates.Add(stateTransition.State);
 
-                // Añade los estados de transición a la cola
+                // Add transition states to the queue
                 foreach (var transition in stateTransition.Transitions)
                     if (!processedStates.Contains(transition.To))
                         stateQueue.Enqueue(aggregateStateTransitions.First(t => t.State == transition.To));
 
-                // Actualiza la posición x para el próximo estado
+                // Update the x position for the next state
                 currentStateX += stateWidth + stateSpacingX;
 
-                // Si se alcanza el final del rectángulo, se baja al siguiente nivel
+                // If the end of the rectangle is reached, move down to the next level
                 if (currentStateX + stateWidth + marginX > rectX + rectWidth)
                 {
                     currentStateX = rectX + marginX;
@@ -314,7 +313,7 @@ public class AggregateCanvasCreator : IYamlProcessor
             }
         }
 
-        // Dibujar flechas de transición
+        // Draw transition arrows
         foreach (var stateTransition in aggregateStateTransitions)
         {
             var (startX, startY) = statePositions[stateTransition.State];
@@ -324,13 +323,13 @@ public class AggregateCanvasCreator : IYamlProcessor
                 {
                     var (endX, endY) = endPosition;
 
-                    // Calcula los puntos de inicio y fin en los bordes de los rectángulos
+                    // Calculate the start and end points at the edges of the rectangles
                     var arrowStartX = startX + stateWidth / 2;
                     var arrowStartY = startY + stateHeight / 2;
                     var arrowEndX = endX + stateWidth / 2;
                     var arrowEndY = endY + stateHeight / 2;
 
-                    // Ajusta la posición de la flecha según la relación entre los estados
+                    // Adjust the arrow position based on the relationship between states
                     if (startX < endX)
                     {
                         arrowStartX = startX + stateWidth;
@@ -353,7 +352,7 @@ public class AggregateCanvasCreator : IYamlProcessor
                         arrowEndY = endY + stateHeight;
                     }
 
-                    // Dibuja la línea de la flecha
+                    // Draw the arrow line
                     var arrowLine = new SvgLine
                     {
                         StartX = new SvgUnit(arrowStartX),
