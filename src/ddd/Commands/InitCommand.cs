@@ -36,6 +36,21 @@ public class InitCommand
         {
             var yamlContent = @"
 # DDD Project Configuration
+
+# Base class or interface that identifies an aggregate
+AggregateBase: ""MyNamespace.IAggregateRoot""
+
+# List of colors for different states of aggregates
+AggregateStatesColors:
+  - ""#FF0000""
+  - ""#00FF00""
+  - ""#0000FF""
+
+# Color for handled commands of aggregates
+HandledCommandsColor: ""#FFFF00""
+
+# Color for created events
+CreatedEventsColor: ""#FF00FF""
 ";
             File.WriteAllText(yamlFilePath, yamlContent);
             Console.WriteLine($"Created file: {yamlFilePath}");
