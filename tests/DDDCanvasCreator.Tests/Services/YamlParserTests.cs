@@ -11,7 +11,6 @@ public class YamlParserTests
       var input = @"
 boundedContexts:
   - name: Sales
-    color: '#0000FF'
     models:
       - name: Customer
         type: AggregateRoot
@@ -20,7 +19,6 @@ boundedContexts:
       - name: Address
         type: ValueObject
   - name: Inventory
-    color: '#008000'
     models:
       - name: Product
         type: AggregateRoot
