@@ -27,13 +27,8 @@ public class AggregateCanvasCreator : IYamlProcessor
 
     private void GenerateAggregateSvg(Aggregate aggregate, string outputFilePath)
     {
-        var resourceName = "DDDCanvasCreator.Templates.aggregate-template.svg";
-
-        // Read the content of the embedded SVG file
-        var svgContent = ReadEmbeddedResource(resourceName);
-
         // Process the SVG content using Svg.NET
-        var svgDocument = SvgDocument.FromSvg<SvgDocument>(svgContent);
+        var svgDocument = TemplateService.GetAggregateSvgDocument();
 
         GenerateNameAndDescription(aggregate, svgDocument);
         GenerateEnforcedInvariants(aggregate.EnforcedInvariants, svgDocument);
@@ -44,17 +39,6 @@ public class AggregateCanvasCreator : IYamlProcessor
 
         // Save the modified SVG document to the specified output file path
         svgDocument.Write(outputFilePath);
-    }
-
-    private string ReadEmbeddedResource(string resourceName)
-    {
-        var assembly = Assembly.GetExecutingAssembly();
-        using var stream = assembly.GetManifestResourceStream(resourceName);
-
-        if (stream == null) throw new FileNotFoundException($"Resource '{resourceName}' not found.");
-
-        using var reader = new StreamReader(stream);
-        return reader.ReadToEnd();
     }
 
     private void GenerateCorrectivePolicies(List<string> aggregateCorrectivePolicies, SvgDocument svgDocument)

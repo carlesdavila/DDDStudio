@@ -16,6 +16,8 @@
       <EmbeddedResource Include="Templates\aggregate-template.svg">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
+      <None Remove="Templates\contexts-template.svg" />
+      <EmbeddedResource Include="Templates\contexts-template.svg" />
     </ItemGroup>
 
 </Project>
