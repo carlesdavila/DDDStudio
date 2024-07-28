@@ -199,11 +199,11 @@ This will provide detailed information about the tool and its capabilities.
 With these commands, you can efficiently manage and document your DDD projects.
 
 ## FAQ
-### Why doesn't the 8. Throughput work?
-Ah, the infamous 8. Throughput! Well, it turns out it's still stuck in a data traffic jam. We've asked it to hurry up, but it seems to be enjoying its vacation too much. It'll be back soon, we promise!
+### Why doesn't the Throughput work?
+Ah, the infamous Throughput! Well, it turns out it's still stuck in a data traffic jam. We've asked it to hurry up, but it seems to be enjoying its vacation too much. It'll be back soon, we promise!
 
-### Why doesn't the 9. Size work?
-The 9. Size is on a strict diet of bits and bytes and hasn't reached its final form yet. We're working hard to help it grow strong and healthy. Thanks for your patience while we let it finish its training!
+### Why doesn't the Size work?
+The Size is on a strict diet of bits and bytes and hasn't reached its final form yet. We're working hard to help it grow strong and healthy. Thanks for your patience while we let it finish its training!
 
 ## License
 This project is licensed under the MIT License.
