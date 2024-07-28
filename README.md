@@ -55,6 +55,7 @@ boundedContexts:
         type: ValueObject
 ```
 ### Generates the following SVG
+![Contexts Sample](https://raw.githubusercontent.com/carlesdavila/DDDStudio/main/images/ContextsSample.svg)
 
 ## Example of an Aggregate YAML File
 
