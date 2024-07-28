@@ -18,7 +18,6 @@ public class AddSubdomainCommand
 
             var yamlContent = @"boundedContexts:
   - name: Sales
-    color: '#0000FF'
     models:
       - name: Customer
         type: AggregateRoot
@@ -27,7 +26,6 @@ public class AddSubdomainCommand
       - name: Address
         type: ValueObject
   - name: Inventory
-    color: '#008000'
     models:
       - name: Product
         type: AggregateRoot
