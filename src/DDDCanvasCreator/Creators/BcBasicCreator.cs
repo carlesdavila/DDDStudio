@@ -85,13 +85,14 @@ public class BcBasicCreator : IYamlProcessor
         title.CustomAttributes.Add("class", "context-text");
         svgDoc.Children.Add(title);
 
-        DrawModels(svgDoc, context.Models, x, y + titleHeight + margin, contextWidth, margin);
+        DrawModels(svgDoc, context.Models, x, y + titleHeight + margin, margin);
     }
 
-    private void DrawModels(SvgDocument svgDoc, List<Model> models, int x, int y, int contextWidth, int margin)
+    private void DrawModels(SvgDocument svgDoc, List<Model> models, int x, int y, int margin)
     {
-        const int modelHeight = 30;
-        const int modelTitleHeight = 20;
+        const int modelWidth = Constants.ModelWidth;
+        const int modelHeight = Constants.ModelHeight;
+        const int modelTitleHeight = 20; // Assuming this constant controls the vertical centering of the text
         const int borderRadius = 10;
 
         foreach (var model in models)
@@ -99,10 +100,11 @@ public class BcBasicCreator : IYamlProcessor
             // Create and configure the model rectangle
             var modelRect = new SvgRectangle
             {
-                X = x + margin,
+                X = x + (Constants.ContextWidth - modelWidth) / 2, // Center the model rectangle
                 Y = y,
-                Width = contextWidth - 2 * margin,
+                Width = modelWidth,
                 Height = modelHeight,
+                Filter = new Uri("url(#dropShadow)", UriKind.Relative),
                 CornerRadiusX = borderRadius / 2,
                 CornerRadiusY = borderRadius / 2
             };
@@ -112,8 +114,9 @@ public class BcBasicCreator : IYamlProcessor
             // Create and configure the model name
             var modelName = new SvgText(model.Name)
             {
-                X = [x + contextWidth / 2],
-                Y = [y + modelTitleHeight]
+                X = [x + Constants.ContextWidth / 2],
+                Y = [y + modelHeight / 2 + modelTitleHeight / 3], // Center the text vertically
+                TextAnchor = SvgTextAnchor.Middle // Center the text horizontally
             };
             modelName.CustomAttributes.Add("class", "model-text");
             svgDoc.Children.Add(modelName);

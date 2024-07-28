@@ -28,7 +28,7 @@
         .model-text {
         text-anchor: middle;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 16px;
         fill: white;
         }      
     </style>
