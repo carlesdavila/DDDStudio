@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xml="http://www.w3.org/XML/1998/namespace" width="1060px" height="770px" viewBox="-0.5, -0.5, 1060, 770">
+  <defs>
+    <filter x="-20%" y="-20%" width="140%" height="140%" id="dropShadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" style="flood-color:#888;flood-opacity:0.9;" />
+    </filter>
+  </defs>
+  <style>
+        .context {
+        fill: white;
+        stroke-width: 3;
+        stroke-linecap: round;
+        }
+        .context-text {
+        text-anchor: middle;
+        font-weight: bold;
+        font-size: 18px;
+        }
+        .model {
+        fill: #14A32C;
+        stroke: #14A32C;
+        stroke-width: 3;
+        stroke-linecap: round;
+        }
+        .model-text {
+        text-anchor: middle;
+        font-weight: bold;
+        font-size: 16px;
+        fill: white;
+        }      
+    </style>
+  <rect x="20" y="20" width="350" height="200" rx="10" ry="10" stroke-width="3" class="context" style="stroke:#0000FF;" />
+  <text x="195" y="45" class="context-text" style="fill:#0000FF;">SALES</text>
+  <rect x="95" y="65" width="200" height="40" rx="5" ry="5" filter="url(#dropShadow)" class="model" />
+  <text x="195" y="91" text-anchor="middle" class="model-text">Customer</text>
+  <rect x="95" y="115" width="200" height="40" rx="5" ry="5" filter="url(#dropShadow)" class="model" />
+  <text x="195" y="141" text-anchor="middle" class="model-text">Product</text>
+  <rect x="95" y="165" width="200" height="40" rx="5" ry="5" filter="url(#dropShadow)" class="model" />
+  <text x="195" y="191" text-anchor="middle" class="model-text">Address</text>
+  <rect x="390" y="20" width="350" height="200" rx="10" ry="10" stroke-width="3" class="context" style="stroke:#008000;" />
+  <text x="565" y="45" class="context-text" style="fill:#008000;">INVENTORY</text>
+  <rect x="465" y="65" width="200" height="40" rx="5" ry="5" filter="url(#dropShadow)" class="model" />
+  <text x="565" y="91" text-anchor="middle" class="model-text">Product</text>
+  <rect x="465" y="115" width="200" height="40" rx="5" ry="5" filter="url(#dropShadow)" class="model" />
+  <text x="565" y="141" text-anchor="middle" class="model-text">Warehouse</text>
+  <rect x="465" y="165" width="200" height="40" rx="5" ry="5" filter="url(#dropShadow)" class="model" />
+  <text x="565" y="191" text-anchor="middle" class="model-text">InventoryQuantity</text>
+</svg>
