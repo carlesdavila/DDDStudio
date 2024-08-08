@@ -37,6 +37,9 @@
       <None Update="TestData\aggregate_input.yaml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestData\ddd.yaml">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

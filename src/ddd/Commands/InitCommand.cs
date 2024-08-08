@@ -42,15 +42,21 @@ AggregateBase: ""MyNamespace.IAggregateRoot""
 
 # List of colors for different states of aggregates
 AggregateStatesColors:
-  - ""#FF0000""
-  - ""#00FF00""
-  - ""#0000FF""
+  - ""#f2798b""
+  - ""#a8ccf6""
+  - ""#d8f79c""
 
 # Color for handled commands of aggregates
-HandledCommandsColor: ""#FFFF00""
+HandledCommandsColor: ""#40C7EA""
 
 # Color for created events
-CreatedEventsColor: ""#FF00FF""
+CreatedEventsColor: ""#FFAA5E""
+
+# Color for BoundedContexts
+BoundedContextColors:
+  - ""#2c9bf0""
+  - ""#f2798b""
+  - ""#ffaa5e""
 ";
             File.WriteAllText(yamlFilePath, yamlContent);
             Console.WriteLine($"Created file: {yamlFilePath}");

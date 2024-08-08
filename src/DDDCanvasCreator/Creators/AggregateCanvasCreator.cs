@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using DDDCanvasCreator.Models;
 using DDDCanvasCreator.Models.AggregateCanvas;
 using DDDCanvasCreator.Services;
 using Svg;
@@ -11,10 +12,10 @@ namespace DDDCanvasCreator.Creators;
 
 public class AggregateCanvasCreator : IYamlProcessor
 {
-    public void ProcessYamlAndGenerateSvg(string yamlContent, string outputFilePath)
+    public void ProcessYamlAndGenerateSvg(string yamlContent, string outputFilePath, DddConfig config)
     {
         var aggregate = ParseYaml(yamlContent);
-        GenerateAggregateSvg(aggregate, outputFilePath);
+        GenerateAggregateSvg(aggregate, outputFilePath, config);
     }
 
     private Aggregate ParseYaml(string yamlContent)
@@ -25,17 +26,17 @@ public class AggregateCanvasCreator : IYamlProcessor
         return actual;
     }
 
-    private void GenerateAggregateSvg(Aggregate aggregate, string outputFilePath)
+    private void GenerateAggregateSvg(Aggregate aggregate, string outputFilePath, DddConfig config)
     {
         // Process the SVG content using Svg.NET
         var svgDocument = TemplateService.GetAggregateSvgDocument();
 
         GenerateNameAndDescription(aggregate, svgDocument);
         GenerateEnforcedInvariants(aggregate.EnforcedInvariants, svgDocument);
-        GenerateHandledCommands(aggregate.HandledCommands, svgDocument);
-        GenerateCreatedEvents(aggregate.CreatedEvents, svgDocument);
+        GenerateHandledCommands(aggregate.HandledCommands, svgDocument, config);
+        GenerateCreatedEvents(aggregate.CreatedEvents, svgDocument, config);
         GenerateCorrectivePolicies(aggregate.CorrectivePolicies, svgDocument);
-        GenerateStateTransitions(aggregate.StateTransitions, svgDocument);
+        GenerateStateTransitions(aggregate.StateTransitions, svgDocument, config);
 
         // Save the modified SVG document to the specified output file path
         svgDocument.Write(outputFilePath);
@@ -117,18 +118,19 @@ public class AggregateCanvasCreator : IYamlProcessor
         }
     }
 
-    private void GenerateHandledCommands(List<string> aggregateHandledCommands, SvgDocument svgDocument)
+    private void GenerateHandledCommands(List<string> aggregateHandledCommands, SvgDocument svgDocument,
+        DddConfig config)
     {
-        GenerateElements(aggregateHandledCommands, svgDocument, "cardsHc", "rectHc", "txtHc", "swHc", "foHc");
+        GenerateElements(aggregateHandledCommands, svgDocument, "cardsHc", "rectHc", "txtHc", "swHc", "foHc", config.HandledCommandsColor);
     }
 
-    private void GenerateCreatedEvents(List<string> aggregateCreatedEvents, SvgDocument svgDocument)
+    private void GenerateCreatedEvents(List<string> aggregateCreatedEvents, SvgDocument svgDocument, DddConfig config)
     {
-        GenerateElements(aggregateCreatedEvents, svgDocument, "cardsCe", "rectCe", "txtCe", "swCe", "foCe");
+        GenerateElements(aggregateCreatedEvents, svgDocument, "cardsCe", "rectCe", "txtCe", "swCe", "foCe", config.CreatedEventsColor);
     }
 
     private void GenerateElements(List<string> aggregateElements, SvgDocument svgDocument, string groupIdPrefix,
-        string rectIdPrefix, string textIdPrefix, string switchIdPrefix, string foreignObjectIdPrefix)
+        string rectIdPrefix, string textIdPrefix, string switchIdPrefix, string foreignObjectIdPrefix, string color)
     {
         // Get the group that contains the elements
         var group = svgDocument.GetElementById<SvgGroup>(groupIdPrefix);
@@ -183,12 +185,17 @@ public class AggregateCanvasCreator : IYamlProcessor
                     // Find and update the corresponding text within the switch
                     var text = svgSwitch.Children.OfType<SvgText>().FirstOrDefault(t => t.ID == textId);
                     if (text != null) text.Text = element;
+                    
+                    // Update the color of the rectangle
+                    var rect = rects.FirstOrDefault(r => r.ID == $"{rectIdPrefix}{i + 1}");
+                    if (rect != null) rect.Fill = new SvgColourServer(ColorTranslator.FromHtml(color));
                 }
             }
         }
     }
 
-    private void GenerateStateTransitions(List<StateTransition> aggregateStateTransitions, SvgDocument svgDocument)
+    private void GenerateStateTransitions(List<StateTransition> aggregateStateTransitions, SvgDocument svgDocument,
+        DddConfig config)
     {
         // Size and position of the main rectangle in the SVG
         const float rectX = 370;
@@ -216,12 +223,7 @@ public class AggregateCanvasCreator : IYamlProcessor
         var stateQueue = new Queue<StateTransition>(aggregateStateTransitions);
 
         // List of colors to alternate
-        var colors = new List<Color>
-        {
-            ColorTranslator.FromHtml("#f2798b"),
-            ColorTranslator.FromHtml("#a8ccf6"),
-            ColorTranslator.FromHtml("#d8f79c")
-        };
+        var colors = config.AggregateStatesColors.Select(ColorTranslator.FromHtml).ToList();
 
         // Color iterator
         var colorIndex = 0;

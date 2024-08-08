@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using DDDCanvasCreator.Models;
 using DDDCanvasCreator.Models.BoundedContextBasic;
 using DDDCanvasCreator.Services;
 using Svg;
@@ -7,10 +8,10 @@ namespace DDDCanvasCreator.Creators;
 
 public class BcBasicCreator : IYamlProcessor
 {
-    public void ProcessYamlAndGenerateSvg(string yamlContent, string outputFilePath)
+    public void ProcessYamlAndGenerateSvg(string yamlContent, string outputFilePath, DddConfig config)
     {
         var boundedContexts = ParseYaml(yamlContent);
-        GenerateBoundedContextSvg(boundedContexts.BoundedContexts, outputFilePath);
+        GenerateBoundedContextSvg(boundedContexts.BoundedContexts, outputFilePath, config);
     }
 
     private BoundedContextsBasic ParseYaml(string yamlContent)
@@ -20,14 +21,14 @@ public class BcBasicCreator : IYamlProcessor
         return actual;
     }
 
-    private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string outputFilePath)
+    private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string outputFilePath, DddConfig config)
     {
         const int margin = 20;
 
         // Load the base SVG document from TemplateService
         var svgDoc = TemplateService.GetContextSvgDocument();
 
-        var colors = new List<string> { "#0000FF", "#008000", "#FF0000", "#FFFF00" }; // Predefined colors
+        var colors = config.BoundedContextColors; // Predefined colors
         var colorIndex = 0;
 
         var x = margin;

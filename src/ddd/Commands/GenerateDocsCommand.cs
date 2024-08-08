@@ -8,6 +8,16 @@ public class GenerateDocsCommand
     [Command(Description = "Generate SVG documentation from YAML files.")]
     public void GenerateDocs()
     {
+        // Assuming the configuration file is in the current execution directory
+        var configFilePath = Path.Combine(AppContext.BaseDirectory, "ddd.yaml");
+        var config = DDDCanvas.LoadConfig(configFilePath); 
+        
+        if (!File.Exists(configFilePath))
+        {
+            Console.WriteLine("Configuration file 'ddd.yaml' not found in the execution directory.");
+            return;
+        }
+        
         var yamlFiles = Directory.GetFiles(Constants.MainPath, "*.yaml", SearchOption.AllDirectories);
 
         const string outputFolder = "docs";
@@ -18,7 +28,7 @@ public class GenerateDocsCommand
             {
                 var dddCanvas = new DDDCanvas();
                 var outputFilePath = Path.Combine(outputFolder, Path.GetFileNameWithoutExtension(yamlFile) + ".svg");
-                dddCanvas.GenerateSvg(yamlFile, outputFilePath);
+                dddCanvas.GenerateSvg(yamlFile, outputFilePath, config);
                 Console.WriteLine($"SVG documentation generated for '{Path.GetFileName(yamlFile)}'.");
             }
             catch (Exception ex)
