@@ -11,6 +11,7 @@ public static class YamlProcessorFactory
         {
             _ when yamlContent.Contains("boundedContexts") => new BcBasicCreator(),
             _ when yamlContent.Contains("aggregate") => new AggregateCanvasCreator(),
+            _ when yamlContent.Contains("subdomains") => new SubdomainsCanvasCreator(),
             _ => throw new NotSupportedException("Unsupported YAML format")
         };
     }
