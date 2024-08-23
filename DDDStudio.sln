@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{2812
 	ProjectSection(SolutionItems) = preProject
 		Yamls\AggregateDesignCanvasFullSample1.yaml = Yamls\AggregateDesignCanvasFullSample1.yaml
 		Yamls\BoundedContextBasic.yaml = Yamls\BoundedContextBasic.yaml
+		Yamls\bc.svg = Yamls\bc.svg
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ddd.Tests", "tests\ddd.Tests\ddd.Tests.csproj", "{7DC33179-6817-48E2-86FA-7BD183B41952}"

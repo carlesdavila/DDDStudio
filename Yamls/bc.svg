@@ -1,0 +1,79 @@
+<svg width="500" height="550" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Definición de clases -->
+  <style>
+    .context {
+      fill: white;
+      stroke: #FF4D88;
+      stroke-width: 5px;
+      stroke-dasharray: 4;
+      rx: 20;
+      ry: 20;
+    }
+
+    .model-core {
+      fill: white;
+      stroke: #00CC66;
+      stroke-width: 5px;
+      rx: 15;
+      ry: 15;
+    }
+
+    .model-sub {
+      fill: white;
+      stroke: #00a2ff;
+      stroke-width: 5px;
+      rx: 15;
+      ry: 15;
+    }
+
+    .text-main {
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+      text-anchor: middle;
+      alignment-baseline: middle;
+      fill: black;
+    }
+
+    .context-title {
+      font-family: Arial, sans-serif;
+      font-size: 28px;
+      font-weight: bold;
+      text-anchor: middle;
+      fill: #FF4D88;
+    }
+  </style>
+
+  <!-- Título del Bounded Context -->
+  <text class="context-title" x="250" y="40">Bounded Context</text>
+
+  <!-- Contenedor -->
+  <rect class="context" x="20" y="60" width="460" height="460"></rect>
+
+  <!-- Modelo principal -->
+  <rect class="model-core" x="160" y="80" width="180" height="120"></rect>
+  <text class="text-main" x="250" y="140">Accounts</text>
+
+  <!-- Filas inferiores -->
+  <rect class="model-sub" x="50" y="220" width="170" height="80"></rect>
+  <text class="text-main" x="135" y="260">Address</text>
+
+  <rect class="model-sub" x="280" y="220" width="170" height="80"></rect>
+  <text class="text-main" x="365" y="260">Login</text>
+
+  <rect class="model-sub" x="50" y="310" width="170" height="80"></rect>
+  <text class="text-main" x="135" y="345">Payment</text>
+  <text class="text-main" x="135" y="365">Details</text>
+
+  <rect class="model-sub" x="280" y="310" width="170" height="80"></rect>
+  <text class="text-main" x="365" y="345">Address</text>
+
+  <rect class="model-sub" x="50" y="400" width="170" height="80"></rect>
+  <text class="text-main" x="135" y="435">Contact</text>
+  <text class="text-main" x="135" y="455">Details</text>
+
+  <rect class="model-sub" x="280" y="400" width="170" height="80"></rect>
+  <text class="text-main" x="365" y="435">Order</text>
+
+</svg>
