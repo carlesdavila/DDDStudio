@@ -20,19 +20,19 @@ public class AddSubdomainCommand
   - name: Sales
     models:
       - name: Customer
-        type: AggregateRoot
+        type: CoreConcept
       - name: Product
-        type: AggregateRoot
+        type: CoreConcept
       - name: Address
-        type: ValueObject
+        type: SubConcept
   - name: Inventory
     models:
       - name: Product
-        type: AggregateRoot
+        type: CoreConcept
       - name: Warehouse
-        type: AggregateRoot
+        type: SubConcept
       - name: InventoryQuantity
-        type: ValueObject
+        type: SubConcept
 ";
             var yamlFilePath = Path.Combine(Constants.MainPath, name, $"{name}.yaml");
             File.WriteAllText(yamlFilePath, yamlContent);

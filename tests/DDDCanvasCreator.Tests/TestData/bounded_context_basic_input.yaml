@@ -2,16 +2,16 @@
   - name: Sales
     models:
       - name: Customer
-        type: AggregateRoot
+        type: CoreConcept
       - name: Product
-        type: AggregateRoot
+        type: SubConcept
       - name: Address
-        type: ValueObject
+        type: SubConcept
   - name: Inventory
     models:
       - name: Product
-        type: AggregateRoot
+        type: CoreConcept
       - name: Warehouse
-        type: AggregateRoot
+        type: SubConcept
       - name: InventoryQuantity
-        type: ValueObject
+        type: SubConcept

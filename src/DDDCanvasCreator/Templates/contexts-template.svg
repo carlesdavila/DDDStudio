@@ -11,25 +11,40 @@
     <style>
         .context {
         fill: white;
-        stroke-width: 3;
-        stroke-linecap: round;
+        stroke: #FF4D88;
+        stroke-width: 5px;
+        stroke-dasharray: 4;
+        rx: 20;
+        ry: 20;
         }
         .context-text {
-        text-anchor: middle;
+        font-family: Arial, sans-serif;
+        font-size: 28px;
         font-weight: bold;
-        font-size: 18px;
+        text-anchor: middle;
+        fill: #FF4D88;
         }
-        .model {
-        fill: #14A32C;
-        stroke: #14A32C;
-        stroke-width: 3;
-        stroke-linecap: round;
+        .model-core {
+        fill: white;
+        stroke: #00CC66;
+        stroke-width: 5px;
+        rx: 15;
+        ry: 15;
+        }
+        .model-sub {
+        fill: white;
+        stroke: #00a2ff;
+        stroke-width: 5px;
+        rx: 15;
+        ry: 15;
         }
         .model-text {
-        text-anchor: middle;
+        font-family: Arial, sans-serif;
+        font-size: 20px;
         font-weight: bold;
-        font-size: 16px;
-        fill: white;
-        }      
+        text-anchor: middle;
+        alignment-baseline: middle;
+        fill: black;
+        }
     </style>
 </svg>

@@ -98,6 +98,9 @@ public class BcBasicCreator : IYamlProcessor
 
         foreach (var model in models)
         {
+            // Determine the CSS class based on the model type
+            var modelClass = model.Type == "CoreConcept" ? "model-core" : "model-sub";
+
             // Create and configure the model rectangle
             var modelRect = new SvgRectangle
             {
@@ -109,7 +112,7 @@ public class BcBasicCreator : IYamlProcessor
                 CornerRadiusX = borderRadius / 2,
                 CornerRadiusY = borderRadius / 2
             };
-            modelRect.CustomAttributes.Add("class", "model");
+            modelRect.CustomAttributes.Add("class", modelClass);
             svgDoc.Children.Add(modelRect);
 
             // Create and configure the model name
