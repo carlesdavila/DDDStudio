@@ -32,9 +32,30 @@ public class BcBasicCreator : IYamlProcessor
         var svgWidth = contexts.Count * (contextWidth + margin) + margin;
         svgDoc.Width = new SvgUnit(svgWidth);
 
-        // Adjust the viewBox of the SVG element
-        const int svgHeight = 770; // Assuming a fixed height for simplicity
+        // Calculate the required height for the SVG
+        var totalHeight = margin;
+        foreach (var context in contexts)
+        {
+            // Separate core models and sub models
+            var coreModelsCount = context.Models.Count(m => m.Type == "CoreConcept");
+            var subModelsCount = context.Models.Count(m => m.Type != "CoreConcept");
+
+            // Calculate the number of rows needed for core models and sub models
+            var coreModelRows = (int)Math.Ceiling(coreModelsCount / 2.0);
+            var subModelRows = (int)Math.Ceiling(subModelsCount / 2.0);
+
+            // Calculate the height for core models and sub models
+            var coreModelsHeight = coreModelRows * 90; // 90 is the height of each model with margin
+            var subModelsHeight = subModelRows * 90; // 90 is the height of each model with margin
+
+            // Total context height includes core models, sub models, title, and extra margin
+            var contextHeight = coreModelsHeight + subModelsHeight + 100; // 100 is for title and extra margin
+            totalHeight += contextHeight + margin;
+        }
+
+        var svgHeight = totalHeight;
         svgDoc.ViewBox = new SvgViewBox(0, 0, svgWidth, svgHeight);
+        svgDoc.Height = new SvgUnit(svgHeight); // Set the height of the SVG element
 
         var colors = config.BoundedContextColors; // Predefined colors
         var colorIndex = 0;
@@ -47,10 +68,20 @@ public class BcBasicCreator : IYamlProcessor
             var contextColor = colors[colorIndex];
             colorIndex = (colorIndex + 1) % colors.Count;
 
-            // Calculate the required height for the context
-            var rows = (int)Math.Ceiling(context.Models.Count / 2.0);
-            var contextHeight =
-                rows * 90 + 100; // 90 is the height of each model with margin, 100 is for title and extra margin
+            // Separate core models and sub models
+            var coreModelsCount = context.Models.Count(m => m.Type == "CoreConcept");
+            var subModelsCount = context.Models.Count(m => m.Type != "CoreConcept");
+
+            // Calculate the number of rows needed for core models and sub models
+            var coreModelRows = (int)Math.Ceiling(coreModelsCount / 2.0);
+            var subModelRows = (int)Math.Ceiling(subModelsCount / 2.0);
+
+            // Calculate the height for core models and sub models
+            var coreModelsHeight = coreModelRows * 90; // 90 is the height of each model with margin
+            var subModelsHeight = subModelRows * 90; // 90 is the height of each model with margin
+
+            // Total context height includes core models, sub models, title, and extra margin
+            var contextHeight = coreModelsHeight + subModelsHeight + 100; // 100 is for title and extra margin
 
             DrawContext(svgDoc, context, contextColor, x, y, margin, contextWidth, contextHeight);
 
