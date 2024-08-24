@@ -24,11 +24,14 @@ public class BcBasicCreator : IYamlProcessor
     private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string outputFilePath, DddConfig config)
     {
         const int margin = 20;
-        const int contextWidth = 460;
+        var contextWidth = config.BoundedContextWidth;
         const int contextHeight = 460;
 
         // Load the base SVG document from TemplateService
         var svgDoc = TemplateService.GetContextSvgDocument();
+
+        // Adjust the width of the SVG element
+        svgDoc.Width = new SvgUnit(contexts.Count * (contextWidth + margin) + margin);
 
         var colors = config.BoundedContextColors; // Predefined colors
         var colorIndex = 0;
@@ -41,7 +44,7 @@ public class BcBasicCreator : IYamlProcessor
             var contextColor = colors[colorIndex];
             colorIndex = (colorIndex + 1) % colors.Count;
 
-            DrawContext(svgDoc, context, contextColor, x, y, margin);
+            DrawContext(svgDoc, context, contextColor, x, y, margin, contextWidth);
 
             x += contextWidth + margin;
             if (x + contextWidth > svgDoc.Width - margin)
@@ -55,9 +58,9 @@ public class BcBasicCreator : IYamlProcessor
         svgDoc.Write(outputFilePath);
     }
 
-    private void DrawContext(SvgDocument svgDoc, BoundedContext context, string contextColor, int x, int y, int margin)
+    private void DrawContext(SvgDocument svgDoc, BoundedContext context, string contextColor, int x, int y, int margin,
+        int contextWidth)
     {
-        const int contextWidth = 460;
         const int contextHeight = 460;
         const int borderRadius = 20;
         const int strokeWidth = 5;
@@ -73,8 +76,7 @@ public class BcBasicCreator : IYamlProcessor
             CornerRadiusX = borderRadius,
             CornerRadiusY = borderRadius,
             Stroke = new SvgColourServer(ColorTranslator.FromHtml(contextColor)),
-            StrokeWidth = strokeWidth,
-            StrokeDashArray = new SvgUnitCollection { 4 }
+            StrokeWidth = strokeWidth
         };
         contextRect.CustomAttributes.Add("class", "context");
         svgDoc.Children.Add(contextRect);
@@ -82,8 +84,8 @@ public class BcBasicCreator : IYamlProcessor
         // Create and configure the context title
         var title = new SvgText(context.Name!.ToUpper())
         {
-            X = [x + contextWidth / 2],
-            Y = [y + titleHeight / 2],
+            X = new SvgUnitCollection { x + contextWidth / 2 },
+            Y = new SvgUnitCollection { y + titleHeight / 2 },
             Fill = new SvgColourServer(ColorTranslator.FromHtml(contextColor)),
             TextAnchor = SvgTextAnchor.Middle,
             FontSize = 28,
@@ -92,13 +94,13 @@ public class BcBasicCreator : IYamlProcessor
         title.CustomAttributes.Add("class", "context-text");
         svgDoc.Children.Add(title);
 
-        DrawModels(svgDoc, context.Models, x, y + titleHeight + margin, margin);
+        DrawModels(svgDoc, context.Models, x, y + titleHeight + margin, margin, contextWidth);
     }
 
-    private void DrawModels(SvgDocument svgDoc, List<Model> models, int x, int y, int margin)
+    private void DrawModels(SvgDocument svgDoc, List<Model> models, int x, int y, int margin, int contextWidth)
     {
-        const int modelWidth = 170;
-        const int modelHeight = 80;
+        var modelWidth = (contextWidth - 3 * margin) / 2; // Two models with margin between and on sides
+        var modelHeight = modelWidth / 2;
         const int borderRadius = 15;
         const int titleHeight = 40;
 
@@ -108,10 +110,10 @@ public class BcBasicCreator : IYamlProcessor
         {
             var coreModelRect = new SvgRectangle
             {
-                X = x + 160,
+                X = x + margin,
                 Y = y + 20,
-                Width = 180,
-                Height = 120,
+                Width = modelWidth,
+                Height = modelHeight,
                 CornerRadiusX = borderRadius,
                 CornerRadiusY = borderRadius,
                 Stroke = new SvgColourServer(ColorTranslator.FromHtml("#00CC66")),
@@ -122,8 +124,8 @@ public class BcBasicCreator : IYamlProcessor
 
             var coreModelName = new SvgText(coreModel.Name)
             {
-                X = new SvgUnitCollection { x + 250 },
-                Y = new SvgUnitCollection { y + 80 },
+                X = new SvgUnitCollection { x + margin + modelWidth / 2 },
+                Y = new SvgUnitCollection { y + 20 + modelHeight / 2 },
                 TextAnchor = SvgTextAnchor.Middle,
                 FontSize = 20,
                 FontWeight = SvgFontWeight.Bold
@@ -136,7 +138,9 @@ public class BcBasicCreator : IYamlProcessor
         var subModels = models.Where(m => m.Type != "CoreConcept").ToList();
         var positions = new List<(int x, int y)>
         {
-            (50, 220), (280, 220), (50, 310), (280, 310), (50, 400), (280, 400)
+            (margin, 220), (2 * margin + modelWidth, 220),
+            (margin, 310), (2 * margin + modelWidth, 310),
+            (margin, 400), (2 * margin + modelWidth, 400)
         };
 
         for (var i = 0; i < subModels.Count && i < positions.Count; i++)

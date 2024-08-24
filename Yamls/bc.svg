@@ -52,7 +52,7 @@
   <rect class="context" x="20" y="60" width="460" height="460"></rect>
 
   <!-- Modelo principal -->
-  <rect class="model-core" x="160" y="80" width="180" height="120"></rect>
+  <rect class="model-core" x="160" y="80" width="130" height="120"></rect>
   <text class="text-main" x="250" y="140">Accounts</text>
 
   <!-- Filas inferiores -->
