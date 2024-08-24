@@ -25,7 +25,6 @@ public class BcBasicCreator : IYamlProcessor
     {
         const int margin = 20;
         var contextWidth = config.BoundedContextWidth;
-        const int contextHeight = 460;
 
         // Load the base SVG document from TemplateService
         var svgDoc = TemplateService.GetContextSvgDocument();
@@ -44,7 +43,12 @@ public class BcBasicCreator : IYamlProcessor
             var contextColor = colors[colorIndex];
             colorIndex = (colorIndex + 1) % colors.Count;
 
-            DrawContext(svgDoc, context, contextColor, x, y, margin, contextWidth);
+            // Calculate the required height for the context
+            var rows = (int)Math.Ceiling(context.Models.Count / 2.0);
+            var contextHeight =
+                rows * 90 + 100; // 90 is the height of each model with margin, 100 is for title and extra margin
+
+            DrawContext(svgDoc, context, contextColor, x, y, margin, contextWidth, contextHeight);
 
             x += contextWidth + margin;
             if (x + contextWidth > svgDoc.Width - margin)
@@ -59,9 +63,8 @@ public class BcBasicCreator : IYamlProcessor
     }
 
     private void DrawContext(SvgDocument svgDoc, BoundedContext context, string contextColor, int x, int y, int margin,
-        int contextWidth)
+        int contextWidth, int contextHeight)
     {
-        const int contextHeight = 460;
         const int borderRadius = 20;
         const int strokeWidth = 5;
         const int titleHeight = 40;
@@ -102,16 +105,24 @@ public class BcBasicCreator : IYamlProcessor
         var modelWidth = (contextWidth - 3 * margin) / 2; // Two models with margin between and on sides
         var modelHeight = modelWidth / 2;
         const int borderRadius = 15;
-        const int titleHeight = 40;
 
-        // Positioning for the first model (Core Concept)
-        var coreModel = models.FirstOrDefault(m => m.Type == "CoreConcept");
-        if (coreModel != null)
+        // Separate core models and sub models
+        var coreModels = models.Where(m => m.Type == "CoreConcept").ToList();
+        var subModels = models.Where(m => m.Type != "CoreConcept").ToList();
+
+        // Positioning for the core models
+        for (var i = 0; i < coreModels.Count; i++)
         {
-            var coreModelRect = new SvgRectangle
+            var model = coreModels[i];
+            var posX = x + (coreModels.Count == 1
+                ? (contextWidth - modelWidth) / 2
+                : margin + i % 2 * (modelWidth + margin));
+            var posY = y;
+
+            var modelRect = new SvgRectangle
             {
-                X = x + margin,
-                Y = y + 20,
+                X = posX,
+                Y = posY,
                 Width = modelWidth,
                 Height = modelHeight,
                 CornerRadiusX = borderRadius,
@@ -119,39 +130,33 @@ public class BcBasicCreator : IYamlProcessor
                 Stroke = new SvgColourServer(ColorTranslator.FromHtml("#00CC66")),
                 StrokeWidth = 5
             };
-            coreModelRect.CustomAttributes.Add("class", "model-core");
-            svgDoc.Children.Add(coreModelRect);
+            modelRect.CustomAttributes.Add("class", "model-core");
+            svgDoc.Children.Add(modelRect);
 
-            var coreModelName = new SvgText(coreModel.Name)
+            var modelName = new SvgText(model.Name)
             {
-                X = new SvgUnitCollection { x + margin + modelWidth / 2 },
-                Y = new SvgUnitCollection { y + 20 + modelHeight / 2 },
+                X = new SvgUnitCollection { posX + modelWidth / 2 },
+                Y = new SvgUnitCollection { posY + modelHeight / 2 },
                 TextAnchor = SvgTextAnchor.Middle,
                 FontSize = 20,
                 FontWeight = SvgFontWeight.Bold
             };
-            coreModelName.CustomAttributes.Add("class", "text-main");
-            svgDoc.Children.Add(coreModelName);
+            modelName.CustomAttributes.Add("class", "text-main");
+            svgDoc.Children.Add(modelName);
         }
 
         // Positioning for the sub models
-        var subModels = models.Where(m => m.Type != "CoreConcept").ToList();
-        var positions = new List<(int x, int y)>
+        var subModelStartY = y + (coreModels.Count > 0 ? modelHeight + margin : 0);
+        for (var i = 0; i < subModels.Count; i++)
         {
-            (margin, 220), (2 * margin + modelWidth, 220),
-            (margin, 310), (2 * margin + modelWidth, 310),
-            (margin, 400), (2 * margin + modelWidth, 400)
-        };
+            var model = subModels[i];
+            var posX = x + margin + i % 2 * (modelWidth + margin);
+            var posY = subModelStartY + i / 2 * (modelHeight + margin);
 
-        for (var i = 0; i < subModels.Count && i < positions.Count; i++)
-        {
-            var subModel = subModels[i];
-            var (posX, posY) = positions[i];
-
-            var subModelRect = new SvgRectangle
+            var modelRect = new SvgRectangle
             {
-                X = x + posX,
-                Y = y + posY,
+                X = posX,
+                Y = posY,
                 Width = modelWidth,
                 Height = modelHeight,
                 CornerRadiusX = borderRadius,
@@ -159,19 +164,19 @@ public class BcBasicCreator : IYamlProcessor
                 Stroke = new SvgColourServer(ColorTranslator.FromHtml("#00a2ff")),
                 StrokeWidth = 5
             };
-            subModelRect.CustomAttributes.Add("class", "model-sub");
-            svgDoc.Children.Add(subModelRect);
+            modelRect.CustomAttributes.Add("class", "model-sub");
+            svgDoc.Children.Add(modelRect);
 
-            var subModelName = new SvgText(subModel.Name)
+            var modelName = new SvgText(model.Name)
             {
-                X = new SvgUnitCollection { x + posX + modelWidth / 2 },
-                Y = new SvgUnitCollection { y + posY + modelHeight / 2 },
+                X = [posX + modelWidth / 2],
+                Y = [posY + modelHeight / 2],
                 TextAnchor = SvgTextAnchor.Middle,
                 FontSize = 20,
                 FontWeight = SvgFontWeight.Bold
             };
-            subModelName.CustomAttributes.Add("class", "text-main");
-            svgDoc.Children.Add(subModelName);
+            modelName.CustomAttributes.Add("class", "text-main");
+            svgDoc.Children.Add(modelName);
         }
     }
 }
