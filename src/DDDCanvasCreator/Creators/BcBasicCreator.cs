@@ -28,36 +28,15 @@ public class BcBasicCreator : IYamlProcessor
 
         var svgDoc = TemplateService.GetContextSvgDocument();
 
-        // Adjust the width of the SVG element
+        // Calculate the width and height of the SVG document
         var svgWidth = contexts.Count * (contextWidth + margin) + margin;
+        var svgHeight = CalculateSvgHeight(contexts, margin);
         svgDoc.Width = new SvgUnit(svgWidth);
-
-        // Calculate the required height for the SVG
-        var totalHeight = margin;
-        foreach (var context in contexts)
-        {
-            // Separate core models and sub models
-            var coreModelsCount = context.Models.Count(m => m.Type == "CoreConcept");
-            var subModelsCount = context.Models.Count(m => m.Type != "CoreConcept");
-
-            // Calculate the number of rows needed for core models and sub models
-            var coreModelRows = (int)Math.Ceiling(coreModelsCount / 2.0);
-            var subModelRows = (int)Math.Ceiling(subModelsCount / 2.0);
-
-            // Calculate the height for core models and sub models
-            var coreModelsHeight = coreModelRows * 90; // 90 is the height of each model with margin
-            var subModelsHeight = subModelRows * 90; // 90 is the height of each model with margin
-
-            // Total context height includes core models, sub models, title, and extra margin
-            var contextHeight = coreModelsHeight + subModelsHeight + 100; // 100 is for title and extra margin
-            totalHeight += contextHeight + margin;
-        }
-
-        var svgHeight = totalHeight;
+        svgDoc.Height = new SvgUnit(svgHeight); 
         svgDoc.ViewBox = new SvgViewBox(0, 0, svgWidth, svgHeight);
-        svgDoc.Height = new SvgUnit(svgHeight); // Set the height of the SVG element
 
-        var colors = config.BoundedContextColors; // Predefined colors
+
+        var colors = config.BoundedContextColors;
         var colorIndex = 0;
 
         var x = margin;
@@ -202,5 +181,30 @@ public class BcBasicCreator : IYamlProcessor
             modelName.CustomAttributes.Add("class", "model-text");
             svgDoc.Children.Add(modelName);
         }
+    }
+
+    private int CalculateSvgHeight(List<BoundedContext> contexts, int margin)
+    {
+        var totalHeight = margin;
+        foreach (var context in contexts)
+        {
+            // Separate core models and sub models
+            var coreModelsCount = context.Models.Count(m => m.Type == "CoreConcept");
+            var subModelsCount = context.Models.Count(m => m.Type != "CoreConcept");
+
+            // Calculate the number of rows needed for core models and sub models
+            var coreModelRows = (int)Math.Ceiling(coreModelsCount / 2.0);
+            var subModelRows = (int)Math.Ceiling(subModelsCount / 2.0);
+
+            // Calculate the height for core models and sub models
+            var coreModelsHeight = coreModelRows * 90; // 90 is the height of each model with margin
+            var subModelsHeight = subModelRows * 90; // 90 is the height of each model with margin
+
+            // Total context height includes core models, sub models, title, and extra margin
+            var contextHeight = coreModelsHeight + subModelsHeight + 100; // 100 is for title and extra margin
+            totalHeight += contextHeight + margin;
+        }
+
+        return totalHeight;
     }
 }
