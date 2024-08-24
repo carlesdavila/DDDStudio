@@ -40,19 +40,25 @@ boundedContexts:
   - name: Sales
     models:
       - name: Customer
-        type: AggregateRoot
+        type: CoreConcept
       - name: Product
-        type: AggregateRoot
+        type: SubConcept
       - name: Address
-        type: ValueObject
-  - name: Inventory
+        type: SubConcept
+  - name: Accounts
     models:
-      - name: Product
-        type: AggregateRoot
-      - name: Warehouse
-        type: AggregateRoot
-      - name: InventoryQuantity
-        type: ValueObject
+      - name: Accounts
+        type: CoreConcept
+      - name: Address
+        type: SubConcept
+      - name: Login
+        type: SubConcept
+      - name: Payment Details
+        type: SubConcept
+      - name: Contact Details
+        type: SubConcept
+      - name: Order
+        type: SubConcept
 ```
 ### Generates the following SVG
 ![Contexts Sample](https://raw.githubusercontent.com/carlesdavila/DDDStudio/main/images/ContextsSample.svg)
