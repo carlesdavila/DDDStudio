@@ -26,11 +26,15 @@ public class BcBasicCreator : IYamlProcessor
         const int margin = 20;
         var contextWidth = config.BoundedContextWidth;
 
-        // Load the base SVG document from TemplateService
         var svgDoc = TemplateService.GetContextSvgDocument();
 
         // Adjust the width of the SVG element
-        svgDoc.Width = new SvgUnit(contexts.Count * (contextWidth + margin) + margin);
+        var svgWidth = contexts.Count * (contextWidth + margin) + margin;
+        svgDoc.Width = new SvgUnit(svgWidth);
+
+        // Adjust the viewBox of the SVG element
+        const int svgHeight = 770; // Assuming a fixed height for simplicity
+        svgDoc.ViewBox = new SvgViewBox(0, 0, svgWidth, svgHeight);
 
         var colors = config.BoundedContextColors; // Predefined colors
         var colorIndex = 0;
@@ -51,7 +55,7 @@ public class BcBasicCreator : IYamlProcessor
             DrawContext(svgDoc, context, contextColor, x, y, margin, contextWidth, contextHeight);
 
             x += contextWidth + margin;
-            if (x + contextWidth > svgDoc.Width - margin)
+            if (x + contextWidth > svgWidth - margin)
             {
                 x = margin;
                 y += contextHeight + margin;
@@ -77,7 +81,7 @@ public class BcBasicCreator : IYamlProcessor
             Height = contextHeight,
             CornerRadiusX = borderRadius,
             CornerRadiusY = borderRadius,
-            Stroke = new SvgColourServer(ColorTranslator.FromHtml(contextColor)),
+            Stroke = new SvgColourServer(ColorTranslator.FromHtml(contextColor))
         };
         contextRect.CustomAttributes.Add("class", "context");
         svgDoc.Children.Add(contextRect);

@@ -15,3 +15,17 @@
         type: SubConcept
       - name: InventoryQuantity
         type: SubConcept
+  - name: Accounts
+    models:
+      - name: Accounts
+        type: CoreConcept
+      - name: Address
+        type: SubConcept
+      - name: Login
+        type: SubConcept
+      - name: Payment Details
+        type: SubConcept
+      - name: Contact Details
+        type: SubConcept
+      - name: Order
+        type: SubConcept
