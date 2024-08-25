@@ -32,7 +32,7 @@
                 }
               }
             },
-            "required": ["state", "transitions"]
+            "required": ["state"]
           }
         },
         "enforcedInvariants": {
