@@ -52,6 +52,9 @@ HandledCommandsColor: ""#40C7EA""
 # Color for created events
 CreatedEventsColor: ""#FFAA5E""
 
+# Color for created events
+BoundedContextWidth: 300
+
 # Color for BoundedContexts
 BoundedContextColors:
   - ""#2c9bf0""
