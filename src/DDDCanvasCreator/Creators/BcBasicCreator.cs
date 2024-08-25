@@ -105,7 +105,7 @@ private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string out
             Y = [y + titleHeight / 2],
             Fill = new SvgColourServer(ColorTranslator.FromHtml(contextColor)),
             TextAnchor = SvgTextAnchor.Middle,
-            FontSize = 28,
+            FontSize = contextWidth / 15,
             FontWeight = SvgFontWeight.Bold
         };
         title.CustomAttributes.Add("class", "context-text");
