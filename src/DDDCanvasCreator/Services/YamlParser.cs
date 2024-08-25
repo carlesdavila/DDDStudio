@@ -184,7 +184,7 @@ public class YamlParser : IDisposable
     public SubdomainCollection ParseSubdomainCollection()
     {
         var deserializer = new DeserializerBuilder()
-            .WithNamingConvention(PascalCaseNamingConvention.Instance)
+            .WithNamingConvention(CamelCaseNamingConvention.Instance)
             .Build();
 
         var subdomains = deserializer.Deserialize<SubdomainCollection>(_reader);

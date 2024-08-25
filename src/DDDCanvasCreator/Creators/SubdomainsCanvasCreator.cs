@@ -16,8 +16,7 @@ public class SubdomainsCanvasCreator : IYamlProcessor
     private SubdomainCollection ParseYaml(string yamlContent)
     {
         using var parser = new YamlParser(yamlContent);
-        var actual = parser.ParseSubdomainCollection();
-        return null;
+        return parser.ParseSubdomainCollection();
     }
 
     private void GenerateSubdomainsSvg(List<Subdomain> subdomainsSubdomains, string outputFilePath, DddConfig config)
