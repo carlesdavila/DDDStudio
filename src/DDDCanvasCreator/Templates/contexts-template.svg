@@ -45,6 +45,12 @@
         text-anchor: middle;
         alignment-baseline: middle;
         fill: black;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
+        display: flex;
         }
     </style>
 </svg>

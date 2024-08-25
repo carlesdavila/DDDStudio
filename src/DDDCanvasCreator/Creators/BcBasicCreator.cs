@@ -32,7 +32,7 @@ public class BcBasicCreator : IYamlProcessor
         var svgWidth = contexts.Count * (contextWidth + margin) + margin;
         var svgHeight = CalculateSvgHeight(contexts, margin);
         svgDoc.Width = new SvgUnit(svgWidth);
-        svgDoc.Height = new SvgUnit(svgHeight); 
+        svgDoc.Height = new SvgUnit(svgHeight);
         svgDoc.ViewBox = new SvgViewBox(0, 0, svgWidth, svgHeight);
 
 
@@ -142,6 +142,25 @@ public class BcBasicCreator : IYamlProcessor
             modelRect.CustomAttributes.Add("class", "model-core");
             svgDoc.Children.Add(modelRect);
 
+            var switchElement = new SvgSwitch();
+            var foreignObject = new SvgForeignObject();
+            foreignObject.CustomAttributes.Add("x", posX.ToString());
+            foreignObject.CustomAttributes.Add("y", y.ToString());
+            foreignObject.CustomAttributes.Add("width", modelWidth.ToString());
+            foreignObject.CustomAttributes.Add("height", modelHeight.ToString());
+
+            var div = new NonSvgElement("div", "http://www.w3.org/1999/xhtml")
+            {
+                Content = model.Name,
+                CustomAttributes =
+                {
+                    { "class", "model-text" },
+                    { "style", $"width: {modelWidth}px; height: {modelHeight}px;" }
+                }
+            };
+            foreignObject.Nodes.Add(div);
+            switchElement.Children.Add(foreignObject);
+
             var modelName = new SvgText(model.Name)
             {
                 X = [posX + modelWidth / 2],
@@ -149,7 +168,9 @@ public class BcBasicCreator : IYamlProcessor
                 TextAnchor = SvgTextAnchor.Middle
             };
             modelName.CustomAttributes.Add("class", "model-text");
-            svgDoc.Children.Add(modelName);
+            switchElement.Children.Add(modelName);
+
+            svgDoc.Children.Add(switchElement);
         }
 
         // Positioning for the sub models
@@ -172,6 +193,25 @@ public class BcBasicCreator : IYamlProcessor
             modelRect.CustomAttributes.Add("class", "model-sub");
             svgDoc.Children.Add(modelRect);
 
+            var switchElement = new SvgSwitch();
+            var foreignObject = new SvgForeignObject();
+            foreignObject.CustomAttributes.Add("x", posX.ToString());
+            foreignObject.CustomAttributes.Add("y", posY.ToString());
+            foreignObject.CustomAttributes.Add("width", modelWidth.ToString());
+            foreignObject.CustomAttributes.Add("height", modelHeight.ToString());
+
+            var div = new NonSvgElement("div", "http://www.w3.org/1999/xhtml")
+            {
+                Content = model.Name,
+                CustomAttributes =
+                {
+                    { "class", "model-text" },
+                    { "style", $"width: {modelWidth}px; height: {modelHeight}px;" }
+                }
+            };
+            foreignObject.Nodes.Add(div);
+            switchElement.Children.Add(foreignObject);
+
             var modelName = new SvgText(model.Name)
             {
                 X = [posX + modelWidth / 2],
@@ -179,7 +219,9 @@ public class BcBasicCreator : IYamlProcessor
                 TextAnchor = SvgTextAnchor.Middle
             };
             modelName.CustomAttributes.Add("class", "model-text");
-            svgDoc.Children.Add(modelName);
+            switchElement.Children.Add(modelName);
+
+            svgDoc.Children.Add(switchElement);
         }
     }
 
