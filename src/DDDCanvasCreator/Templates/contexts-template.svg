@@ -40,7 +40,6 @@
         }
         .model-text {
         font-family: Arial, sans-serif;
-        font-size: 20px;
         font-weight: bold;
         text-anchor: middle;
         alignment-baseline: middle;

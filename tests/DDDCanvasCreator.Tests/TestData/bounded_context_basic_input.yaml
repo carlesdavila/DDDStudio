@@ -13,7 +13,7 @@
         type: CoreConcept
       - name: Warehouse
         type: SubConcept
-      - name: InventoryQuantity
+      - name: Inventory Quantity
         type: SubConcept
   - name: Accounts
     models:

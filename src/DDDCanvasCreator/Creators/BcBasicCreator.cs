@@ -155,7 +155,7 @@ public class BcBasicCreator : IYamlProcessor
                 CustomAttributes =
                 {
                     { "class", "model-text" },
-                    { "style", $"width: {modelWidth}px; height: {modelHeight}px;" }
+                    { "style", $"width: {modelWidth}px; height: {modelHeight}px; font-size: {modelHeight / 4}px;" }
                 }
             };
             foreignObject.Nodes.Add(div);
@@ -206,7 +206,7 @@ public class BcBasicCreator : IYamlProcessor
                 CustomAttributes =
                 {
                     { "class", "model-text" },
-                    { "style", $"width: {modelWidth}px; height: {modelHeight}px;" }
+                    { "style", $"width: {modelWidth}px; height: {modelHeight}px; font-size: {modelHeight / 4}px;" }
                 }
             };
             foreignObject.Nodes.Add(div);
