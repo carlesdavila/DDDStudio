@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "AggregateBase": {
+      "type": "string"
+    },
+    "AggregateStatesColors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^#[0-9a-fA-F]{6}$"
+      }
+    },
+    "HandledCommandsColor": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "CreatedEventsColor": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "BoundedContextWidth": {
+      "type": "integer"
+    },
+    "BoundedContextColors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^#[0-9a-fA-F]{6}$"
+      }
+    }
+  },
+  "required": ["AggregateBase", "AggregateStatesColors", "HandledCommandsColor", "CreatedEventsColor", "BoundedContextWidth", "BoundedContextColors"]
+}

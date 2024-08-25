@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "aggregate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "stateTransitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "state": {
+                "type": "string"
+              },
+              "transitions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": ["state"]
+          }
+        },
+        "enforcedInvariants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "correctivePolicies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "handledCommands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "createdEvents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["name", "description", "stateTransitions", "enforcedInvariants", "correctivePolicies", "handledCommands", "createdEvents"]
+    }
+  },
+  "required": ["aggregate"]
+}

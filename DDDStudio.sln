@@ -31,6 +31,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{00D0F980-9
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "schema", "schema", "{EEFA0020-C682-491B-A4B3-C99279560F4A}"
+	ProjectSection(SolutionItems) = preProject
+		src\schema\README.md = src\schema\README.md
+		src\schema\bounded_context_schema.json = src\schema\bounded_context_schema.json
+		src\schema\aggregate_schema.json = src\schema\aggregate_schema.json
+		src\schema\ddd_schema.json = src\schema\ddd_schema.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "boundedContexts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "models": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": ["CoreConcept", "SubConcept"]
+                }
+              },
+              "required": ["name", "type"]
+            }
+          }
+        },
+        "required": ["name", "models"]
+      }
+    }
+  },
+  "required": ["boundedContexts"]
+}

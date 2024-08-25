@@ -1,0 +1,26 @@
+
+# DDD Project Configuration
+
+# Base class or interface that identifies an aggregate
+AggregateBase: "MyNamespace.IAggregateRoot"
+
+# List of colors for different states of aggregates
+AggregateStatesColors:
+  - "#f2798b"
+  - "#a8ccf6"
+  - "#d8f79c"
+
+# Color for handled commands of aggregates
+HandledCommandsColor: "#40C7EA"
+
+# Color for created events
+CreatedEventsColor: "#FFAA5E"
+
+# Color for created events
+BoundedContextWidth: 300
+
+# Color for BoundedContexts
+BoundedContextColors:
+  - "#2c9bf0"
+  - "#f2798b"
+  - "#ffaa5e"
