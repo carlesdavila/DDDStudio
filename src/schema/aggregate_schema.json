@@ -22,11 +22,17 @@
               "transitions": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "object",
+                  "properties": {
+                    "to": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["to"]
                 }
               }
             },
-            "required": ["state"]
+            "required": ["state", "transitions"]
           }
         },
         "enforcedInvariants": {
