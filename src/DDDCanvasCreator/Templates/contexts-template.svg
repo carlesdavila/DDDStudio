@@ -19,10 +19,8 @@
         }
         .context-text {
         font-family: Arial, sans-serif;
-        font-size: 28px;
         font-weight: bold;
         text-anchor: middle;
-        fill: #FF4D88;
         }
         .model-core {
         fill: white;

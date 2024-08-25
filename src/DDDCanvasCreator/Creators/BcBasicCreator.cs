@@ -21,61 +21,63 @@ public class BcBasicCreator : IYamlProcessor
         return actual;
     }
 
-    private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string outputFilePath, DddConfig config)
+private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string outputFilePath, DddConfig config)
+{
+    const int margin = 20;
+    var contextWidth = config.BoundedContextWidth;
+
+    var svgDoc = TemplateService.GetContextSvgDocument();
+
+    // Calculate the width and height of the SVG document
+    var svgWidth = contexts.Count * (contextWidth + margin) + margin;
+    var svgHeight = CalculateSvgHeight(contexts, config.BoundedContextWidth, margin);
+    svgDoc.Width = new SvgUnit(svgWidth);
+    svgDoc.Height = new SvgUnit(svgHeight);
+    svgDoc.ViewBox = new SvgViewBox(0, 0, svgWidth, svgHeight);
+
+    var colors = config.BoundedContextColors;
+    var colorIndex = 0;
+
+    var x = margin;
+    var y = margin;
+
+    foreach (var context in contexts)
     {
-        const int margin = 20;
-        var contextWidth = config.BoundedContextWidth;
+        var contextColor = colors[colorIndex];
+        colorIndex = (colorIndex + 1) % colors.Count;
 
-        var svgDoc = TemplateService.GetContextSvgDocument();
+        // Calculate the width and height of the models
+        var modelWidth = (contextWidth - 3 * margin) / 2;
+        var modelHeight = modelWidth / 2;
 
-        // Calculate the width and height of the SVG document
-        var svgWidth = contexts.Count * (contextWidth + margin) + margin;
-        var svgHeight = CalculateSvgHeight(contexts, margin);
-        svgDoc.Width = new SvgUnit(svgWidth);
-        svgDoc.Height = new SvgUnit(svgHeight);
-        svgDoc.ViewBox = new SvgViewBox(0, 0, svgWidth, svgHeight);
+        // Separate core models and sub models
+        var coreModelsCount = context.Models.Count(m => m.Type == "CoreConcept");
+        var subModelsCount = context.Models.Count(m => m.Type != "CoreConcept");
 
+        // Calculate the number of rows needed for core models and sub models
+        var coreModelRows = (int)Math.Ceiling(coreModelsCount / 2.0);
+        var subModelRows = (int)Math.Ceiling(subModelsCount / 2.0);
 
-        var colors = config.BoundedContextColors;
-        var colorIndex = 0;
+        // Calculate the height for core models and sub models
+        var coreModelsHeight = coreModelRows * (modelHeight + margin);
+        var subModelsHeight = subModelRows * (modelHeight + margin);
 
-        var x = margin;
-        var y = margin;
+        // Total context height includes core models, sub models, title, and extra margin
+        var contextHeight = coreModelsHeight + subModelsHeight + margin;
 
-        foreach (var context in contexts)
+        DrawContext(svgDoc, context, contextColor, x, y, margin, contextWidth, contextHeight);
+
+        x += contextWidth + margin;
+        if (x + contextWidth > svgWidth - margin)
         {
-            var contextColor = colors[colorIndex];
-            colorIndex = (colorIndex + 1) % colors.Count;
-
-            // Separate core models and sub models
-            var coreModelsCount = context.Models.Count(m => m.Type == "CoreConcept");
-            var subModelsCount = context.Models.Count(m => m.Type != "CoreConcept");
-
-            // Calculate the number of rows needed for core models and sub models
-            var coreModelRows = (int)Math.Ceiling(coreModelsCount / 2.0);
-            var subModelRows = (int)Math.Ceiling(subModelsCount / 2.0);
-
-            // Calculate the height for core models and sub models
-            var coreModelsHeight = coreModelRows * 90; // 90 is the height of each model with margin
-            var subModelsHeight = subModelRows * 90; // 90 is the height of each model with margin
-
-            // Total context height includes core models, sub models, title, and extra margin
-            var contextHeight = coreModelsHeight + subModelsHeight + 100; // 100 is for title and extra margin
-
-            DrawContext(svgDoc, context, contextColor, x, y, margin, contextWidth, contextHeight);
-
-            x += contextWidth + margin;
-            if (x + contextWidth > svgWidth - margin)
-            {
-                x = margin;
-                y += contextHeight + margin;
-            }
+            x = margin;
+            y += contextHeight + margin;
         }
-
-        // Save the modified SVG document to the specified output file path
-        svgDoc.Write(outputFilePath);
     }
 
+    // Save the modified SVG document to the specified output file path
+    svgDoc.Write(outputFilePath);
+}
     private void DrawContext(SvgDocument svgDoc, BoundedContext context, string contextColor, int x, int y, int margin,
         int contextWidth, int contextHeight)
     {
@@ -225,11 +227,15 @@ public class BcBasicCreator : IYamlProcessor
         }
     }
 
-    private int CalculateSvgHeight(List<BoundedContext> contexts, int margin)
+    private int CalculateSvgHeight(List<BoundedContext> contexts, int boundedContextWidth, int margin)
     {
         var totalHeight = margin;
         foreach (var context in contexts)
         {
+            // Calculate the width and height of the models
+            var modelWidth = (boundedContextWidth - 3 * margin) / 2;
+            var modelHeight = modelWidth / 2;
+
             // Separate core models and sub models
             var coreModelsCount = context.Models.Count(m => m.Type == "CoreConcept");
             var subModelsCount = context.Models.Count(m => m.Type != "CoreConcept");
@@ -239,8 +245,8 @@ public class BcBasicCreator : IYamlProcessor
             var subModelRows = (int)Math.Ceiling(subModelsCount / 2.0);
 
             // Calculate the height for core models and sub models
-            var coreModelsHeight = coreModelRows * 90; // 90 is the height of each model with margin
-            var subModelsHeight = subModelRows * 90; // 90 is the height of each model with margin
+            var coreModelsHeight = coreModelRows * (modelHeight + margin);
+            var subModelsHeight = subModelRows * (modelHeight + margin);
 
             // Total context height includes core models, sub models, title, and extra margin
             var contextHeight = coreModelsHeight + subModelsHeight + 100; // 100 is for title and extra margin
