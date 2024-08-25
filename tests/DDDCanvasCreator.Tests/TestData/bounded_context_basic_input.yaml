@@ -7,14 +7,6 @@
         type: SubConcept
       - name: Address
         type: SubConcept
-  - name: Inventory
-    models:
-      - name: Product
-        type: CoreConcept
-      - name: Warehouse
-        type: SubConcept
-      - name: Inventory Quantity
-        type: SubConcept
   - name: Accounts
     models:
       - name: Accounts

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xml="http://www.w3.org/XML/1998/namespace" width="860" height="600" viewBox="0, 0, 860, 600">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xml="http://www.w3.org/XML/1998/namespace" width="660" height="410" viewBox="0, 0, 660, 410">
   <defs>
     <filter x="-20%" y="-20%" width="140%" height="140%" id="dropShadow">
       <feDropShadow dx="2" dy="2" stdDeviation="2" style="flood-color:#888;flood-opacity:0.9;" />
@@ -17,10 +17,8 @@
         }
         .context-text {
         font-family: Arial, sans-serif;
-        font-size: 28px;
         font-weight: bold;
         text-anchor: middle;
-        fill: #FF4D88;
         }
         .model-core {
         fill: white;
@@ -38,7 +36,6 @@
         }
         .model-text {
         font-family: Arial, sans-serif;
-        font-size: 20px;
         font-weight: bold;
         text-anchor: middle;
         alignment-baseline: middle;
@@ -51,71 +48,71 @@
         display: flex;
         }
     </style>
-  <rect x="20" y="60" width="400" height="280" rx="20" ry="20" class="context" style="stroke:#2C9BF0;" />
-  <text x="220" y="40" text-anchor="middle" font-size="28" font-weight="bold" class="context-text" style="fill:#2C9BF0;">SALES</text>
-  <rect x="135" y="80" width="170" height="85" rx="15" ry="15" class="model-core" />
+  <rect x="20" y="60" width="300" height="180" rx="20" ry="20" class="context" style="stroke:#2C9BF0;" />
+  <text x="170" y="40" text-anchor="middle" font-size="20" font-weight="bold" class="context-text" style="fill:#2C9BF0;">SALES</text>
+  <rect x="110" y="80" width="120" height="60" rx="15" ry="15" class="model-core" />
   <switch>
-    <foreignObject x="135" y="80" width="170" height="85">
-      <div class="model-text" style="width: 170px; height: 85px;" xmlns="http://www.w3.org/1999/xhtml">Customer</div>
+    <foreignObject x="110" y="80" width="120" height="60">
+      <div class="model-text" style="width: 120px; height: 60px; font-size: 15px;" xmlns="http://www.w3.org/1999/xhtml">Customer</div>
     </foreignObject>
-    <text x="220" y="122" text-anchor="middle" class="model-text">Customer</text>
+    <text x="170" y="110" text-anchor="middle" class="model-text">Customer</text>
   </switch>
-  <rect x="40" y="185" width="170" height="85" rx="15" ry="15" class="model-sub" />
+  <rect x="40" y="160" width="120" height="60" rx="15" ry="15" class="model-sub" />
   <switch>
-    <foreignObject x="40" y="185" width="170" height="85">
-      <div class="model-text" style="width: 170px; height: 85px;" xmlns="http://www.w3.org/1999/xhtml">Product</div>
+    <foreignObject x="40" y="160" width="120" height="60">
+      <div class="model-text" style="width: 120px; height: 60px; font-size: 15px;" xmlns="http://www.w3.org/1999/xhtml">Product</div>
     </foreignObject>
-    <text x="125" y="227" text-anchor="middle" class="model-text">Product</text>
+    <text x="100" y="190" text-anchor="middle" class="model-text">Product</text>
   </switch>
-  <rect x="230" y="185" width="170" height="85" rx="15" ry="15" class="model-sub" />
+  <rect x="180" y="160" width="120" height="60" rx="15" ry="15" class="model-sub" />
   <switch>
-    <foreignObject x="230" y="185" width="170" height="85">
-      <div class="model-text" style="width: 170px; height: 85px;" xmlns="http://www.w3.org/1999/xhtml">Address</div>
+    <foreignObject x="180" y="160" width="120" height="60">
+      <div class="model-text" style="width: 120px; height: 60px; font-size: 15px;" xmlns="http://www.w3.org/1999/xhtml">Address</div>
     </foreignObject>
-    <text x="315" y="227" text-anchor="middle" class="model-text">Address</text>
+    <text x="240" y="190" text-anchor="middle" class="model-text">Address</text>
   </switch>
-  <rect x="440" y="60" width="400" height="460" rx="20" ry="20" class="context" style="stroke:#F2798B;" />
-  <text x="640" y="40" text-anchor="middle" font-size="28" font-weight="bold" class="context-text" style="fill:#F2798B;">ACCOUNTS</text>
-  <rect x="555" y="80" width="170" height="85" rx="15" ry="15" class="model-core" />
+  <rect x="340" y="60" width="300" height="340" rx="20" ry="20" class="context" style="stroke:#F2798B;" />
+  <text x="490" y="40" text-anchor="middle" font-size="20" font-weight="bold" class="context-text" style="fill:#F2798B;">ACCOUNTS</text>
+  <rect x="430" y="80" width="120" height="60" rx="15" ry="15" class="model-core" />
   <switch>
-    <foreignObject x="555" y="80" width="170" height="85">
-      <div class="model-text" style="width: 170px; height: 85px;" xmlns="http://www.w3.org/1999/xhtml">Accounts</div>
+    <foreignObject x="430" y="80" width="120" height="60">
+      <div class="model-text" style="width: 120px; height: 60px; font-size: 15px;" xmlns="http://www.w3.org/1999/xhtml">Accounts</div>
     </foreignObject>
-    <text x="640" y="122" text-anchor="middle" class="model-text">Accounts</text>
+    <text x="490" y="110" text-anchor="middle" class="model-text">Accounts</text>
   </switch>
-  <rect x="460" y="185" width="170" height="85" rx="15" ry="15" class="model-sub" />
+  <rect x="360" y="160" width="120" height="60" rx="15" ry="15" class="model-sub" />
   <switch>
-    <foreignObject x="460" y="185" width="170" height="85">
-      <div class="model-text" style="width: 170px; height: 85px;" xmlns="http://www.w3.org/1999/xhtml">Address</div>
+    <foreignObject x="360" y="160" width="120" height="60">
+      <div class="model-text" style="width: 120px; height: 60px; font-size: 15px;" xmlns="http://www.w3.org/1999/xhtml">Address</div>
     </foreignObject>
-    <text x="545" y="227" text-anchor="middle" class="model-text">Address</text>
+    <text x="420" y="190" text-anchor="middle" class="model-text">Address</text>
   </switch>
-  <rect x="650" y="185" width="170" height="85" rx="15" ry="15" class="model-sub" />
+  <rect x="500" y="160" width="120" height="60" rx="15" ry="15" class="model-sub" />
   <switch>
-    <foreignObject x="650" y="185" width="170" height="85">
-      <div class="model-text" style="width: 170px; height: 85px;" xmlns="http://www.w3.org/1999/xhtml">Login</div>
+    <foreignObject x="500" y="160" width="120" height="60">
+      <div class="model-text" style="width: 120px; height: 60px; font-size: 15px;" xmlns="http://www.w3.org/1999/xhtml">Login</div>
     </foreignObject>
-    <text x="735" y="227" text-anchor="middle" class="model-text">Login</text>
+    <text x="560" y="190" text-anchor="middle" class="model-text">Login</text>
   </switch>
-  <rect x="460" y="290" width="170" height="85" rx="15" ry="15" class="model-sub" />
+  <rect x="360" y="240" width="120" height="60" rx="15" ry="15" class="model-sub" />
   <switch>
-    <foreignObject x="460" y="290" width="170" height="85">
-      <div class="model-text" style="width: 170px; height: 85px;" xmlns="http://www.w3.org/1999/xhtml">Payment Details</div>
+    <foreignObject x="360" y="240" width="120" height="60">
+      <div class="model-text" style="width: 120px; height: 60px; font-size: 15px;" xmlns="http://www.w3.org/1999/xhtml">Payment Details</div>
     </foreignObject>
-    <text x="545" y="332" text-anchor="middle" class="model-text">Payment Details</text>
+    <text x="420" y="270" text-anchor="middle" class="model-text">Payment Details</text>
   </switch>
-  <rect x="650" y="290" width="170" height="85" rx="15" ry="15" class="model-sub" />
+  <rect x="500" y="240" width="120" height="60" rx="15" ry="15" class="model-sub" />
   <switch>
-    <foreignObject x="650" y="290" width="170" height="85">
-      <div class="model-text" style="width: 170px; height: 85px;" xmlns="http://www.w3.org/1999/xhtml">Contact Details</div>
+    <foreignObject x="500" y="240" width="120" height="60">
+      <div class="model-text" style="width: 120px; height: 60px; font-size: 15px;" xmlns="http://www.w3.org/1999/xhtml">Contact Details</div>
     </foreignObject>
-    <text x="735" y="332" text-anchor="middle" class="model-text">Contact Details</text>
+    <text x="560" y="270" text-anchor="middle" class="model-text">Contact Details</text>
   </switch>
-  <rect x="460" y="395" width="170" height="85" rx="15" ry="15" class="model-sub" />
+  <rect x="360" y="320" width="120" height="60" rx="15" ry="15" class="model-sub" />
   <switch>
-    <foreignObject x="460" y="395" width="170" height="85">
-      <div class="model-text" style="width: 170px; height: 85px;" xmlns="http://www.w3.org/1999/xhtml">Order</div>
+    <foreignObject x="360" y="320" width="120" height="60">
+      <div class="model-text" style="width: 120px; height: 60px; font-size: 15px;" xmlns="http://www.w3.org/1999/xhtml">Order</div>
     </foreignObject>
-    <text x="545" y="437" text-anchor="middle" class="model-text">Order</text>
+    <text x="420" y="350" text-anchor="middle" class="model-text">Order</text>
   </switch>
 </svg>
