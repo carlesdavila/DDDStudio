@@ -9,7 +9,7 @@ public class GenerateDocsCommand
     public void GenerateDocs()
     {
         // Assuming the configuration file is in the current execution directory
-        var configFilePath = Path.Combine(AppContext.BaseDirectory, "ddd.yaml");
+        var configFilePath = Path.Combine(Directory.GetCurrentDirectory(), "ddd.yaml");
         var config = DDDCanvas.LoadConfig(configFilePath); 
         
         var yamlFiles = Directory.GetFiles(Constants.MainPath, "*.yaml", SearchOption.AllDirectories);
