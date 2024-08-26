@@ -12,12 +12,6 @@ public class GenerateDocsCommand
         var configFilePath = Path.Combine(AppContext.BaseDirectory, "ddd.yaml");
         var config = DDDCanvas.LoadConfig(configFilePath); 
         
-        if (!File.Exists(configFilePath))
-        {
-            Console.WriteLine("Configuration file 'ddd.yaml' not found in the execution directory.");
-            return;
-        }
-        
         var yamlFiles = Directory.GetFiles(Constants.MainPath, "*.yaml", SearchOption.AllDirectories);
 
         const string outputFolder = "docs";

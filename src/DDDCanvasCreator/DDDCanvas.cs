@@ -33,7 +33,7 @@ public class DDDCanvas
         }
         else
         {
-            Console.WriteLine("Configuration file not found. Using default configuration.");
+            Console.WriteLine($"Configuration file not found in {configFilePath}. Using default configuration.");
         }
 
         return config;
