@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300" viewBox="0 0 600 300">
+  <style>
+    .card { rx: 10; ry: 10; width: 180px; height: 100px; }
+    .text-title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: white; }
+    .text-subtitle { font-family: Arial, sans-serif; font-size: 16px; fill: white; }
+    .bg-book-prep { fill: #8A2BE2; } /* Purpura */
+    .bg-talent-book { fill: #FF1493; } /* Rosa */
+    .bg-warehouse { fill: #1E90FF; } /* Azul */
+    .bg-production { fill: #FF8C00; } /* Naranja */
+    .bg-publicity { fill: #FFD700; } /* Amarillo */
+    .bg-sales { fill: #32CD32; } /* Verde */
+    .bar { fill: #000000; height: 20px; width: 180px; }
+  </style>
+
+  <!-- Book Prep -->
+  <rect class="card bg-book-prep" x="10" y="10" />
+  <rect class="bar" x="10" y="80" />
+  <text x="30" y="50" class="text-title">Book Prep</text>
+  <text x="45" y="95" class="text-subtitle">Supporting</text>
+
+  <!-- Talent & Book Acquisition -->
+  <rect class="card bg-talent-book" x="210" y="10" />
+  <rect class="bar" x="210" y="80" />
+  <text x="230" y="50" class="text-title">Talent &amp; Book Acquisition</text>
+  <text x="275" y="95" class="text-subtitle">Core</text>
+
+  <!-- Warehouse & Shipping -->
+  <rect class="card bg-warehouse" x="410" y="10" />
+  <rect class="bar" x="410" y="80" />
+  <text x="430" y="50" class="text-title">Warehouse &amp; Shipping</text>
+  <text x="455" y="95" class="text-subtitle">Generic</text>
+
+  <!-- Production -->
+  <rect class="card bg-production" x="10" y="150" />
+  <rect class="bar" x="10" y="220" />
+  <text x="40" y="190" class="text-title">Production</text>
+  <text x="50" y="235" class="text-subtitle">Generic</text>
+
+  <!-- Publicity (CRM) -->
+  <rect class="card bg-publicity" x="210" y="150" />
+  <rect class="bar" x="210" y="220" />
+  <text x="240" y="190" class="text-title">Publicity (CRM)</text>
+  <text x="260" y="235" class="text-subtitle">Supporting</text>
+
+  <!-- Sales & Accounting -->
+  <rect class="card bg-sales" x="410" y="150" />
+  <rect class="bar" x="410" y="220" />
+  <text x="425" y="190" class="text-title">Sales &amp; Accounting</text>
+  <text x="455" y="235" class="text-subtitle">Generic</text>
+</svg>
