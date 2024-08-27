@@ -29,4 +29,11 @@ public static class TemplateService
         var svgContent = ReadEmbeddedResource(resourceName);
         return SvgDocument.FromSvg<SvgDocument>(svgContent);
     }
+    
+    public static SvgDocument GetSubdomainSvgDocument()
+    {
+        const string resourceName = "DDDCanvasCreator.Templates.subdomains-template.svg";
+        var svgContent = ReadEmbeddedResource(resourceName);
+        return SvgDocument.FromSvg<SvgDocument>(svgContent);
+    }
 }

@@ -76,7 +76,7 @@ public class DDDCanvasTests
         File.Delete(configFilePath);
     }
     
-    [Fact(Skip = "This test is failing")]
+    [Fact]
     public void GenerateSubdomainsSvg_WhenYamlFileExists_GeneratesSvg()
     {
         // Arrange

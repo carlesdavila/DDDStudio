@@ -18,6 +18,8 @@
       </EmbeddedResource>
       <None Remove="Templates\contexts-template.svg" />
       <EmbeddedResource Include="Templates\contexts-template.svg" />
+      <None Remove="Templates\subdomains-template.svg" />
+      <EmbeddedResource Include="Templates\subdomains-template.svg" />
     </ItemGroup>
 
 </Project>
