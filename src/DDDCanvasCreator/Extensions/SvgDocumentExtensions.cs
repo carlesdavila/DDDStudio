@@ -4,7 +4,8 @@ namespace DDDCanvasCreator.Extensions;
 
 public static class SvgDocumentExtensions
 {
-    public static void AddRectWithText(this SvgDocument svgDoc, SvgRectangle rect, string? text, string? textClass)
+    public static void AddRectWithText(this SvgDocument svgDoc, SvgRectangle rect, string? text, string? textClass,
+        int fontSize)
     {
         svgDoc.Children.Add(rect);
 
@@ -26,7 +27,7 @@ public static class SvgDocumentExtensions
             CustomAttributes =
             {
                 { "class", textClass },
-                { "style", $"width: {modelWidth}px; height: {modelHeight}px; font-size: {modelHeight / 4}px;" }
+                { "style", $"width: {modelWidth}px; height: {modelHeight}px; font-size: {fontSize}px;" }
             }
         };
         foreignObject.Nodes.Add(div);

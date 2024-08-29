@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using DDDCanvasCreator.Extensions;
 using DDDCanvasCreator.Models;
 using DDDCanvasCreator.Models.Subdomains;
 using DDDCanvasCreator.Services;
@@ -38,6 +39,7 @@ public class SubdomainsCanvasCreator : IYamlProcessor
         var cardHeight = (int)Math.Round(cardWidth / 1.8);
         var barHeight = (int)Math.Round((decimal)(cardHeight / 5));
         var barBottomMargin = (int)Math.Round(barHeight * 0.4); // Calculate margin as 40% of bar height
+        var fontSize = cardHeight / 6;
 
         var x = margin;
         var y = margin;
@@ -60,7 +62,7 @@ public class SubdomainsCanvasCreator : IYamlProcessor
                 Fill = new SvgColourServer(ColorTranslator.FromHtml(bgColor)),
                 CustomAttributes = { { "class", "card" } }
             };
-            svgDoc.Children.Add(card);
+            svgDoc.AddRectWithText(card, subdomain.Name, "text-title", fontSize);
 
             var bar = new SvgRectangle
             {
@@ -71,24 +73,8 @@ public class SubdomainsCanvasCreator : IYamlProcessor
                 Fill = new SvgColourServer(ColorTranslator.FromHtml("#000000")),
                 CustomAttributes = { { "class", "bar" } }
             };
-            svgDoc.Children.Add(bar);
-
-            var title = new SvgText(subdomain.Name)
-            {
-                X = [x + 20],
-                Y = [y + (cardHeight - barHeight - barBottomMargin) / 2],
-                CustomAttributes = { { "class", "text-title" } }
-            };
-            svgDoc.Children.Add(title);
-
-            var subtitle = new SvgText(subdomain.Type)
-            {
-                X = [x + cardWidth / 2],
-                Y = [y + cardHeight - barHeight - barBottomMargin + barHeight / 2],
-                CustomAttributes = { { "class", "text-subtitle" } },
-                TextAnchor = SvgTextAnchor.Middle,
-            };
-            svgDoc.Children.Add(subtitle);
+            
+            svgDoc.AddRectWithText(bar, subdomain.Type, "text-subtitle", fontSize/2);
 
             x += cardWidth + margin;
             cardsInRow++;

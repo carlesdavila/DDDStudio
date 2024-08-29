@@ -120,6 +120,8 @@ private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string out
         var modelWidth = (contextWidth - 3 * margin) / 2; // Two models with margin between and on sides
         var modelHeight = modelWidth / 2;
         const int borderRadius = 15;
+        int fontSize = modelHeight / 4;
+
 
         // Separate core models and sub models
         var coreModels = models.Where(m => m.Type == "CoreConcept").ToList();
@@ -144,7 +146,7 @@ private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string out
             };
             modelRect.CustomAttributes.Add("class", "model-core");
             
-            svgDoc.AddRectWithText(modelRect, model.Name, "model-text");
+            svgDoc.AddRectWithText(modelRect, model.Name, "model-text", fontSize);
         }
 
         // Positioning for the sub models
@@ -165,7 +167,7 @@ private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string out
                 CornerRadiusY = borderRadius
             };
             modelRect.CustomAttributes.Add("class", "model-sub");
-            svgDoc.AddRectWithText(modelRect, model.Name, "model-text");
+            svgDoc.AddRectWithText(modelRect, model.Name, "model-text", fontSize);
         }
     }
 
