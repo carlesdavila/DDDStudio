@@ -24,14 +24,20 @@ public class SubdomainsCanvasCreator : IYamlProcessor
     private void GenerateSubdomainsSvg(List<Subdomain> subdomains, string outputFilePath, DddConfig config)
     {
         const int margin = 20;
-        const int titleFontSize = 18;
-        const int subtitleFontSize = 16;
         const int maxCardsPerRow = 3; // Adjust as needed
 
-        var cardWidth = config.SubdomainWidth;
-        var cardHeight = (int)Math.Round(cardWidth / 1.8); // Example ratio, adjust as needed
-        var barHeight = (int)Math.Round((decimal)(cardHeight / 5)); // Example ratio, adjust as needed
+        var (svgWidth, svgHeight) =
+            CalculateSvgWidthAndHeight(subdomains.Count, config.SubdomainWidth, margin, maxCardsPerRow);
+
         var svgDoc = TemplateService.GetSubdomainSvgDocument();
+        svgDoc.Width = svgWidth;
+        svgDoc.Height = svgHeight;
+        svgDoc.ViewBox = new SvgViewBox(0, 0, svgWidth, svgHeight);
+
+        var cardWidth = config.SubdomainWidth;
+        var cardHeight = (int)Math.Round(cardWidth / 1.8);
+        var barHeight = (int)Math.Round((decimal)(cardHeight / 5));
+        var barBottomMargin = (int)Math.Round(barHeight * 0.4); // Calculate margin as 40% of bar height
 
         var x = margin;
         var y = margin;
@@ -59,7 +65,7 @@ public class SubdomainsCanvasCreator : IYamlProcessor
             var bar = new SvgRectangle
             {
                 X = x,
-                Y = y + cardHeight - barHeight,
+                Y = y + cardHeight - barHeight - barBottomMargin,
                 Width = cardWidth,
                 Height = barHeight,
                 Fill = new SvgColourServer(ColorTranslator.FromHtml("#000000")),
@@ -69,17 +75,18 @@ public class SubdomainsCanvasCreator : IYamlProcessor
 
             var title = new SvgText(subdomain.Name)
             {
-                X = [new SvgUnit(x + 20)],
-                Y = [new SvgUnit(y + cardHeight / 2)],
+                X = [x + 20],
+                Y = [y + (cardHeight - barHeight - barBottomMargin) / 2],
                 CustomAttributes = { { "class", "text-title" } }
             };
             svgDoc.Children.Add(title);
 
             var subtitle = new SvgText(subdomain.Type)
             {
-                X = [new SvgUnit(x + 45)],
-                Y = [new SvgUnit(y + cardHeight - 5)],
-                CustomAttributes = { { "class", "text-subtitle" } }
+                X = [x + cardWidth / 2],
+                Y = [y + cardHeight - barHeight - barBottomMargin + barHeight / 2],
+                CustomAttributes = { { "class", "text-subtitle" } },
+                TextAnchor = SvgTextAnchor.Middle,
             };
             svgDoc.Children.Add(subtitle);
 
@@ -95,5 +102,15 @@ public class SubdomainsCanvasCreator : IYamlProcessor
         }
 
         svgDoc.Write(outputFilePath);
+    }
+
+    private (int width, int height) CalculateSvgWidthAndHeight(int subdomainCount, int subdomainWidth, int margin,
+        int maxCardsPerRow)
+    {
+        var cardHeight = (int)Math.Round(subdomainWidth / 1.8);
+        var rows = (int)Math.Ceiling(subdomainCount / (double)maxCardsPerRow);
+        var width = (subdomainWidth + margin) * Math.Min(subdomainCount, maxCardsPerRow) + margin;
+        var height = (cardHeight + margin) * rows + margin;
+        return (width, height);
     }
 }
