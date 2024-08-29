@@ -38,6 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "schema", "schema", "{EEFA00
 		src\schema\bounded_context_schema.json = src\schema\bounded_context_schema.json
 		src\schema\aggregate_schema.json = src\schema\aggregate_schema.json
 		src\schema\ddd_schema.json = src\schema\ddd_schema.json
+		src\schema\subdomains_schema.json = src\schema\subdomains_schema.json
 	EndProjectSection
 EndProject
 Global

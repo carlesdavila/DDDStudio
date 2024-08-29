@@ -9,6 +9,7 @@ public class InitCommand
     {
         CreateDirectories();
         CreateDddYamlFile();
+        CreateSubdomainsYamlFile();
         Console.WriteLine("Project initialized.");
     }
 
@@ -30,38 +31,24 @@ public class InitCommand
 
     private void CreateDddYamlFile()
     {
-        // Crear el fichero ddd.yaml en la raíz del proyecto
         var yamlFilePath = "ddd.yaml";
         if (!File.Exists(yamlFilePath))
         {
-            var yamlContent = @"
-# DDD Project Configuration
+            File.WriteAllText(yamlFilePath, Constants.DddYamlContent);
+            Console.WriteLine($"Created file: {yamlFilePath}");
+        }
+        else
+        {
+            Console.WriteLine($"File {yamlFilePath} already exists.");
+        }
+    }
 
-# Base class or interface that identifies an aggregate
-AggregateBase: ""MyNamespace.IAggregateRoot""
-
-# List of colors for different states of aggregates
-AggregateStatesColors:
-  - ""#f2798b""
-  - ""#a8ccf6""
-  - ""#d8f79c""
-
-# Color for handled commands of aggregates
-HandledCommandsColor: ""#40C7EA""
-
-# Color for created events
-CreatedEventsColor: ""#FFAA5E""
-
-# Color for created events
-BoundedContextWidth: 300
-
-# Color for BoundedContexts
-BoundedContextColors:
-  - ""#2c9bf0""
-  - ""#f2798b""
-  - ""#ffaa5e""
-";
-            File.WriteAllText(yamlFilePath, yamlContent);
+    private void CreateSubdomainsYamlFile()
+    {
+        var yamlFilePath = Path.Combine(Constants.MainPath, "Subdomains.yaml");
+        if (!File.Exists(yamlFilePath))
+        {
+            File.WriteAllText(yamlFilePath, Constants.SubdomainsYamlContent);
             Console.WriteLine($"Created file: {yamlFilePath}");
         }
         else
