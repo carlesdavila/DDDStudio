@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using DDDCanvasCreator.Extensions;
 using DDDCanvasCreator.Models;
 using DDDCanvasCreator.Models.BoundedContextBasic;
 using DDDCanvasCreator.Services;
@@ -142,37 +143,8 @@ private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string out
                 CornerRadiusY = borderRadius
             };
             modelRect.CustomAttributes.Add("class", "model-core");
-            svgDoc.Children.Add(modelRect);
-
-            var switchElement = new SvgSwitch();
-            var foreignObject = new SvgForeignObject();
-            foreignObject.CustomAttributes.Add("x", posX.ToString());
-            foreignObject.CustomAttributes.Add("y", y.ToString());
-            foreignObject.CustomAttributes.Add("width", modelWidth.ToString());
-            foreignObject.CustomAttributes.Add("height", modelHeight.ToString());
-
-            var div = new NonSvgElement("div", "http://www.w3.org/1999/xhtml")
-            {
-                Content = model.Name,
-                CustomAttributes =
-                {
-                    { "class", "model-text" },
-                    { "style", $"width: {modelWidth}px; height: {modelHeight}px; font-size: {modelHeight / 4}px;" }
-                }
-            };
-            foreignObject.Nodes.Add(div);
-            switchElement.Children.Add(foreignObject);
-
-            var modelName = new SvgText(model.Name)
-            {
-                X = [posX + modelWidth / 2],
-                Y = [y + modelHeight / 2],
-                TextAnchor = SvgTextAnchor.Middle
-            };
-            modelName.CustomAttributes.Add("class", "model-text");
-            switchElement.Children.Add(modelName);
-
-            svgDoc.Children.Add(switchElement);
+            
+            svgDoc.AddRectWithText(modelRect, model.Name, "model-text");
         }
 
         // Positioning for the sub models
@@ -193,37 +165,7 @@ private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string out
                 CornerRadiusY = borderRadius
             };
             modelRect.CustomAttributes.Add("class", "model-sub");
-            svgDoc.Children.Add(modelRect);
-
-            var switchElement = new SvgSwitch();
-            var foreignObject = new SvgForeignObject();
-            foreignObject.CustomAttributes.Add("x", posX.ToString());
-            foreignObject.CustomAttributes.Add("y", posY.ToString());
-            foreignObject.CustomAttributes.Add("width", modelWidth.ToString());
-            foreignObject.CustomAttributes.Add("height", modelHeight.ToString());
-
-            var div = new NonSvgElement("div", "http://www.w3.org/1999/xhtml")
-            {
-                Content = model.Name,
-                CustomAttributes =
-                {
-                    { "class", "model-text" },
-                    { "style", $"width: {modelWidth}px; height: {modelHeight}px; font-size: {modelHeight / 4}px;" }
-                }
-            };
-            foreignObject.Nodes.Add(div);
-            switchElement.Children.Add(foreignObject);
-
-            var modelName = new SvgText(model.Name)
-            {
-                X = [posX + modelWidth / 2],
-                Y = [posY + modelHeight / 2],
-                TextAnchor = SvgTextAnchor.Middle
-            };
-            modelName.CustomAttributes.Add("class", "model-text");
-            switchElement.Children.Add(modelName);
-
-            svgDoc.Children.Add(switchElement);
+            svgDoc.AddRectWithText(modelRect, model.Name, "model-text");
         }
     }
 

@@ -4,7 +4,7 @@ namespace DDDCanvasCreator.Extensions;
 
 public static class SvgDocumentExtensions
 {
-    public static void AddRectWithText(this SvgDocument svgDoc, SvgRectangle rect, string text, string textClass)
+    public static void AddRectWithText(this SvgDocument svgDoc, SvgRectangle rect, string? text, string? textClass)
     {
         svgDoc.Children.Add(rect);
 
