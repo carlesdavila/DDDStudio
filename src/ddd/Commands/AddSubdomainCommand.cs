@@ -22,7 +22,7 @@ public class AddSubdomainCommand
       - name: Customer
         type: CoreConcept
       - name: Product
-        type: CoreConcept
+        type: SubConcept
       - name: Address
         type: SubConcept
   - name: Inventory
@@ -31,7 +31,7 @@ public class AddSubdomainCommand
         type: CoreConcept
       - name: Warehouse
         type: SubConcept
-      - name: InventoryQuantity
+      - name: Inventory Quantity
         type: SubConcept
 ";
             var yamlFilePath = Path.Combine(Constants.MainPath, name, $"{name}.yaml");
