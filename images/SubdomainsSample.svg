@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xml="http://www.w3.org/XML/1998/namespace" width="980" height="207" viewBox="0, 0, 980, 207">
+  <style>
+        .card { rx: 10; ry: 10; }
+        .text-title {
+        font-family: Arial, sans-serif;
+        color: white;
+        fill: white;
+        font-weight: bold;
+        text-anchor: middle;
+        alignment-baseline: middle;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
+        display: flex;
+        }
+        .text-subtitle { 
+        font-family: Arial, 
+        sans-serif; 
+        fill: white;
+        color: white;
+        font-weight: bold;
+        text-anchor: middle;
+        alignment-baseline: middle;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
+        display: flex;
+        }
+        .bar { fill: #000000; }
+    </style>
+  <rect x="20" y="20" width="300" height="167" class="card" style="fill:#8A2BE2;" />
+  <switch>
+    <foreignObject x="20" y="20" width="300" height="167">
+      <div class="text-title" style="width: 300px; height: 167px; font-size: 27px;" xmlns="http://www.w3.org/1999/xhtml">Order Management</div>
+    </foreignObject>
+    <text x="170" y="103" text-anchor="middle" class="text-title">Order Management</text>
+  </switch>
+  <rect x="20" y="141" width="300" height="33" class="bar" style="fill:#000000;" />
+  <switch>
+    <foreignObject x="20" y="141" width="300" height="33">
+      <div class="text-subtitle" style="width: 300px; height: 33px; font-size: 13px;" xmlns="http://www.w3.org/1999/xhtml">Core Domain</div>
+    </foreignObject>
+    <text x="170" y="157" text-anchor="middle" class="text-subtitle">Core Domain</text>
+  </switch>
+  <rect x="340" y="20" width="300" height="167" class="card" style="fill:#FF1493;" />
+  <switch>
+    <foreignObject x="340" y="20" width="300" height="167">
+      <div class="text-title" style="width: 300px; height: 167px; font-size: 27px;" xmlns="http://www.w3.org/1999/xhtml">Inventory Management</div>
+    </foreignObject>
+    <text x="490" y="103" text-anchor="middle" class="text-title">Inventory Management</text>
+  </switch>
+  <rect x="340" y="141" width="300" height="33" class="bar" style="fill:#000000;" />
+  <switch>
+    <foreignObject x="340" y="141" width="300" height="33">
+      <div class="text-subtitle" style="width: 300px; height: 33px; font-size: 13px;" xmlns="http://www.w3.org/1999/xhtml">Supporting Domain</div>
+    </foreignObject>
+    <text x="490" y="157" text-anchor="middle" class="text-subtitle">Supporting Domain</text>
+  </switch>
+  <rect x="660" y="20" width="300" height="167" class="card" style="fill:#1E90FF;" />
+  <switch>
+    <foreignObject x="660" y="20" width="300" height="167">
+      <div class="text-title" style="width: 300px; height: 167px; font-size: 27px;" xmlns="http://www.w3.org/1999/xhtml">Customer Support</div>
+    </foreignObject>
+    <text x="810" y="103" text-anchor="middle" class="text-title">Customer Support</text>
+  </switch>
+  <rect x="660" y="141" width="300" height="33" class="bar" style="fill:#000000;" />
+  <switch>
+    <foreignObject x="660" y="141" width="300" height="33">
+      <div class="text-subtitle" style="width: 300px; height: 33px; font-size: 13px;" xmlns="http://www.w3.org/1999/xhtml">Generic Domain</div>
+    </foreignObject>
+    <text x="810" y="157" text-anchor="middle" class="text-subtitle">Generic Domain</text>
+  </switch>
+</svg>
