@@ -4,8 +4,8 @@
 
 ## Project Description
 
-**DDD Studio** is a tool designed to document artifacts identified in the [Domain-Driven Design Starter Modelling Process](https://github.com/ddd-crew/ddd-starter-modelling-process).
-It helps users document key elements such as Bounded Contexts and Aggregates. The tool automatically creates a
+**DDD Studio** is a tool designed to document artifacts of the DDD Strategic design. These artifacts can be identified in the [Domain-Driven Design Starter Modelling Process](https://github.com/ddd-crew/ddd-starter-modelling-process).
+It helps users document key elements such as Subdomains, Bounded Contexts and Aggregates. The tool automatically creates a
 structured set of folders and YAML documents, making it easy to document and organize your DDD artifacts. YAML is used
 for its simplicity and readability, allowing both humans and machines to easily understand and edit the documents. This
 structured approach facilitates continuous collaboration and integration into repositories, supporting ongoing
@@ -17,6 +17,7 @@ The tool generates a folder and file structure to organize subdomains and bounde
 
 ```plaintext
 DDD/
+├── Subdomains.yaml
 ├── BusinessSubdomain/
 │   ├── BusinessSubdomain.yaml
 │   ├── SalesContext/
@@ -32,6 +33,53 @@ DDD/
 └── ddd.yaml
 ```
 ## Documenting Subdomains
+Subdomains are the first level of organization in a DDD project. They represent a specific area of the business domain.
+- **Name**: The name of the subdomain.
+- **Type**: The type of the subdomain, such as Core Domain, Supporting Domain, or Generic Domain.
+- **Purpose**: A detailed description of the subdomain's purpose and its role within the business domain.
+- **Context**: The context in which the subdomain operates, including its interactions with other subdomains and systems.
+
+### Example of Subdomain
+```yaml
+subdomains:
+  - name: "Order Management"
+    type: "Core Domain"
+    purpose: >
+      The Order Management subdomain manages the entire lifecycle of an order, from creation to delivery.
+      It ensures a seamless and efficient customer experience, which is critical for maintaining customer satisfaction
+      and ensuring the business meets its delivery commitments.
+    context: >
+      This subdomain operates in close interaction with the Inventory, Logistics, and Billing systems.
+      It receives order requests from Sales, checks product availability with Inventory, coordinates delivery with Logistics,
+      and processes payments through the Billing system. As a Core Domain, Order Management is crucial to the day-to-day operations,
+      directly impacting revenue and customer experience.
+
+  - name: "Inventory Management"
+    type: "Supporting Domain"
+    purpose: >
+      The Inventory Management subdomain tracks and manages the availability of products in stock.
+      It supports order fulfillment by ensuring accurate inventory levels are maintained, preventing stockouts,
+      and facilitating efficient restocking processes.
+    context: >
+      This subdomain is closely linked to the Order Management and Procurement systems.
+      It updates stock levels based on incoming orders and communicates restocking needs to Procurement.
+      As a Supporting Domain, it provides essential data for order processing and procurement but does not directly contribute to a competitive advantage.
+
+  - name: "Customer Support"
+    type: "Generic Domain"
+    purpose: >
+      The Customer Support subdomain handles customer inquiries, complaints, and support requests.
+      It enhances customer satisfaction by providing timely and effective support, contributing to improved customer retention and a positive brand perception.
+    context: >
+      This subdomain operates independently but interacts with the Order Management and CRM systems.
+      It accesses order details from Order Management to assist with customer inquiries and logs customer interactions in the CRM system.
+      Although a Generic Domain, it provides essential support services that bolster overall customer satisfaction.
+```
+
+### Generates the following SVG
+![Subdomains Sample](https://raw.githubusercontent.com/carlesdavila/DDDStudio/main/images/SubdomainsSample.svg)
+
+## Documenting Bounded Contexts of a Subdomain
 If you are using the DDD Starter Modelling Process, you are likely employing collaborative techniques such as Domain Storytelling or Event Storming to identify Bounded Contexts. Once these Bounded Contexts are identified, you can use DDD Studio to document them and their models in YAML format.
 
 ### Example of Subdomain
