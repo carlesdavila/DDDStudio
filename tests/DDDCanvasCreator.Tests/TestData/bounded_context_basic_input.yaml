@@ -12,9 +12,9 @@
       - name: Accounts
         type: CoreConcept
       - name: Address
-        type: SubConcept
+        type: CoreConcept
       - name: Login
-        type: SubConcept
+        type: CoreConcept
       - name: Payment Details
         type: SubConcept
       - name: Contact Details

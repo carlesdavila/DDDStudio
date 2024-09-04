@@ -120,47 +120,52 @@ private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string out
         var modelWidth = (contextWidth - 3 * margin) / 2; // Two models with margin between and on sides
         var modelHeight = modelWidth / 2;
         const int borderRadius = 15;
-        int fontSize = modelHeight / 4;
-
+        var fontSize = modelHeight / 4;
 
         // Separate core models and sub models
         var coreModels = models.Where(m => m.Type == "CoreConcept").ToList();
         var subModels = models.Where(m => m.Type != "CoreConcept").ToList();
 
         // Positioning for the core models
+        var currentY = y;
         for (var i = 0; i < coreModels.Count; i++)
         {
             var model = coreModels[i];
-            var posX = x + (coreModels.Count == 1
-                ? (contextWidth - modelWidth) / 2
-                : margin + i % 2 * (modelWidth + margin));
+            var posX = x + margin + (i % 2) * (modelWidth + margin);
+            if (i > 0 && i % 2 == 0)
+            {
+                currentY += modelHeight + margin;
+            }
 
             var modelRect = new SvgRectangle
             {
                 X = posX,
-                Y = y,
+                Y = currentY,
                 Width = modelWidth,
                 Height = modelHeight,
                 CornerRadiusX = borderRadius,
                 CornerRadiusY = borderRadius
             };
             modelRect.CustomAttributes.Add("class", "model-core");
-            
+
             svgDoc.AddRectWithText(modelRect, model.Name, "model-text", fontSize);
         }
 
         // Positioning for the sub models
-        var subModelStartY = y + (coreModels.Count > 0 ? modelHeight + margin : 0);
+        currentY += modelHeight + margin; // Move Y position below core models
         for (var i = 0; i < subModels.Count; i++)
         {
             var model = subModels[i];
-            var posX = x + margin + i % 2 * (modelWidth + margin);
-            var posY = subModelStartY + i / 2 * (modelHeight + margin);
+            var posX = x + margin + (i % 2) * (modelWidth + margin);
+            if (i > 0 && i % 2 == 0)
+            {
+                currentY += modelHeight + margin;
+            }
 
             var modelRect = new SvgRectangle
             {
                 X = posX,
-                Y = posY,
+                Y = currentY,
                 Width = modelWidth,
                 Height = modelHeight,
                 CornerRadiusX = borderRadius,
@@ -170,7 +175,6 @@ private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string out
             svgDoc.AddRectWithText(modelRect, model.Name, "model-text", fontSize);
         }
     }
-
     private int CalculateSvgHeight(List<BoundedContext> contexts, int boundedContextWidth, int margin)
     {
         var totalHeight = margin;
