@@ -9,15 +9,33 @@
         type: SubConcept
   - name: Accounts
     models:
-      - name: Accounts
+      - name: Account
         type: CoreConcept
-      - name: Address
-        type: CoreConcept
-      - name: Login
+      - name: User
         type: CoreConcept
       - name: Payment Details
         type: SubConcept
-      - name: Contact Details
+      - name: Transaction History
         type: SubConcept
-      - name: Order
+      - name: Account Settings
+        type: SubConcept
+  - name: Inventory
+    models:
+      - name: Stock
+        type: CoreConcept
+      - name: Warehouse
+        type: CoreConcept
+      - name: Supplier
+        type: CoreConcept
+      - name: Item
+        type: SubConcept
+      - name: Inventory Levels
+        type: SubConcept
+      - name: Restocking
+        type: SubConcept
+      - name: Shipping
+        type: SubConcept
+      - name: Returns
+        type: SubConcept
+      - name: Damaged Goods
         type: SubConcept

@@ -22,63 +22,64 @@ public class BcBasicCreator : IYamlProcessor
         return actual;
     }
 
-private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string outputFilePath, DddConfig config)
-{
-    const int margin = 20;
-    var contextWidth = config.BoundedContextWidth;
-
-    var svgDoc = TemplateService.GetContextSvgDocument();
-
-    // Calculate the width and height of the SVG document
-    var svgWidth = contexts.Count * (contextWidth + margin) + margin;
-    var svgHeight = CalculateSvgHeight(contexts, config.BoundedContextWidth, margin);
-    svgDoc.Width = new SvgUnit(svgWidth);
-    svgDoc.Height = new SvgUnit(svgHeight);
-    svgDoc.ViewBox = new SvgViewBox(0, 0, svgWidth, svgHeight);
-
-    var colors = config.BoundedContextColors;
-    var colorIndex = 0;
-
-    var x = margin;
-    var y = margin;
-
-    foreach (var context in contexts)
+    private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string outputFilePath, DddConfig config)
     {
-        var contextColor = colors[colorIndex];
-        colorIndex = (colorIndex + 1) % colors.Count;
+        const int margin = 20;
+        var contextWidth = config.BoundedContextWidth;
 
-        // Calculate the width and height of the models
-        var modelWidth = (contextWidth - 3 * margin) / 2;
-        var modelHeight = modelWidth / 2;
+        var svgDoc = TemplateService.GetContextSvgDocument();
 
-        // Separate core models and sub models
-        var coreModelsCount = context.Models.Count(m => m.Type == "CoreConcept");
-        var subModelsCount = context.Models.Count(m => m.Type != "CoreConcept");
+        // Calculate the width and height of the SVG document
+        var svgWidth = contexts.Count * (contextWidth + margin) + margin;
+        var svgHeight = CalculateSvgHeight(contexts, config.BoundedContextWidth, margin);
+        svgDoc.Width = new SvgUnit(svgWidth);
+        svgDoc.Height = new SvgUnit(svgHeight);
+        svgDoc.ViewBox = new SvgViewBox(0, 0, svgWidth, svgHeight);
 
-        // Calculate the number of rows needed for core models and sub models
-        var coreModelRows = (int)Math.Ceiling(coreModelsCount / 2.0);
-        var subModelRows = (int)Math.Ceiling(subModelsCount / 2.0);
+        var colors = config.BoundedContextColors;
+        var colorIndex = 0;
 
-        // Calculate the height for core models and sub models
-        var coreModelsHeight = coreModelRows * (modelHeight + margin);
-        var subModelsHeight = subModelRows * (modelHeight + margin);
+        var x = margin;
+        var y = margin;
 
-        // Total context height includes core models, sub models, title, and extra margin
-        var contextHeight = coreModelsHeight + subModelsHeight + margin;
-
-        DrawContext(svgDoc, context, contextColor, x, y, margin, contextWidth, contextHeight);
-
-        x += contextWidth + margin;
-        if (x + contextWidth > svgWidth - margin)
+        foreach (var context in contexts)
         {
-            x = margin;
-            y += contextHeight + margin;
+            var contextColor = colors[colorIndex];
+            colorIndex = (colorIndex + 1) % colors.Count;
+
+            // Calculate the width and height of the models
+            var modelWidth = (contextWidth - 3 * margin) / 2;
+            var modelHeight = modelWidth / 2;
+
+            // Separate core models and sub models
+            var coreModelsCount = context.Models.Count(m => m.Type == "CoreConcept");
+            var subModelsCount = context.Models.Count(m => m.Type != "CoreConcept");
+
+            // Calculate the number of rows needed for core models and sub models
+            var coreModelRows = (int)Math.Ceiling(coreModelsCount / 2.0);
+            var subModelRows = (int)Math.Ceiling(subModelsCount / 2.0);
+
+            // Calculate the height for core models and sub models
+            var coreModelsHeight = coreModelRows * (modelHeight + margin);
+            var subModelsHeight = subModelRows * (modelHeight + margin);
+
+            // Total context height includes core models, sub models, title, and extra margin
+            var contextHeight = coreModelsHeight + subModelsHeight + margin;
+
+            DrawContext(svgDoc, context, contextColor, x, y, margin, contextWidth, contextHeight);
+
+            x += contextWidth + margin;
+            if (x + contextWidth > svgWidth - margin)
+            {
+                x = margin;
+                y += contextHeight + margin;
+            }
         }
+
+        // Save the modified SVG document to the specified output file path
+        svgDoc.Write(outputFilePath);
     }
 
-    // Save the modified SVG document to the specified output file path
-    svgDoc.Write(outputFilePath);
-}
     private void DrawContext(SvgDocument svgDoc, BoundedContext context, string contextColor, int x, int y, int margin,
         int contextWidth, int contextHeight)
     {
@@ -131,11 +132,10 @@ private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string out
         for (var i = 0; i < coreModels.Count; i++)
         {
             var model = coreModels[i];
-            var posX = x + margin + (i % 2) * (modelWidth + margin);
-            if (i > 0 && i % 2 == 0)
-            {
-                currentY += modelHeight + margin;
-            }
+            var posX = x + margin + i % 2 * (modelWidth + margin);
+            if (i % 2 == 0 && coreModels.Count == 1)
+                posX = x + (contextWidth - modelWidth) / 2; // Center the single core model
+            if (i > 0 && i % 2 == 0) currentY += modelHeight + margin;
 
             var modelRect = new SvgRectangle
             {
@@ -156,11 +156,8 @@ private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string out
         for (var i = 0; i < subModels.Count; i++)
         {
             var model = subModels[i];
-            var posX = x + margin + (i % 2) * (modelWidth + margin);
-            if (i > 0 && i % 2 == 0)
-            {
-                currentY += modelHeight + margin;
-            }
+            var posX = x + margin + i % 2 * (modelWidth + margin);
+            if (i > 0 && i % 2 == 0) currentY += modelHeight + margin;
 
             var modelRect = new SvgRectangle
             {
@@ -175,6 +172,7 @@ private void GenerateBoundedContextSvg(List<BoundedContext> contexts, string out
             svgDoc.AddRectWithText(modelRect, model.Name, "model-text", fontSize);
         }
     }
+
     private int CalculateSvgHeight(List<BoundedContext> contexts, int boundedContextWidth, int margin)
     {
         var totalHeight = margin;
