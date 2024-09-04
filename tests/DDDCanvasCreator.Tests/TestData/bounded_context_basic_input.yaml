@@ -30,12 +30,7 @@
       - name: Item
         type: SubConcept
       - name: Inventory Levels
-        type: SubConcept
       - name: Restocking
-        type: SubConcept
       - name: Shipping
-        type: SubConcept
       - name: Returns
-        type: SubConcept
       - name: Damaged Goods
-        type: SubConcept

@@ -20,10 +20,11 @@
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["CoreConcept", "SubConcept"]
+                  "enum": ["CoreConcept", "SubConcept"],
+                  "default": "SubConcept"
                 }
               },
-              "required": ["name", "type"]
+              "required": ["name"]
             }
           }
         },

@@ -125,7 +125,7 @@ public class BcBasicCreator : IYamlProcessor
 
         // Separate core models and sub models
         var coreModels = models.Where(m => m.Type == "CoreConcept").ToList();
-        var subModels = models.Where(m => m.Type != "CoreConcept").ToList();
+        var subModels = models.Where(m => m.Type != "CoreConcept" || string.IsNullOrEmpty(m.Type)).ToList();
 
         // Positioning for the core models
         var currentY = y;
