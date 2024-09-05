@@ -41,6 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "schema", "schema", "{EEFA00
 		src\schema\subdomains_schema.json = src\schema\subdomains_schema.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDCanvasCreator.Benchmarks", "tests\DDDCanvasCreator.Benchmarks\DDDCanvasCreator.Benchmarks.csproj", "{B33AF7EF-831D-4D0E-9859-6C10473033BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,7 @@ Global
 		{AD0253C1-47F0-4A35-AA56-94D4B1E4B665} = {448FF2F2-DB0D-42ED-9A54-53E41618E40C}
 		{7DC33179-6817-48E2-86FA-7BD183B41952} = {448FF2F2-DB0D-42ED-9A54-53E41618E40C}
 		{51B3D1DC-0335-4C9E-AF4D-868098D2E0CC} = {FA77E917-DD00-47C3-8FEB-0F03F742F790}
+		{B33AF7EF-831D-4D0E-9859-6C10473033BE} = {448FF2F2-DB0D-42ED-9A54-53E41618E40C}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{56E7E3DB-53AE-4BEA-925A-8950020F5BF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -77,5 +80,9 @@ Global
 		{51B3D1DC-0335-4C9E-AF4D-868098D2E0CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51B3D1DC-0335-4C9E-AF4D-868098D2E0CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51B3D1DC-0335-4C9E-AF4D-868098D2E0CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B33AF7EF-831D-4D0E-9859-6C10473033BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B33AF7EF-831D-4D0E-9859-6C10473033BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B33AF7EF-831D-4D0E-9859-6C10473033BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B33AF7EF-831D-4D0E-9859-6C10473033BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
