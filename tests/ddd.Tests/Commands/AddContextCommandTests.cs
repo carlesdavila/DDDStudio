@@ -10,8 +10,8 @@ public class AddContextCommandTests
     {
         // Arrange
         var command = new AddContextCommand();
-        var contextName = "TestContext";
-        var subdomainName = "TestSubdomain";
+        const string contextName = "TestContext";
+        const string subdomainName = "TestSubdomain";
         var contextPath = Path.Combine(Constants.MainPath, subdomainName, contextName);
 
         // Cleanup any pre-existing test artifacts

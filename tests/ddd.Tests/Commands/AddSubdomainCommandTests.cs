@@ -9,7 +9,7 @@ public class AddSubdomainCommandTests
     {
         // Arrange
         var command = new AddSubdomainCommand();
-        var subdomainName = "TestSubdomain";
+        const string subdomainName = "TestSubdomain";
         var subdomainPath = Path.Combine(Constants.MainPath, subdomainName);
         var yamlFilePath = Path.Combine(subdomainPath, $"{subdomainName}.yaml");
 

@@ -1,7 +1,7 @@
 ﻿using Cocona;
 using ddd.Commands;
 
-var app = CoconaApp.Create();
+var app = CoconaLiteApp.Create();
 
 app.AddCommands<InitCommand>();
 

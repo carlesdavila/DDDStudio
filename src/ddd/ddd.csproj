@@ -30,7 +30,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Cocona" Version="2.2.0" />
+      <PackageReference Include="Cocona.Lite" Version="2.2.0" />
       <PackageReference Include="MinVer" Version="5.0.0">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
