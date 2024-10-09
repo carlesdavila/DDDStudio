@@ -7,6 +7,12 @@ public static class Constants
     public static string DddYamlContent => @"
 # DDD Project Configuration
 
+# Create files options
+CreateAllSubdomainsFile: true
+CreateContextsFile: true
+CreateBoundedContextCanvas: true
+CreateAggregateCanvas: true
+
 # Base class or interface that identifies an aggregate
 AggregateBase: ""MyNamespace.IAggregateRoot""
 
