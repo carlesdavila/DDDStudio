@@ -2,6 +2,11 @@
 
 public class DddConfig
 {
+    // New properties for deserialization
+    public bool CreateAllSubdomainsFile { get; set; } = true;
+    public bool CreateContextsFile { get; set; } = true;
+    public bool CreateBoundedContextCanvas { get; set; } = true;
+    public bool CreateAggregateCanvas { get; set; } = true;
     public string AggregateBase { get; set; } = "MyNamespace.IAggregateRoot";
     public List<string> AggregateStatesColors { get; set; } = ["#f2798b", "#a8ccf6", "#d8f79c"];
     public string HandledCommandsColor { get; set; } = "#40C7EA";
@@ -12,4 +17,6 @@ public class DddConfig
     public List<string> SubdomainColors { get; set; } = ["#8A2BE2", "#FF1493", "#1E90FF", $"#FF8C00", "#FFD700", "#32CD32"];
     
     public int SubdomainWidth { get; set; } = 300;
+    
+    
 }
