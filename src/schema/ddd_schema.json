@@ -29,6 +29,9 @@
         "type": "string",
         "pattern": "^#[0-9a-fA-F]{6}$"
       }
+    },
+    "OutputDirectory": {
+      "type": "string"
     }
   },
   "required": ["AggregateBase", "AggregateStatesColors", "HandledCommandsColor", "CreatedEventsColor", "BoundedContextWidth", "BoundedContextColors"]
