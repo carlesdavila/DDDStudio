@@ -60,7 +60,7 @@
           }
         }
       },
-      "required": ["name", "description", "stateTransitions", "enforcedInvariants", "correctivePolicies", "handledCommands", "createdEvents"]
+      "required": ["name", "description"]
     }
   },
   "required": ["aggregate"]

@@ -39,25 +39,45 @@ public static class AggregateParser
                     aggregate.Description = YamlParser.GetScalarValue(key, child.Value);
                     break;
                 case "stateTransitions":
-                    YamlParser.ThrowIfNotYamlSequence(key, child.Value);
-                    StateTransitionsParser.HandleStateTransitions((child.Value as YamlSequenceNode)!,
-                        aggregate.StateTransitions);
+                    if (child.Value.NodeType == YamlNodeType.Sequence)
+                    {
+                        YamlParser.ThrowIfNotYamlSequence(key, child.Value);
+                        StateTransitionsParser.HandleStateTransitions((child.Value as YamlSequenceNode)!,
+                            aggregate.StateTransitions);
+                    }
+
                     break;
                 case "enforcedInvariants":
-                    YamlParser.ThrowIfNotYamlSequence(key, child.Value);
-                    HandleStringSequence(child.Value as YamlSequenceNode, aggregate.EnforcedInvariants);
+                    if (child.Value.NodeType == YamlNodeType.Sequence)
+                    {
+                        YamlParser.ThrowIfNotYamlSequence(key, child.Value);
+                        HandleStringSequence(child.Value as YamlSequenceNode, aggregate.EnforcedInvariants);
+                    }
+
                     break;
                 case "correctivePolicies":
-                    YamlParser.ThrowIfNotYamlSequence(key, child.Value);
-                    HandleStringSequence(child.Value as YamlSequenceNode, aggregate.CorrectivePolicies);
+                    if (child.Value.NodeType == YamlNodeType.Sequence)
+                    {
+                        YamlParser.ThrowIfNotYamlSequence(key, child.Value);
+                        HandleStringSequence(child.Value as YamlSequenceNode, aggregate.CorrectivePolicies);
+                    }
+
                     break;
                 case "handledCommands":
-                    YamlParser.ThrowIfNotYamlSequence(key, child.Value);
-                    HandleStringSequence(child.Value as YamlSequenceNode, aggregate.HandledCommands);
+                    if (child.Value.NodeType == YamlNodeType.Sequence)
+                    {
+                        YamlParser.ThrowIfNotYamlSequence(key, child.Value);
+                        HandleStringSequence(child.Value as YamlSequenceNode, aggregate.HandledCommands);
+                    }
+
                     break;
                 case "createdEvents":
-                    YamlParser.ThrowIfNotYamlSequence(key, child.Value);
-                    HandleStringSequence(child.Value as YamlSequenceNode, aggregate.CreatedEvents);
+                    if (child.Value.NodeType == YamlNodeType.Sequence)
+                    {
+                        YamlParser.ThrowIfNotYamlSequence(key, child.Value);
+                        HandleStringSequence(child.Value as YamlSequenceNode, aggregate.CreatedEvents);
+                    }
+
                     break;
                 default:
                     throw new DDDYamlException(child.Key.Start, $"Unrecognized Key: {key}");
