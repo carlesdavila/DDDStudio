@@ -36,6 +36,9 @@ BoundedContextColors:
   - ""#2c9bf0""
   - ""#f2798b""
   - ""#ffaa5e""
+
+# Output directory for SVG files
+OutputDirectory: ""./docs""
 ";
 
     public static string SubdomainsYamlContent => @"

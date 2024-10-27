@@ -18,5 +18,6 @@ public class DddConfig
     
     public int SubdomainWidth { get; set; } = 300;
     
-    
+    public string OutputDirectory { get; set; } = "./docs";
+
 }

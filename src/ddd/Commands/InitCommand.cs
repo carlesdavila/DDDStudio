@@ -16,10 +16,9 @@ public class InitCommand
     private void CreateDirectories()
     {
         string[] directories =
-        {
-            Constants.MainPath,
-            "docs"
-        };
+        [
+            Constants.MainPath
+        ];
 
         foreach (var dir in directories)
             if (!Directory.Exists(dir))

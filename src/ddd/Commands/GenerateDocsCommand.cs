@@ -14,7 +14,7 @@ public class GenerateDocsCommand
         
         var yamlFiles = Directory.GetFiles(Constants.MainPath, "*.yaml", SearchOption.AllDirectories);
 
-        const string outputFolder = "docs";
+        var  outputFolder =  config.OutputDirectory;;
         if (!Directory.Exists(outputFolder)) Directory.CreateDirectory(outputFolder);
 
         foreach (var yamlFile in yamlFiles)
