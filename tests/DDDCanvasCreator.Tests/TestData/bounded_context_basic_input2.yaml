@@ -1,0 +1,9 @@
+﻿boundedContexts:
+  - name: This Is An Extremely Long BoundedContext Name
+    models:
+      - name: Customer
+        type: CoreConcept
+      - name: Product
+        type: SubConcept
+      - name: Address
+        type: SubConcept

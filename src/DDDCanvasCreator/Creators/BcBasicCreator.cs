@@ -86,11 +86,14 @@ public class BcBasicCreator : IYamlProcessor
         const int borderRadius = 20;
         const int titleHeight = 40;
 
+        // Create and configure the context title
+        DrawContextTitle(svgDoc, context, contextColor, x, y, contextWidth, titleHeight);
+        
         // Create and configure the context rectangle
         var contextRect = new SvgRectangle
         {
             X = x,
-            Y = y + titleHeight,
+            Y = y + titleHeight+5,
             Width = contextWidth,
             Height = contextHeight,
             CornerRadiusX = borderRadius,
@@ -99,21 +102,46 @@ public class BcBasicCreator : IYamlProcessor
         };
         contextRect.CustomAttributes.Add("class", "context");
         svgDoc.Children.Add(contextRect);
+        
+        DrawModels(svgDoc, context.Models, x, y + titleHeight + margin, margin, contextWidth);
+    }
 
-        // Create and configure the context title
+    private static void DrawContextTitle(SvgDocument svgDoc, BoundedContext context, string contextColor, int x, int y,
+        int contextWidth, int titleHeight)
+    {
+        var switchElement = new SvgSwitch();
+        
+        var foreignObject = new SvgForeignObject();
+        foreignObject.CustomAttributes.Add("x", x.ToString());
+        foreignObject.CustomAttributes.Add("y", y.ToString());
+        foreignObject.CustomAttributes.Add("width", contextWidth.ToString());
+        foreignObject.CustomAttributes.Add("height", titleHeight.ToString());
+        
+        var div = new NonSvgElement("div", "http://www.w3.org/1999/xhtml")
+        {
+            Content = context.Name!.ToUpper(),
+            CustomAttributes =
+            {
+                { "class", "title-text" },
+                { "style", $"color: {contextColor}" }
+            }
+        };
+        foreignObject.Nodes.Add(div);
+        switchElement.Children.Add(foreignObject);
+        
         var title = new SvgText(context.Name!.ToUpper())
         {
             X = [x + contextWidth / 2],
             Y = [y + titleHeight / 2],
-            Fill = new SvgColourServer(ColorTranslator.FromHtml(contextColor)),
             TextAnchor = SvgTextAnchor.Middle,
+            Fill = new SvgColourServer(ColorTranslator.FromHtml(contextColor)),
             FontSize = contextWidth / 15,
             FontWeight = SvgFontWeight.Bold
         };
         title.CustomAttributes.Add("class", "context-text");
-        svgDoc.Children.Add(title);
-
-        DrawModels(svgDoc, context.Models, x, y + titleHeight + margin, margin, contextWidth);
+        switchElement.Children.Add(title);
+        
+        svgDoc.Children.Add(switchElement);
     }
 
     private void DrawModels(SvgDocument svgDoc, List<Model> models, int x, int y, int margin, int contextWidth)

@@ -49,5 +49,16 @@
         box-sizing: border-box;
         display: flex;
         }
+        .title-text {
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        width: 100%;
+        height: 100%;
+        }
     </style>
 </svg>
